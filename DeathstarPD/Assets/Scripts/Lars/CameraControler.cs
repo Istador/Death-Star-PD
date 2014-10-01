@@ -49,6 +49,11 @@ public class CameraControler : MonoBehaviour {
 				float dy = lastPos.y - Input.mousePosition.y;
 				rotation += dx/100;
 				topRotation += dy/100;
+				if(topRotation < -1){
+					topRotation = -1;
+				}else if(topRotation > 1){
+					topRotation = 1;
+				}
 			}
 		}else{
 			moving = false;
