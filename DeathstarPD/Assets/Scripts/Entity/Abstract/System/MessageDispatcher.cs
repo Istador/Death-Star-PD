@@ -82,16 +82,16 @@ public class MessageDispatcher {
 		float now = Time.time;
 		
 		//Nachricht mit frühestem auslieferzeitpunkt
-		Telegram t = pq.First();
+		Telegram t = pq.First;
 		
 		//wenn das Telegram jetzt ausgeliefert werden soll
-		while(t!=null && t.dispatchTime <= now && t.dispatchTime >= 0.0f){
+		while(t != null && t.dispatchTime <= now && t.dispatchTime >= 0.0f){
 			//ausliefern
 			Discharge(t);
 			//aus Warteschlange entfernen
 			pq.RemoveFirst();
 			//nächste Nachricht
-			t = pq.First();
+			t = pq.First;
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class MessageDispatcher {
 	/// Löscht alle noch verbleibenden Nachrichten, z.B. bei einem Level Neustart
 	/// </summary>
 	public void EmptyQueue(){
-		pq.Empty();
+		pq.Clear();
 	}
 	
 	

@@ -7,14 +7,14 @@ using System.Collections.Generic;
  * 
  * basiert auf den Vergleichsoperator CompareTo des Interfaces IComparable
 */
-public class PriorityQueue<T> where T: IComparable<T> {
+public class PriorityQueue<T> : ICollection<T> where T: IComparable<T> {
 	
 	
 	
 	/// <summary>
-	/// Sortierte Liste anhand IComparable
+	/// Heap, in dem das kleinste Element vorne ist
 	/// </summary>
-	private SortedList<T, T> list; //TODO: Austauschen gegen einen Heap für bessere Laufzeiten
+	private Heap<T> heap;
 	
 	
 	
@@ -29,7 +29,7 @@ public class PriorityQueue<T> where T: IComparable<T> {
 	/// Konstruktor: Leere Warteschlange
 	/// </summary>
 	public PriorityQueue(){
-		list = new SortedList<T,T>();
+		heap = new MinHeap<T>();
 		menge = new HashSet<T>();
 	}
 	
@@ -52,9 +52,17 @@ public class PriorityQueue<T> where T: IComparable<T> {
 	/// Leert die Proiority Queue, so dass sie keine Elemente mehr enthält.
 	/// </summary>
 	public void Empty(){
-		list.Clear();
+		Clear();
+	}
+
+	/// <summary>
+	/// Leert die Proiority Queue, so dass sie keine Elemente mehr enthält.
+	/// </summary>
+	public void Clear(){
+		heap.Clear();
 		menge.Clear();
 	}
+
 	
 	
 	/// <summary>
@@ -66,7 +74,7 @@ public class PriorityQueue<T> where T: IComparable<T> {
 	public void Enqueue(T t){
 		//noch nicht vorhanden
 		if(!menge.Contains(t)){
-			list.Add(t, t);
+			heap.Add(t);
 			menge.Add(t);
 		}
 		
@@ -78,22 +86,24 @@ public class PriorityQueue<T> where T: IComparable<T> {
 	/// Das erste Element der Warteschlange.
 	/// Das Element mit der kleinsten Priorität.
 	/// </summary>
-	public T First(){
-		if(list.Count > 0)
-			return list.Values[0];
+	public T First{get{
+		if(!heap.IsEmpty)
+			return heap.First;
 		return default(T);
-	}
+	}}
 	
 	
 	
 	/// <summary>
 	/// Entferne das erste Element der Warteschlange
 	/// </summary>
-	public void RemoveFirst(){
-		if(list.Count > 0){
-			menge.Remove(First());
-			list.RemoveAt(0);
+	public bool RemoveFirst(){
+		if(!heap.IsEmpty){
+			menge.Remove(First);
+			heap.RemoveFirst();
+			return true;
 		}
+		return false;
 	}
 	
 	
@@ -102,11 +112,25 @@ public class PriorityQueue<T> where T: IComparable<T> {
 	/// Entferne das erste Element der Warteschlange und gebe es zurück.
 	/// </summary>
 	public T Dequeue(){
-		T t = First();
+		T t = First;
 		RemoveFirst();
 		return t;
 	}
-	
-	
+
+
+	// IEnumerator
+	public IEnumerator<T> GetEnumerator(){ return heap.GetEnumerator(); }
+	IEnumerator IEnumerable.GetEnumerator(){ return heap.GetEnumerator(); }
+
+	// ICollection
+	public int Count { get{return heap.Count;} }
+	public bool IsReadOnly { get{return false;} }
+	public void Add(T t){ Enqueue(t); }
+	public bool Contains(T t){ return menge.Contains(t); }
+	public bool Remove(T t){
+		if(t.Equals(First)) return RemoveFirst();
+		else throw new InvalidOperationException("Remove not possible");
+	}
+	public void CopyTo(T[] arr, int index){ heap.CopyTo(arr, index); }
 	
 }
