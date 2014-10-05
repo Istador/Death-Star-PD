@@ -76,6 +76,7 @@ public abstract class Heap<T> : IEnumerable<T> where T: IComparable<T> {
 
 	private void BubbleDown(int i){
 		int dominatingNode = Dominating(i);
+		if(i == dominatingNode) return;
 		Swap(i, dominatingNode);
 		BubbleDown(dominatingNode);
 	}

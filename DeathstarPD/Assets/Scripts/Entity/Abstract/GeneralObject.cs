@@ -254,35 +254,57 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		Level = 1<<8,
 		
 		/// <summary>
-		/// Layer 9: Entities.
-		/// Gegner und Spieler.
-		/// Kollidieren mit dem Level, Projektilen und Leitern, aber nicht mit anderen Entities.
+		/// Layer 9: Building.
+		/// Gebäude des Spielers.
+		/// Kollidieren mit den Projektilen der Gegner.
 		/// </summary>
-		Entity = 1<<9,
+		Building = 1<<9,
+
+		/// <summary>
+		/// Layer 10: Tower.
+		/// Türme des Spielers.
+		/// Kollidieren mit den Projektilen der Gegner.
+		/// </summary>
+		Tower = 1<<10,
+
+		/// <summary>
+		/// Layer 11: DefendingFighter.
+		/// Kollidieren mit den Gegnern und deren Projektilen.
+		/// </summary>
+		DefendingFighter = 1<<11,
 		
 		/// <summary>
-		/// Layer 10: Projektile.
-		/// Kollidieren mit dem Level, Entities und anderen Projektilen.
+		/// Layer 12: DefendingProjectile
+		/// Projektile der Türme des Spielers
+		/// Kollidieren mit den Gegnern.
 		/// </summary>
-		Projektile	= 1<<10,
-		
+		DefendingProjectile = 1<<12,	
+
 		/// <summary>
-		/// Layer 11: Player Collider.
-		/// Kollidiert nur mit Entities.
+		/// Alles was dem Spieler gehört
 		/// </summary>
-		PlayerCollider = 1<<11,	
-		
+		Player = (int)Building | (int)Tower | (int)DefendingFighter | (int)DefendingProjectile,
+
 		/// <summary>
-		/// Layer 12: Leitern.
-		/// Kollidieren nur mit Entities.
+		/// Layer 13: EnemyFighter.
+		/// Gegner-Flieger.
+		/// Kollidieren mit den Projektilen des Spielers.
 		/// </summary>
-		Ladder = 1<<12,
-		
+		EnemyFighter = 1<<13,
+
 		/// <summary>
-		/// Für Explosionen
-		/// Kollidiert mit Entity und Projektile Layer
+		/// Layer 14: EnemyProjectile.
+		/// Gegner.
+		/// Kollidieren mit den Türmen und Gebäuden des Spielers.
 		/// </summary>
-		Explosion = (int)Entity | (int)Projektile
+		EnemyProjectile = 1<<14,
+
+		/// <summary>
+		/// Gegner
+		/// Flieger und Projektile.
+		/// </summary>
+		Enemy = (int)EnemyFighter | (int)EnemyProjectile
+
 	}
 	
 	
