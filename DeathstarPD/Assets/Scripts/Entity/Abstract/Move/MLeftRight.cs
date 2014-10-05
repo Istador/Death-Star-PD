@@ -17,7 +17,7 @@ public abstract class MLeftRight : MovableEntity {
 	/// <param name='maxHealth'>
 	/// Maximale Trefferpunkte des Gegners. Bei 0 HP stirbt der Gegner.
 	/// </param>
-	public MLeftRight(int maxHealth) : base(maxHealth){
+	public MLeftRight() : base(){
 		
 	}
 		

@@ -43,11 +43,13 @@ public abstract class Projektile : MovableEntity {
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Projektile`1"/> class.
 	/// </summary>
-	public Projektile() : base(1) {}
+	public Projektile() : base() {}
 	
 	
 	
 	protected override void Start() {
+		MaxHealth = 1;
+
 		base.Start();
 		
 		//Projektile hinter die Gegner Positionieren

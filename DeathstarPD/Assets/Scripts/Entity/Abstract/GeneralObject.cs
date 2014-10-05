@@ -17,6 +17,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	//Konstruktor
 	
 	public GeneralObject(){
+#if GO_USE_SPRITE_CONTROLER
 		//zu verwendendes Sprite für den Sprite-Controller setzen
 		Sprite = 0;
 		
@@ -24,6 +25,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		txtCols = 1;
 		txtRows = 1;
 		txtFPS = 1;
+#endif
 	}
 	
 	
@@ -44,8 +46,10 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// Animation.
 	/// </summary>
 	protected virtual void Update() {
+#if GO_USE_SPRITE_CONTROLER
 		//Sprite Controller zum animieren der Textur wenn vorhanden
 		Animate();
+#endif
 	}
 	
 	
@@ -63,7 +67,14 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// Die Nachricht
 	/// </param>
 	public virtual bool HandleMessage(Telegram msg){
-		return false;
+		switch(msg.message){
+			case "ApplyDamage":
+			case "ApplyHealth":
+				this.SendMessage(msg.message, msg.extraInfo, SendMessageOptions.DontRequireReceiver);
+				return true;
+			default:
+				return false;
+		}
 	}
 	
 	
@@ -113,7 +124,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		}
 	}
 	private SpriteController _SpriteCntrl; //Instanzvariable die von der Property verwendet wird
-#endif
+
 
 
 	/// <summary>
@@ -123,13 +134,8 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <c>true</c> wenn animier; ansonsten, <c>false</c>.
 	/// </value>
 	public bool Animated {
-#if GO_USE_SPRITE_CONTROLER
 		get{return _SpriteCntrl != null && SpriteCntrl.enabled; }
 		set{ if(_SpriteCntrl != null || value) SpriteCntrl.enabled = value; }
-#else
-		get{return false;}
-		set{}
-#endif
 	}
 	
 	/// <summary>
@@ -144,10 +150,9 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// Benutze den Sprite Controller um die Textur zu animieren
 	/// </summary>
 	private void Animate(){
-#if GO_USE_SPRITE_CONTROLER
 		if(Animated && !SkipAnimation)
 			SpriteCntrl.animate(txtCols, txtRows, 0, Sprite, txtCols, txtFPS);
-#endif
+
 		SkipAnimation = false;
 	}
 	
@@ -167,8 +172,10 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// Frames per Second - Bilder die Sekunde
 	/// </summary>
 	public int txtFPS {get; protected set;}
-	
-	
+#endif
+
+
+
 	// Audio
 	private bool _audioAdded = false;
 	public AudioSource Audio {
@@ -181,7 +188,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		}
 	}
 
-
+	
 	/// <summary>
 	/// Spielt einen Sound an der aktuellen Position des Objektes ab
 	/// </summary>

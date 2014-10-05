@@ -50,12 +50,14 @@ public class PBullet : Projektile {
 		base.Start();
 		
 		//Sprite-Eigenschaften
+		/*
 		txtCols = 8;
 		txtRows = 1;
 		txtFPS = 8;
-		
+
 		//SpriteController einschalten
 		Animated = true;
+		*/
 		
 		//Geschwindigkeit setzen
 		MaxSpeed = 8.4f;

@@ -110,7 +110,7 @@ public abstract class MovableEntity : Entity {
 	/// <param name='maxHealth'>
 	/// Maximale Trefferpunkte des Gegners. Bei 0 HP stirbt der Gegner.
 	/// </param>
-	public MovableEntity(int maxHealth) : base(maxHealth){
+	public MovableEntity(){
 		//Zustandsautomaten erstellen
 		MoveFSM = new StateMachine<MovableEntity>(this);
 		

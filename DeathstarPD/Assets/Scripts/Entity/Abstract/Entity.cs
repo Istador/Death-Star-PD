@@ -7,26 +7,7 @@ using System.Collections;
 /// Trefferpunkte und Sterben
 /// 
 public abstract class Entity : GeneralObject {
-	
-	
-	
-	// Konstruktor
-	
-	/// <summary>
-	/// Initializes a new instance of the <see cref="Entity"/> class.
-	/// </summary>
-	/// <param name='maxHealth'>
-	/// Maximale Trefferpunkte des Subjektes.
-	/// Bei 0 Trefferpunkten stirbt das Subjekt.
-	/// </param>
-	public Entity(int maxHealth){ //TODO: nicht als Konstruktor-Arg., sondern Property | Inst.var.
-		//Instanzvariablen setzen
-		MaxHealth = maxHealth;
-		Health = maxHealth;
-		HealthFactor = 1.0f;
-	}
-	
-	
+		
 	
 	//Start
 	
@@ -37,8 +18,6 @@ public abstract class Entity : GeneralObject {
 	/// </summary>
 	protected override void Start(){
 		base.Start();
-		Health = MaxHealth;
-		HealthFactor = 1.0f;
 		IsDead = false;
 	}
 	
@@ -48,8 +27,29 @@ public abstract class Entity : GeneralObject {
 	/// <summary>
 	/// Die maximalen Trefferunkte des Subjektes
 	/// </summary>
-	public int MaxHealth {get; private set;}
-	
+	public int MaxHealth {
+		get {return _MaxHealth ?? 1; }
+		protected set {
+			int neu = System.Math.Max(1, value);
+			//beim ersten mal
+			if(!_MaxHealth.HasValue){
+				//Setze Instanzvariable
+				_MaxHealth = neu;
+				//setze Health auf maximalen Wert
+				Health = neu;
+			} else {
+				//alten Wert merken
+				int alt = MaxHealth;
+				//Setze Instanzvariable
+				_MaxHealth = neu;
+				//berechne Health und HealthFactor neu
+				neu = Health + (MaxHealth > alt ? MaxHealth - alt : 0);
+				Health = System.Math.Max(1, neu);
+			}
+		}
+	}
+	private int? _MaxHealth;
+
 	/// <summary>
 	/// Die aktuellen Trefferunkte des Subjektes
 	/// </summary>
@@ -120,7 +120,6 @@ public abstract class Entity : GeneralObject {
 	
 	
 	// Unbesiegbarkeit
-	
 	public bool Invincible {get; set;}
 	
 	
