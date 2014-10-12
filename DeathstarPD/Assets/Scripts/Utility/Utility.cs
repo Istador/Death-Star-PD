@@ -188,7 +188,32 @@ public static class Utility {
 			return Vector3.zero;
 		}
 	}
-	
+
+
+
+	/// <summary>
+	/// Distanz auf einer Kugel zwischen zwei Punkten.
+	/// Es wird angenommen, dass beide Punkte auf der Kugel liegen.
+	/// </summary>
+	/// <returns>Distanz</returns>
+	/// <param name="circle">Position der Kugel (Mittelpunkt).</param>
+	/// <param name="radius">Radius der Kugel.</param>
+	/// <param name="a">Der erste Punkt.</param>
+	/// <param name="b">Der zweite Punkt.</param>
+	public static float CirleDistance(Vector3 circle, float radius, Vector3 a, Vector3 b){
+		//Kreismittelpunkt ist nicht der Koordinatenursprung
+		if(circle != Vector3.zero){
+			//verschiebe Vektoren
+			a -= circle;
+			b -= circle;
+		}
+
+		//Winkel zwischen den beiden Vektoren, in Grad
+		float angle = Vector3.Angle(a, b);
+
+		//Länge des Kreisbogens berechnen
+		return Mathf.Abs(Mathf.PI * radius * angle / 180f);
+	}
 	
 	
 }

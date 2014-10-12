@@ -385,12 +385,25 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Position des Objektes in der Spielwelt basierend auf der Collidermittelpunkt.
 	/// </summary>
-	public Vector3 Pos { get{return collider.bounds.center;} }
+	public Vector3 Pos { get{return Posi(gameObject);} }
 	
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
 	public Vector3 Posi(GameObject other){ return other.collider.bounds.center; }
+	/// <summary>
+	/// Position eines anderen Objektes
+	/// </summary>
+	public Vector3 Posi(Collider other){ return Posi(other.gameObject); }
+	/// <summary>
+	/// Position eines anderen Objektes
+	/// </summary>
+	public Vector3 Posi(Collision other){ return Posi(other.gameObject); }
+	/// <summary>
+	/// Position eines anderen Objektes
+	/// </summary>
+	public Vector3 Posi(GeneralObject other){ return other.Pos; }
+
 	
 	/// <summary>
 	/// Breite des Objektes in der Spielwelt basierend auf dem Collider
@@ -401,7 +414,12 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// Höhe des Objektes in der Spielwelt basierend auf dem Collider
 	/// </summary>
 	public float Height { get{return collider.bounds.size.y;} }
-	
+
+	/// <summary>
+	/// Tiefe des Objektes in der Spielwelt basierend auf dem Collider
+	/// </summary>
+	public float Depth { get{return collider.bounds.size.z;} }
+
 	
 	
 	
@@ -418,27 +436,19 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Ob ein anderes Objekt rechts von diesem Objekt ist.
 	/// </summary>
-	public bool IsRight(GameObject obj){
-		return IsRight(obj.collider.bounds.center);
-	}
+	public bool IsRight(GameObject obj){ return IsRight(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt rechts von diesem Objekt ist.
 	/// </summary>
-	public bool IsRight(Collider obj){
-		return IsRight(obj.gameObject);
-	}
+	public bool IsRight(Collider obj){ return IsRight(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt rechts von diesem Objekt ist.
 	/// </summary>
-	public bool IsRight(Collision obj){
-		return IsRight(obj.gameObject);
-	}
+	public bool IsRight(Collision obj){ return IsRight(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt rechts von diesem Objekt ist.
 	/// </summary>
-	public bool IsRight(GeneralObject obj){
-		return IsRight(obj.Pos);
-	}
+	public bool IsRight(GeneralObject obj){ return IsRight(Posi(obj)); }
 	
 	// Links
 	
@@ -451,27 +461,19 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Ob ein anderes Objekt rechts von diesem Objekt ist.
 	/// </summary>
-	public bool IsLeft(GameObject obj){
-		return IsLeft(obj.collider.bounds.center);
-	}
+	public bool IsLeft(GameObject obj){ return IsLeft(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt links von diesem Objekt ist.
 	/// </summary>
-	public bool IsLeft(Collider obj){
-		return IsLeft(obj.gameObject);
-	}
+	public bool IsLeft(Collider obj){ return IsLeft(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt links von diesem Objekt ist.
 	/// </summary>
-	public bool IsLeft(Collision obj){
-		return IsLeft(obj.gameObject);
-	}
+	public bool IsLeft(Collision obj){ return IsLeft(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt rechts von diesem Objekt ist.
 	/// </summary>
-	public bool IsLeft(GeneralObject obj){
-		return IsLeft(obj.Pos);
-	}
+	public bool IsLeft(GeneralObject obj){ return IsLeft(Posi(obj)); }
 	
 	// Oben
 	
@@ -484,60 +486,42 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Ob ein anderes Objekt über diesem Objekt ist.
 	/// </summary>
-	public bool IsOver(GameObject obj){
-		return IsOver(obj.collider.bounds.center);
-	}
+	public bool IsOver(GameObject obj){ return IsOver(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt über diesem Objekt ist.
 	/// </summary>
-	public bool IsOver(Collider obj){
-		return IsOver(obj.gameObject);
-	}
+	public bool IsOver(Collider obj){ return IsOver(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt über diesem Objekt ist.
 	/// </summary>
-	public bool IsOver(Collision obj){
-		return IsOver(obj.gameObject);
-	}
+	public bool IsOver(Collision obj){ return IsOver(Posi(obj)); }
 	/// <summary>
 	/// Ob ein anderes Objekt über diesem Objekt ist.
 	/// </summary>
-	public bool IsOver(GeneralObject obj){
-		return IsOver(obj.Pos);
-	}
+	public bool IsOver(GeneralObject obj){ return IsOver(Posi(obj)); }
 	
 	// Unten
 	
 	/// <summary>
 	/// Ob die Position unter diesem Objekt ist.
 	/// </summary>
-	public bool IsUnder(Vector3 pos){
-		return ! IsOver(pos);
-	}
+	public bool IsUnder(Vector3 pos){ return ! IsOver(pos); }
 	/// <summary>
 	/// Ob ein anderes Objekt unter diesem Objekt ist.
 	/// </summary>
-	public bool IsUnder(GameObject obj){
-		return ! IsOver(obj);
-	}
+	public bool IsUnder(GameObject obj){ return ! IsOver(obj); }
 	/// <summary>
 	/// Ob ein anderes Objekt unter diesem Objekt ist.
 	/// </summary>
-	public bool IsUnder(Collider obj){
-		return ! IsOver(obj);
-	}
+	public bool IsUnder(Collider obj){ return ! IsOver(obj); }
 	/// <summary>
 	/// Ob ein anderes Objekt unter diesem Objekt ist.
 	/// </summary>
-	public bool IsUnder(Collision obj){
-		return ! IsOver(obj);
-	}
+	public bool IsUnder(Collision obj){ return ! IsOver(obj); }
 	/// <summary>
 	/// Ob ein anderes Objekt unter diesem Objekt ist.
 	/// </summary>
-	public bool IsUnder(GeneralObject obj){
-		return ! IsOver(obj);
-	}
+	public bool IsUnder(GeneralObject obj){ return ! IsOver(obj); }
 	
 	
 	
@@ -562,11 +546,13 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		return DirectlyLeftOrRight(pos);
 	}
 	
-	
+
+
 	// Entfernung
 	
 	/// <summary>
-	/// Entfernung dieses Objektes zu einer anderen Position
+	/// Entfernung dieses Objektes zu einer anderen Position.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
 	/// </summary>
 	/// <returns>
 	/// Die absolute Distanz zur Position
@@ -578,7 +564,8 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		return Mathf.Abs(Vector3.Distance(Pos, pos));
 	}
 	/// <summary>
-	/// Entfernung dieses Objektes zu einem anderem Objekt
+	/// Entfernung dieses Objektes zu einem anderem Objekt.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
 	/// </summary>
 	/// <returns>
 	/// Die absolute Distanz zum Objekt
@@ -586,46 +573,139 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='obj'>
 	/// Das Objekt zu dem die Distanz ermittelt werden soll
 	/// </param>
-	public float DistanceTo(GameObject obj){
-		return DistanceTo(obj.collider.bounds.center);
+	public float DistanceTo(GameObject obj){ return DistanceTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung dieses Objektes zu einem anderem Objekt.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
+	/// </summary>
+	/// <returns>
+	/// Die absolute Distanz zum Objekt
+	/// </returns>
+	/// <param name='obj'>
+	/// Das Objekt zu dem die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceTo(Collider obj){ return DistanceTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung dieses Objektes zu einem anderem Objekt.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
+	/// </summary>
+	/// <returns>
+	/// Die absolute Distanz zum Objekt
+	/// </returns>
+	/// <param name='obj'>
+	/// Das Objekt zu dem die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceTo(Collision obj){ return DistanceTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung dieses Objektes zu einem anderem Objekt.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
+	/// </summary>
+	/// <returns>
+	/// Die absolute Distanz zum Objekt
+	/// </returns>
+	/// <param name='obj'>
+	/// Das Objekt zu dem die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceTo(GeneralObject obj){ return DistanceTo(Posi(obj)); }
+
+	/// <summary>
+	/// Entfernung dieses Objektes zu einer anderen Position im Squared Distance Space.
+	/// Es wird keine Wurzel gezogen, eignet sich z.B. performanter für Vergleiche zwischen Distanzen.
+	/// </summary>
+	/// <returns>
+	/// Die absolute quadrierte Distanz zur Position
+	/// </returns>
+	/// <param name='obj'>
+	/// Die Position zu der die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceSqTo(Vector3 pos){
+		return Mathf.Abs((Pos - pos).sqrMagnitude);
 	}
 	/// <summary>
-	/// Entfernung dieses Objektes zu einem anderem Objekt
+	/// Entfernung dieses Objektes zu einem anderem Objekt im Squared Distance Space.
+	/// Es wird keine Wurzel gezogen, eignet sich z.B. performanter für Vergleiche.
 	/// </summary>
 	/// <returns>
-	/// Die absolute Distanz zum Objekt
+	/// Die absolute quadrierte Distanz zum Objekt
 	/// </returns>
 	/// <param name='obj'>
 	/// Das Objekt zu dem die Distanz ermittelt werden soll
 	/// </param>
-	public float DistanceTo(Collider obj){
-		return DistanceTo(obj.gameObject);
+	public float DistanceSqTo(GameObject obj){ return DistanceSqTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung dieses Objektes zu einem anderem Objekt im Squared Distance Space.
+	/// Es wird keine Wurzel gezogen, eignet sich z.B. performanter für Vergleiche.
+	/// </summary>
+	/// <returns>
+	/// Die absolute quadrierte Distanz zum Objekt
+	/// </returns>
+	/// <param name='obj'>
+	/// Das Objekt zu dem die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceSqTo(Collider obj){ return DistanceSqTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung dieses Objektes zu einem anderem Objekt im Squared Distance Space.
+	/// Es wird keine Wurzel gezogen, eignet sich z.B. performanter für Vergleiche.
+	/// </summary>
+	/// <returns>
+	/// Die absolute quadrierte Distanz zum Objekt
+	/// </returns>
+	/// <param name='obj'>
+	/// Das Objekt zu dem die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceSqTo(Collision obj){ return DistanceSqTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung dieses Objektes zu einem anderem Objekt im Squared Distance Space.
+	/// Es wird keine Wurzel gezogen, eignet sich z.B. performanter für Vergleiche.
+	/// </summary>
+	/// <returns>
+	/// Die absolute quadrierte Distanz zum Objekt
+	/// </returns>
+	/// <param name='obj'>
+	/// Das Objekt zu dem die Distanz ermittelt werden soll
+	/// </param>
+	public float DistanceSqTo(GeneralObject obj){ return DistanceSqTo(Posi(obj)); }
+
+	/// <summary>
+	/// Entfernung zwischen diesem Objekt und einer Position auf einer Kugel.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
+	/// </summary>
+	/// <returns>Die Distanz</returns>
+	/// <param name="pos">Position.</param>
+	public float CircleDistanceTo(Vector3 pos){
+		return Utility.CirleDistance(Vector3.zero, Pos.magnitude, Pos, pos);
 	}
 	/// <summary>
-	/// Entfernung dieses Objektes zu einem anderem Objekt
+	/// Entfernung zwischen diesem Objekt und einem anderem Objekt auf einer Kugel.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
 	/// </summary>
-	/// <returns>
-	/// Die absolute Distanz zum Objekt
-	/// </returns>
-	/// <param name='obj'>
-	/// Das Objekt zu dem die Distanz ermittelt werden soll
-	/// </param>
-	public float DistanceTo(Collision obj){
-		return DistanceTo(obj.gameObject);
-	}
+	/// <returns>Die Distanz</returns>
+	/// <param name="obj">das andere Objekt.</param>
+	public float CircleDistanceTo(GameObject obj){ return CircleDistanceTo(Posi(obj)); }
 	/// <summary>
-	/// Entfernung dieses Objektes zu einem anderem Objekt
+	/// Entfernung zwischen diesem Objekt und einem anderem Objekt auf einer Kugel.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
 	/// </summary>
-	/// <returns>
-	/// Die absolute Distanz zum Objekt
-	/// </returns>
-	/// <param name='obj'>
-	/// Das Objekt zu dem die Distanz ermittelt werden soll
-	/// </param>
-	public float DistanceTo(GeneralObject obj){
-		return DistanceTo(obj.Pos);
-	}
-	
+	/// <returns>Die Distanz</returns>
+	/// <param name="obj">das andere Objekt.</param>
+	public float CircleDistanceTo(Collider obj){ return CircleDistanceTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung zwischen diesem Objekt und einem anderem Objekt auf einer Kugel.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
+	/// </summary>
+	/// <returns>Die Distanz</returns>
+	/// <param name="obj">das andere Objekt.</param>
+	public float CircleDistanceTo(Collision obj){ return CircleDistanceTo(Posi(obj)); }
+	/// <summary>
+	/// Entfernung zwischen diesem Objekt und einem anderem Objekt auf einer Kugel.
+	/// Für Vergleiche zwischen Distanzen ist DistanceSqTo besser geeignet.
+	/// </summary>
+	/// <returns>Die Distanz</returns>
+	/// <param name="obj">das andere Objekt.</param>
+	public float CircleDistanceTo(GeneralObject obj){ return CircleDistanceTo(Posi(obj)); }
+
+
+
 	// Line Of Sight
 	
 	/// <summary>

@@ -57,7 +57,7 @@ public abstract class Tower : ImmovableEntity {
 					Target = hit.collider.gameObject.GetComponent<MovableEntity>();
 
 					//Wenn der Cooldown noch nicht läuft
-					if(!isAttackCooldownActive){
+					if(Target != null && !isAttackCooldownActive){
 						//Greife das Ziel jetzt an
 						DoAttack();
 						//Nachricht an selbst für später
@@ -153,7 +153,7 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// momentaner Schaden pro Treffer
+	/// momentaner Schaden pro Treffer, abhängig vom aktuellem Level.
 	/// </summary>
 	public int Damage { get; private set; }
 	/// <summary>
@@ -164,7 +164,7 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// momentane Angriffsreichweite
+	/// momentane Angriffsreichweite, abhängig vom aktuellem Level.
 	/// </summary>
 	public float Range { get; private set; }
 	/// <summary>
@@ -175,7 +175,7 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// Abklingzeit zwischen Angriffen in Sekunden
+	/// Abklingzeit zwischen Angriffen in Sekunden, abhängig vom aktuellem Level.
 	/// </summary>
 	public float AttackCooldown { get; private set; }
 	/// <summary>
@@ -190,7 +190,7 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// Das momentan anvisierte Ziel dieses Turmes
+	/// Das momentan anvisierte Ziel dieses Turmes.
 	/// </summary>
 	public MovableEntity Target { get; private set; }
 
