@@ -38,13 +38,11 @@ public class FlyAround : MonoBehaviour {
 	}
 
 	void shoot(){
-		//TODO: Projektil Asset fehlt.
-		Debug.Log("TODO: Projektil-Asset wurde nicht committed!");
-		/*
+
 		GameObject p = (GameObject)GameObject.Instantiate (projectile);
 		p.transform.position = transform.position;
 		p.transform.rotation = transform.rotation;
 		pewManager.Add (p);
-		*/
+
 	}
 }

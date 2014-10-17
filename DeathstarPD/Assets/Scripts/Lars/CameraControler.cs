@@ -91,13 +91,11 @@ public class CameraControler : MonoBehaviour {
 		Ray vRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if(Physics.Raycast(vRay, out vHit, 1000))
 		{
-			//TODO: Tower Asset fehlt
-			Debug.Log("TODO: Tower-Asset wurde nicht committed!");
-			/*
+
 			GameObject t = (GameObject) GameObject.Instantiate(tower);
 			t.transform.position = vHit.point;
 			t.transform.LookAt(new Vector3(0,0,0));
-			*/
+
 		}
 	}
 }
