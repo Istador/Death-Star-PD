@@ -26,4 +26,19 @@ public class ProjectileManager : ScriptableObject{
 		}
 		projectiles = new GameObject[size];
 	}
+
+
+
+	/// <summary>
+	/// Container in den alle Projektile kommen
+	/// </summary>
+	public static GameObject Container { get{
+			if(_container == null)
+				_container = GameObject.Find("Projectiles");
+			return _container;
+		}
+	}
+	private static GameObject _container = null;
+
+
 }

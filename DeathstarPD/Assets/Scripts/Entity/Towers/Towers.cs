@@ -5,6 +5,20 @@ using System.Collections.Generic;
 
 public class Towers : IEnumerable<Tower> {
 
+
+	/// <summary>
+	/// Container in den alle Türme kommen
+	/// </summary>
+	public static GameObject Container {
+		get{
+			if(_container == null)
+				_container = GameObject.Find("Towers");
+			return _container;
+		}
+	}
+	private static GameObject _container = null;
+
+
 	//Alle Türme
 	private HashSet<Tower> set = new HashSet<Tower>();
 

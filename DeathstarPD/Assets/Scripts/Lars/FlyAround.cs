@@ -38,8 +38,9 @@ public class FlyAround : MonoBehaviour {
 	}
 
 	void shoot(){
-
+		//Projektil erzeugen
 		GameObject p = (GameObject)GameObject.Instantiate (projectile);
+		p.transform.parent = ProjectileManager.Container.transform; //in Projektil-Container
 		p.transform.position = transform.position;
 		p.transform.rotation = transform.rotation;
 		pewManager.Add (p);

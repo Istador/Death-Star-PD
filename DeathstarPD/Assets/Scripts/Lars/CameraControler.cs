@@ -91,10 +91,11 @@ public class CameraControler : MonoBehaviour {
 		Ray vRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if(Physics.Raycast(vRay, out vHit, 1000))
 		{
-
+			//Turm erzeugen
 			GameObject t = (GameObject) GameObject.Instantiate(tower);
-			t.transform.position = vHit.point;
-			t.transform.LookAt(new Vector3(0,0,0));
+			t.transform.parent = Towers.Container.transform; //in Turm-Container
+			t.transform.position = vHit.point; //Position, wo der Ray getroffen hat
+			t.transform.LookAt(new Vector3(0,0,0)); //zum Kugel-Mittelpunkt ausrichten
 
 		}
 	}
