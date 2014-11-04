@@ -33,13 +33,13 @@ public class CameraControler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Click to place a building
-		if(Input.GetMouseButtonUp(0) && moving == false){
-			placeBuilding();
+		if(Input.GetMouseButtonUp(0) && !moving){
+			TowerBuilding.I.Build();
 		}
 
 		//Click and drag to move Camera
 		if(Input.GetMouseButton(0)){
-			if(moving == false){
+			if(!moving){
 				timer += 1;
 			}
 			if(timer >= delay){
@@ -55,7 +55,7 @@ public class CameraControler : MonoBehaviour {
 					topRotation = 1;
 				}
 			}
-		}else{
+		} else {
 			moving = false;
 			timer = 0;
 			Screen.showCursor = true;
@@ -84,19 +84,5 @@ public class CameraControler : MonoBehaviour {
 		transform.position = newPos;
 		transform.LookAt(new Vector3(0,0,0));
 	}
-
-	private void placeBuilding(){
-		Debug.Log ("Casting Ray...");
-		RaycastHit vHit = new RaycastHit();
-		Ray vRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		if(Physics.Raycast(vRay, out vHit, 1000))
-		{
-			//Turm erzeugen
-			GameObject t = (GameObject) GameObject.Instantiate(tower);
-			t.transform.parent = Towers.Container.transform; //in Turm-Container
-			t.transform.position = vHit.point; //Position, wo der Ray getroffen hat
-			t.transform.LookAt(new Vector3(0,0,0)); //zum Kugel-Mittelpunkt ausrichten
-
-		}
-	}
+	
 }

@@ -118,11 +118,10 @@ public abstract class Tower : ImmovableEntity {
 		private set {
 			//Setze Instanzvariable
 			_Level = value;
-			//Berechne Werte neu
-			MaxHealth = CalcMaxHealth(Level);
-			Damage = CalcDamage(Level);
-			Range = CalcRange(Level);
-			AttackCooldown = CalcAttackCooldown(Level);
+			//neuen Wert setzen
+			MaxHealth = MaxHealthTable[Level - 1];
+			//Namen setzen
+			name = GetType()+" (Level "+Level+")";
 		}
 	}
 	private int _Level; //Instanzvariable
@@ -146,42 +145,42 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// Berechnet die macimalen Trefferpunkte abhängig vom Level des Turmes
+	/// maximale Trefferpunkte abhängig vom Level des Turmes
 	/// </summary>
-	public abstract int CalcMaxHealth(int level);
+	public abstract int[] MaxHealthTable { get; }
 
 
 
 	/// <summary>
 	/// momentaner Schaden pro Treffer, abhängig vom aktuellem Level.
 	/// </summary>
-	public int Damage { get; private set; }
+	public int Damage { get{return DamageTable[Level - 1];} }
 	/// <summary>
-	/// Berechnet den verursachten Schaden abhängig vom Level des Turmes
+	/// verursachter Schaden abhängig vom Level des Turmes
 	/// </summary>
-	public abstract int CalcDamage(int level);
+	public abstract int[] DamageTable { get; }
 
 
 
 	/// <summary>
 	/// momentane Angriffsreichweite, abhängig vom aktuellem Level.
 	/// </summary>
-	public float Range { get; private set; }
+	public float Range { get{return RangeTable[Level - 1];} }
 	/// <summary>
-	/// Berechnet die Angriffsreichtweite abhängig vom Level des Turmes
+	/// Angriffsreichtweite abhängig vom Level des Turmes
 	/// </summary>
-	public abstract float CalcRange(int level);
+	public abstract float[] RangeTable { get; }
 
 
 
 	/// <summary>
 	/// Abklingzeit zwischen Angriffen in Sekunden, abhängig vom aktuellem Level.
 	/// </summary>
-	public float AttackCooldown { get; private set; }
+	public float AttackCooldown { get{return AttackCooldownTable[Level - 1];} }
 	/// <summary>
-	/// Berechnet die Abklingzeit zwischen den Angriffen abhängig vom Level des Turmes
+	/// Abklingzeit zwischen den Angriffen abhängig vom Level des Turmes
 	/// </summary>
-	public abstract float CalcAttackCooldown(int level);
+	public abstract float[] AttackCooldownTable  { get; }
 	/// <summary>
 	/// Ob der Cooldown Aktiv ist
 	/// </summary>

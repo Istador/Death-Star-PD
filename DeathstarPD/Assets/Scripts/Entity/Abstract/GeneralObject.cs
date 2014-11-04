@@ -27,7 +27,10 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 		txtFPS = 1;
 #endif
 	}
-	
+
+
+	public bool Active { get{return gameObject.activeSelf;} set{gameObject.SetActive(value);}}
+
 	
 	// Start
 	
@@ -390,7 +393,12 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
-	public Vector3 Posi(GameObject other){ return other.collider.bounds.center; }
+	public Vector3 Posi(GameObject other){ 
+		if(other.collider != null)
+			return other.collider.bounds.center;
+		else
+			return other.transform.position;
+	}
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
