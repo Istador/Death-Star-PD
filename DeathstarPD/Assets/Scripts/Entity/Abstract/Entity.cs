@@ -84,7 +84,7 @@ public abstract class Entity : GeneralObject {
 	
 	
 	// Methoden um Trefferunkte zu verändern
-	
+
 	/// <summary>
 	/// Schaden erhalten, der die Trefferunkte verringert, und zum Tode führen kann
 	/// </summary>

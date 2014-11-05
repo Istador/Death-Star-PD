@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class FlyAround : MonoBehaviour {
+public class FlyAround : MovableEntity {
 
 	private float rotation = 0;
 	public float radius = 102f;
@@ -16,7 +16,7 @@ public class FlyAround : MonoBehaviour {
 	public GameObject projectile;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start() {
 		pew = new GameObject[10];
 		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * radius, 0f, Mathf.Sin (rotation) * radius);
 		transform.position = newPos;
@@ -24,7 +24,7 @@ public class FlyAround : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update() {
 		rotation += speed;
 		float nradius = Mathf.Cos (topRotation) * radius;
 		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * nradius, Mathf.Sin(topRotation)*radius, Mathf.Sin (rotation) * nradius);
@@ -37,6 +37,8 @@ public class FlyAround : MonoBehaviour {
 		}
 	}
 
+	protected override void FixedUpdate(){}
+
 	void shoot(){
 		//Projektil erzeugen
 		GameObject p = (GameObject)GameObject.Instantiate (projectile);
@@ -45,5 +47,10 @@ public class FlyAround : MonoBehaviour {
 		p.transform.rotation = transform.rotation;
 		pewManager.Add (p);
 
+	}
+
+	public override void ApplyDamage(Vector3 damage){
+		int dmg = System.Convert.ToInt32(damage.magnitude);
+		Debug.Log("Avion wurde getroffen mit "+dmg+" Schaden.");
 	}
 }

@@ -3,10 +3,12 @@ using System.Collections;
 
 public class TowerBuilding : GeneralObject {
 
+	private float MinimumDistanceToNextTower = 5f;
+
 	/// <summary>
 	/// wie weit das Objekt in den Planeten hineinragt
 	/// </summary>
-	public float Offset = 1.5f;
+	private float Offset = 1.5f;
 
 	/// <summary>
 	/// Container in den alle Prototyp-Türme kommen
@@ -25,7 +27,8 @@ public class TowerBuilding : GeneralObject {
 
 		//Prototypen erzeugen
 		Prototypes = new Tower[]{
-			Instantiate("LaserTower").GetComponent<Tower>()
+			  Instantiate("LaserTower").GetComponent<Tower>()
+			, Instantiate("RocketTower").GetComponent<Tower>()
 		};
 
 		//für jeden Prototyp
@@ -67,12 +70,20 @@ public class TowerBuilding : GeneralObject {
 				);
 				Selected.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
 				Selected.Visible = true; //Sichtbar
+				//TODO Lars: farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
+				// if(CanBuild); //Grün
+				// else ; //Rot
 			} else {
 				//wenn die Maus über dem All ist
 				Selected.Visible = false; //Unsichtbar
 			}
 		}
 	}
+
+	public bool CanBuild { get {
+		//TODO Robin: Funktion um Abstand zu nächstem Turm einzuhalten
+		return true;
+	}}
 
 	public void Select(int index){
 		if(index < 0 || index >= Prototypes.Length){
@@ -105,9 +116,8 @@ public class TowerBuilding : GeneralObject {
 	}
 
 	public void Build(){
-		//TODO: Verhindern, dass Türme zu nahe aneinander gebaut werden können
-		//Nur wenn ein Turm zum bauen ausgewählt ist, und dieser gezeichnet wird
-		if(SelectedIndex != -1 && Selected.Visible){
+		//Nur wenn ein Turm zum bauen ausgewählt ist, dieser gezeichnet wird, und bauen möglich ist
+		if(SelectedIndex != -1 && Selected.Visible && CanBuild){
 			//Turm erzeugen
 			Tower t = Selected.Instantiate(Selected.gameObject).GetComponent<Tower>();
 			//in Turm-Container

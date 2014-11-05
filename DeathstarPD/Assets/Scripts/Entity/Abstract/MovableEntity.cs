@@ -197,7 +197,7 @@ public abstract class MovableEntity : Entity {
 	/// </param>
 	public override bool HandleMessage(Telegram msg){
 		//Move-Zustandsautomat
-		return IsDead || MoveFSM.HandleMessage(msg);
+		return IsDead || MoveFSM.HandleMessage(msg) || base.HandleMessage(msg);
 	}
 	
 	

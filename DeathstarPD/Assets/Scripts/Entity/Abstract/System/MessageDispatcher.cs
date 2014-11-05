@@ -9,8 +9,8 @@ using UnityEngine; //Abhängigkeit: Unity.Time
  * Mat Buckland - Programming Game AI by Example
 */
 public class MessageDispatcher {
-	
-	
+
+
 	
 	/// <summary>
 	/// Priorisierte Warteschlange mit Mengencharakteristik (keine Doppelten)
@@ -25,7 +25,7 @@ public class MessageDispatcher {
 	/// <param name='msg'>
 	/// Die Nachricht die ausgeliefert wird
 	/// </param>
-	private void Discharge(Telegram msg){		
+	private void Discharge(Telegram msg){
 		//Nachricht an MessageReceiver Methode übergeben
 		if(msg.receiver != null)
 			msg.receiver.HandleMessage(msg);

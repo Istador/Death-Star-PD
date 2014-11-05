@@ -7,7 +7,7 @@ public abstract class Tower : ImmovableEntity {
 	/// wie oft geupdatet werden soll.
 	/// default: 3 (jeden 3. Frame)
 	/// </summary>
-	public static readonly int update_each_x_frames = 3;
+	public static readonly int update_each_x_frames = 7;
 	/// <summary>
 	/// Dieser spezifische Tower updatet bei Frame Nr. x
 	/// </summary>
@@ -37,6 +37,7 @@ public abstract class Tower : ImmovableEntity {
 
 
 	protected override void Update() {
+		//nur berechnen der neuen Framenummer
 		if(last_frame_time < Time.time){
 			frame_nr = (frame_nr + 1) % update_each_x_frames;
 			last_frame_time = Time.time;
@@ -50,11 +51,23 @@ public abstract class Tower : ImmovableEntity {
 				Target = null;
 
 				//finde neues Target
-				RaycastHit hit;
-				//TODO: testen ob der SphereCast funktioniert :)
-				if(Physics.SphereCast(Pos, Range, Vector3.zero, out hit, 0f, (int)Layer.EnemyFighter)){
-					//neues Target setzen
-					Target = hit.collider.gameObject.GetComponent<MovableEntity>();
+				RaycastHit[] hits = Physics.SphereCastAll(Pos, Range, Pos, 0.1f, (int)Layer.EnemyFighter);
+				if(hits.Length > 0){
+
+					//neues Target das am nächsten ist finden
+					float nearestdistance = float.PositiveInfinity;
+					foreach(RaycastHit hit in hits){
+						MovableEntity current = hit.collider.gameObject.GetComponent<MovableEntity>();
+						//ob es ein valides Ziel
+						if(current == null || !current.enabled || current.IsDead) continue;
+						//Enfernung berechnen (im Squared-Distance-Space)
+						float distance = DistanceSqTo(current);
+						//neues nahestes Ziel
+						if(Target == null || distance < nearestdistance){
+							nearestdistance = distance;
+							Target = current;
+						}
+					}
 
 					//Wenn der Cooldown noch nicht läuft
 					if(Target != null && !isAttackCooldownActive){

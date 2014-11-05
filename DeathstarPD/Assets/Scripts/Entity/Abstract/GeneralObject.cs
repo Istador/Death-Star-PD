@@ -774,12 +774,13 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='damage'>
 	/// Der Schadenswert
 	/// </param>
-	public void DoDamage(GameObject other, int damage){
+	public void DoDamage(GameObject other, int damage, float delay = 0f){
 		Vector3 richtung = (other.collider.bounds.center - Pos);
 		if(richtung.magnitude == 0.0) richtung = Vector3.up;
-
 		Vector3 dmg = richtung.normalized * damage;
-		other.SendMessage("ApplyDamage", dmg, SendMessageOptions.DontRequireReceiver);
+
+		MessageReceiver mr = MessageReceiverWrapper.wrap(other);
+		MessageDispatcher.I.Dispatch(this, mr, "ApplyDamage", delay, dmg);
 	}
 	/// <summary>
 	/// Einem anderen Objekt Schaden verursachen
@@ -790,7 +791,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='damage'>
 	/// Der Schadenswert
 	/// </param>
-	public void DoDamage(Collider other, int damage){
+	public void DoDamage(Collider other, int damage, float delay = 0f){
 		DoDamage(other.gameObject, damage);
 	}
 	/// <summary>
@@ -802,7 +803,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='damage'>
 	/// Der Schadenswert
 	/// </param>
-	public void DoDamage(Collision other, int damage){
+	public void DoDamage(Collision other, int damage, float delay = 0f){
 		DoDamage(other.gameObject, damage);
 	}
 	/// <summary>
@@ -814,7 +815,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='damage'>
 	/// Der Schadenswert
 	/// </param>
-	public void DoDamage(GeneralObject other, int damage){
+	public void DoDamage(GeneralObject other, int damage, float delay = 0f){
 		DoDamage(other.gameObject, damage);
 	}
 	
@@ -829,8 +830,9 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='hp'>
 	/// Anzahl Lebenspunkte um die das Objekt geheilt werden soll
 	/// </param>
-	public void DoHeal(GameObject other, int hp){
-		other.SendMessage("ApplyHealth", hp, SendMessageOptions.DontRequireReceiver);
+	public void DoHeal(GameObject other, int hp, float delay = 0f){
+		MessageReceiver mr = MessageReceiverWrapper.wrap(other);
+		MessageDispatcher.I.Dispatch(this, mr, "ApplyHealth", delay, hp);
 	}
 	/// <summary>
 	/// Einem anderem Objekt Lebenspunkte heilen
@@ -841,7 +843,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='hp'>
 	/// Anzahl Lebenspunkte um die das Objekt geheilt werden soll
 	/// </param>
-	public void DoHeal(Collider other, int hp){
+	public void DoHeal(Collider other, int hp, float delay = 0f){
 		DoHeal(other.gameObject, hp);
 	}
 	/// <summary>
@@ -853,7 +855,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='hp'>
 	/// Anzahl Lebenspunkte um die das Objekt geheilt werden soll
 	/// </param>
-	public void DoHeal(Collision other, int hp){
+	public void DoHeal(Collision other, int hp, float delay = 0f){
 		DoHeal(other.gameObject, hp);
 	}
 	/// <summary>
@@ -865,7 +867,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <param name='hp'>
 	/// Anzahl Lebenspunkte um die das Objekt geheilt werden soll
 	/// </param>
-	public void DoHeal(GeneralObject other, int hp){
+	public void DoHeal(GeneralObject other, int hp, float delay = 0f){
 		DoHeal(other.gameObject, hp);
 	}
 	

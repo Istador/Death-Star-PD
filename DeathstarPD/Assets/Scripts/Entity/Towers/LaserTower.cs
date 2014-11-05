@@ -23,8 +23,9 @@ public class LaserTower : Tower {
 	public override float[] AttackCooldownTable { get{ return attack_cooldown_table; } }
 
 	protected override void DoAttack(){
-		//TODO: sichtbaren Effekt erzeugen
+		//TODO Lars: sichtbaren Effekt für Laserstrahl erzeugen
 		DoDamage(Target, Damage);
+		//DoDamage(Target, Damage, 0.5); //Alternativ: erst nach 0,5 sekunden Schaden verursachen
 	}
 
 }
