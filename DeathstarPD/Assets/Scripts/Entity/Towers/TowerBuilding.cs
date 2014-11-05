@@ -3,7 +3,10 @@ using System.Collections;
 
 public class TowerBuilding : GeneralObject {
 
-	private float MinimumDistanceToNextTower = 5f;
+	/// <summary>
+	/// Minimale Distanz zum nächsten Turm um bauen zu können
+	/// </summary>
+	//private float MinimumDistanceToNextTower = 5f;
 
 	/// <summary>
 	/// wie weit das Objekt in den Planeten hineinragt
