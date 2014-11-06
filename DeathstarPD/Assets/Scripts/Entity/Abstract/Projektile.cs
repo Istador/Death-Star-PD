@@ -9,7 +9,7 @@ using System.Collections;
  * - Rotation zu Flugrichtung
  * 
 */
-public abstract class Projektile : MovableEntity {
+public abstract class Projektile<T> : MovableEntity {
 	
 	
 	
@@ -19,14 +19,14 @@ public abstract class Projektile : MovableEntity {
 	/// <value>
 	/// in ganzen Trefferpunkten
 	/// </value>
-	public abstract int Damage { get; }
+	protected abstract int Damage { get; }
 	
 	
 	
 	/// <summary>
 	/// GameObject, dass dieses Projektil abgeschossen hat.
 	/// </summary>
-	public GameObject owner;
+	public T Owner { get; set; }
 	
 	
 	
@@ -48,12 +48,14 @@ public abstract class Projektile : MovableEntity {
 	
 	
 	protected override void Start() {
-		MaxHealth = 1;
+		//hier nicht base, weil evtl. erst Parameter übergeben werden müssen
+	}
 
-		base.Start();
+
+	public virtual void Init(){
+		MaxHealth = 1;
 		
-		//Projektile hinter die Gegner Positionieren
-		transform.position = transform.position + new Vector3(0.0f, 0.0f, 0.01f);
+		base.Start();
 		
 		//Zielposition anstreben
 		Steering.DoSeek(TargetPos);
@@ -82,7 +84,12 @@ public abstract class Projektile : MovableEntity {
 	/// <summary>
 	/// Rotiere das Projektil in Bewegungsrichtung
 	/// </summary>
+
 	protected void Rotate(){
+		//TODO Robin: Rotiert auf falscher Achse
+		transform.LookAt(TargetPos);
+
+		/*
 		Vector3 rotate = rigidbody.velocity.Equals(Vector3.zero) ? TargetPos - Pos : rigidbody.velocity ;
 		
 		//Rotiere zum Ziel entlang der Z-Achse
@@ -90,37 +97,38 @@ public abstract class Projektile : MovableEntity {
 		
 		//Drehe Sprite um 90°
 		transform.Rotate(-90.0f, 0.0f, -90.0f);
+		*/
 	}
+
 	
 	/// <summary>
 	/// Rotation um die Z-Achse
 	/// </summary>
-	private static readonly Vector3 zvector = new Vector3(0.0f, 0.0f, 1.0f);
+	//private static readonly Vector3 zvector = new Vector3(0.0f, 0.0f, 1.0f);
 	
 	
 	
 	/// <summary>
 	/// Kollisionsbehandlungsroutine:
-	/// Kollision mit Spieler -> Schaden verursachen
+	/// Kollision mit Gegnern/Spieler -> Schaden verursachen
 	/// </summary>
 	/// <param name='other'>
 	/// Objekt mit dem die Kollision stattfindet
 	/// </param>
 	protected virtual void OnTriggerEnter(Collider other) {
-		//nicht null, wenn Projektil von selben Typ
-		Projektile p = other.gameObject.GetComponent<Projektile>();
-		
-		//Nicht mit dem Besitzer dieses Projektiles oder eines seiner anderen Projektile kollidieren
-		if(other.gameObject != owner && (p==null || p.owner != owner ) ){
-		
-			//Kollision mit Spieler?
-			if(other.gameObject.tag == "Player")
-				//Schaden verursachen
-				DoDamage(other, Damage);
-			//auch bei Kollisionen die nicht mit dem Spieler sind sterben
-			Death();
+		//Kollision mit Gegnern?
+
+		//Kein Schaden bei Levelobjekten verursachen
+		if( ((int)Layer.Level & other.gameObject.layer) != 0 ){
+			//Schaden verursachen
+			DoDamage(other, Damage);
 		}
+
+		//auch bei Kollisionen, die mit dem Level sind, sterben.
+		Death();
 	}
+
+
 	
 	
 	

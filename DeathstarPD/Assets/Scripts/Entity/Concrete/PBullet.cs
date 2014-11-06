@@ -6,7 +6,7 @@ using System.Collections;
 /// 
 /// Sie bewegen sich stur in eine Richtung und haben eine begrenzte Lebensdauer
 /// 
-public class PBullet : Projektile {
+public class PBullet : Projektile<Entity> {
 	
 	
 	/// <summary>
@@ -23,7 +23,7 @@ public class PBullet : Projektile {
 	/// <value>
 	/// in ganzen Trefferpunkten
 	/// </value>
-	public override int Damage { get{return 10;} }
+	protected override int Damage { get{return 10;} }
 	
 	
 	
@@ -42,12 +42,12 @@ public class PBullet : Projektile {
 	
 	
 	
-	protected override void Start() {
+	public override void Init() {
 		//Zielposition setzen
 		TargetPos = Pos + Heading.normalized * MaxSpeed;
 		
 		//u.a. Rotieren zum Ziel
-		base.Start();
+		base.Init();
 		
 		//Sprite-Eigenschaften
 		/*

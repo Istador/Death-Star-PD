@@ -19,12 +19,15 @@ public class RocketTower : Tower {
 	private static float[] range_table = { 8f, 10f, 12f, 14f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 	
-	private static float[] attack_cooldown_table = { 3.0f, 2.8f, 2.6f, 2.4f }; // Angriffe die Sekunde
+	private static float[] attack_cooldown_table = { 3.0f, 2.8f, 2.6f, 2.4f };
 	public override float[] AttackCooldownTable { get{ return attack_cooldown_table; } }
 	
 	protected override void DoAttack(){
-		//TODO Robin: Rakete erzeugen, die auf das Target zufliegt
-		DoDamage(Target, Damage);
+
+		//TODO Robin: nicht in der mitte erzeugen, sondern an Abschussposition
+		PRocket r = Instantiate("Rocket").GetComponent<PRocket>();
+		r.Owner = this;
+		r.Init();
 	}
 	
 }
