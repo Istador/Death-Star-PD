@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class UVGImportWindow : EditorWindow {
 
 	string path = "";
-	float scale = 1/11;
+	float scale = 1f / 11f;
 
 	List<Field> fields = new List<Field>();
 	bool[] faces = new bool[]{false, false, false, false, false, false};
@@ -17,7 +17,7 @@ public class UVGImportWindow : EditorWindow {
 	[MenuItem ("Window/Import UVG")]
 	static void Init () {
 		// Get existing open window or if none, make a new one:
-		UVGImportWindow window = (UVGImportWindow)EditorWindow.GetWindow (typeof (UVGImportWindow));
+		/*UVGImportWindow window = (UVGImportWindow)*/ EditorWindow.GetWindow (typeof (UVGImportWindow));
 	}
 	
 	void OnGUI () {
@@ -48,16 +48,16 @@ public class UVGImportWindow : EditorWindow {
 		string fileContents = sr.ReadToEnd();
 		sr.Close();
 		
-		string[] lines = fileContents.Split(";\n"[0]);
+		string[] lines = fileContents.Split(";\n"[0]); // TODO: \n wird nicht benutzt. gewollt?
 		foreach (string line in lines) {
 			int x = 0;
 			int y = 0;
 			int z = 0;
 			string c = "";
 			bool done = true;
-			string[] parts = line.Split(":"[0]);
+			string[] parts = line.Split(':');
 			if(parts.Length >= 2){
-				string[] coords = parts[0].Split (","[0]);
+				string[] coords = parts[0].Split(',');
 				if(coords.Length == 3){
 					done = int.TryParse(coords[0], out x);
 					done = int.TryParse(coords[1], out y);
@@ -77,30 +77,23 @@ public class UVGImportWindow : EditorWindow {
 			if(parts.Length >= 3){
 				char[] fac = parts[2].ToCharArray();
 				foreach(char ch in fac){
-					if(ch == "0"[0]){
-						faces[0] = true;
-					}else if(ch == "1"[0]){
-						faces[1] = true;
-					}else if(ch == "2"[0]){
-						faces[2] = true;
-					}else if(ch == "3"[0]){
-						faces[3] = true;
-					}else if(ch == "4"[0]){
-						faces[4] = true;
-					}else if(ch == "5"[0]){
-						faces[5] = true;
-					}
+					if('0' <= ch && ch <= '5') //weglassen, sofern garantiert
+						faces[ch - 0x30] = true;
+					/*
+					if(ch == '0') faces[0] = true;
+					else if(ch == '1') faces[1] = true;
+					else if(ch == '2') faces[2] = true;
+					else if(ch == '3') faces[3] = true;
+					else if(ch == '4') faces[4] = true;
+					else if(ch == '5') faces[5] = true;
+					*/
 				}
 			}else{
 				useFaces = false;
 			}
 			if(done == true){
 				Field f = new Field(new Vector3(x,z,y), 1, c);
-				if(useFaces == true){
-					f.setFaceArray ( faces);
-				}else{
-					f.setFaceArray (new bool[]{true, true, true, true, true, true});
-				}
+				f.Faces = useFaces ? faces : new bool[]{true, true, true, true, true, true};
 				fields.Add(f);
 			}
 		}
@@ -135,7 +128,7 @@ public class UVGImportWindow : EditorWindow {
 			colors.Add(f.Color);
 
 			//Front
-			if(f.getFaceActive(0)){
+			if(f.Faces[0]){
 				triangles.Add(counter + 2);
 				triangles.Add(counter + 1);
 				triangles.Add(counter + 0);
@@ -145,7 +138,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 0);
 			}
 			//Left
-			if(f.getFaceActive(1)){				
+			if(f.Faces[1]){				
 				triangles.Add(counter + 4);
 				triangles.Add(counter + 3);
 				triangles.Add(counter + 0);
@@ -155,7 +148,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 4);
 			}
 			//Back
-			if(f.getFaceActive(2)){				
+			if(f.Faces[2]){				
 				triangles.Add(counter + 5);
 				triangles.Add(counter + 7);
 				triangles.Add(counter + 4);
@@ -165,7 +158,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 7);
 			}
 			//Right
-			if(f.getFaceActive(3)){				
+			if(f.Faces[3]){				
 				triangles.Add(counter + 5);
 				triangles.Add(counter + 2);
 				triangles.Add(counter + 6);
@@ -175,7 +168,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 5);
 			}
 			//Top
-			if(f.getFaceActive(4)){				
+			if(f.Faces[4]){				
 				triangles.Add(counter + 3);
 				triangles.Add(counter + 7);
 				triangles.Add(counter + 2);
@@ -185,7 +178,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 2);
 			}
 			//Bottom
-			if(f.getFaceActive(5)){				
+			if(f.Faces[5]){				
 				triangles.Add(counter + 4);
 				triangles.Add(counter + 1);
 				triangles.Add(counter + 0);
@@ -198,7 +191,7 @@ public class UVGImportWindow : EditorWindow {
 		}
 
 		GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		string[] ar = path.Split("/"[0]);
+		string[] ar = path.Split('/');
 		go.name = ar[ar.Length -1];
 
 		Mesh m = new Mesh();

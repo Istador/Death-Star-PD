@@ -8,7 +8,7 @@ public class FlyAround : MovableEntity {
 	public float radius = 102f;
 	public float topRotation = 0f;
 	public float speed = -0.01f;
-	private GameObject[] pew;
+	/* private GameObject[] pew; */ //unused
 	private int timer = 0;
 
 	private ProjectileManager pewManager;
@@ -17,7 +17,7 @@ public class FlyAround : MovableEntity {
 
 	// Use this for initialization
 	protected override void Start() {
-		pew = new GameObject[10];
+		/* pew = new GameObject[10]; */ //unused
 		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * radius, 0f, Mathf.Sin (rotation) * radius);
 		transform.position = newPos;
 		pewManager = new ProjectileManager(10);
