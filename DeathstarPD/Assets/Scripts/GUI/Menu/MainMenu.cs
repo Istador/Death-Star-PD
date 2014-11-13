@@ -27,26 +27,36 @@ public class MainMenu: MonoBehaviour {
 	GButton g_quit = null;
 	Vector2 pos_quit;
 
-
-	Action<GButton> a_start = (b) => {
+	public static void ToMainMenu(){
+		//Nachrichtenwarteschlange leeren
 		MessageDispatcher.I.EmptyQueue();
-		Application.LoadLevel(1);
-	};
+		//Hauptmenü laden
+		Application.LoadLevel(0);
+		//Spiel fortsetzen
+		if(Pause.I != null)
+			Pause.I.ResumeGame();
+	}
 
-	Action<GButton> a_quit = (b) => {
+	public static void QuitGame(){
 		//Beendet das Spiel
 		#if UNITY_EDITOR
 		//Unity Editor
 		UnityEditor.EditorApplication.isPlaying = false;
 		#elif UNITY_WEBPLAYER
 		//Webplayer
-		Application.OpenURL("https://games.blackpinguin.de/BrainOfTehZwarm/play.html");
+		Application.OpenURL("https://games.blackpinguin.de/DeathstarPD/play.html");
 		#else
 		//Standalone Build
 		Application.Quit();
 		#endif
+	}
 
+	Action<GButton> a_start = (b) => {
+		MessageDispatcher.I.EmptyQueue();
+		Application.LoadLevel(1);
 	};
+
+	Action<GButton> a_quit = (b) => { QuitGame(); };
 
 
 

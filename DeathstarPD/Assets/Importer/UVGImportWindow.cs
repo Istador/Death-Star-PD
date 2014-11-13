@@ -1,8 +1,10 @@
 ﻿// C# example:
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
+
 
 public class UVGImportWindow : EditorWindow {
 
@@ -216,3 +218,4 @@ public class UVGImportWindow : EditorWindow {
 
 
 }
+#endif
