@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 /// <summary>
@@ -29,7 +26,6 @@ public class Pause : MonoBehaviour {
 		Paused = false;
 
 		Inputs.I.Register("Pause", ()=>{
-			Debug.Log("pause");
 			//prüfen ob das Spiel pausiert
 			if(!Paused) PauseGame();
 			//oder fortgesetzt werden soll
@@ -37,9 +33,9 @@ public class Pause : MonoBehaviour {
 		});
 	}
 
-	public void QuitGame(){ MainMenu.QuitGame(); }
+	public void QuitGame(){ Game.Quit(); }
 	
-	public void ToMainMenu() { MainMenu.ToMainMenu(); }
+	public void ToMainMenu() { Game.ToMainMenu(); }
 
 	/// <summary>
 	/// Ist das Spiel jetzt gerade pausiert?
