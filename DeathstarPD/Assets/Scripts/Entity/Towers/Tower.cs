@@ -51,13 +51,13 @@ public abstract class Tower : ImmovableEntity {
 				Target = null;
 
 				//finde neues Target
-				RaycastHit[] hits = Physics.SphereCastAll(Pos, Range, Pos, 0.1f, (int)Layer.EnemyFighter);
+				Collider[] hits = Physics.OverlapSphere(Pos, Range, (int)Layer.EnemyFighter);
 				if(hits.Length > 0){
 
 					//neues Target das am nächsten ist finden
 					float nearestdistance = float.PositiveInfinity;
-					foreach(RaycastHit hit in hits){
-						MovableEntity current = hit.collider.gameObject.GetComponent<MovableEntity>();
+					foreach(Collider hit in hits){
+						MovableEntity current = hit.gameObject.GetComponent<MovableEntity>();
 						//ob es ein valides Ziel
 						if(current == null || !current.enabled || current.IsDead) continue;
 						//Enfernung berechnen (im Squared-Distance-Space)

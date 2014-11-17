@@ -16,7 +16,7 @@ public class LaserTower : Tower {
 	private static int[] damage_table = { 10, 12, 14, 16 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 
-	private static float[] range_table = { 10f, 12f, 14f, 16f }; // maximale Distanz zum Ziel
+	private static float[] range_table = { 20f, 24f, 28f, 32f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 
 	private static float[] attack_cooldown_table = { 0.5f, 0.6f, 0.7f, 0.8f }; // Angriffe die Sekunde

@@ -4865,8 +4865,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 240943176}
-  m_Father: {fileID: 1682240529}
-  m_RootOrder: 1
+  m_Father: {fileID: 1410694194}
+  m_RootOrder: 2
 --- !u!1 &1410694193
 GameObject:
   m_ObjectHideFlags: 0
@@ -4894,6 +4894,7 @@ Transform:
   m_Children:
   - {fileID: 407536226}
   - {fileID: 1682240529}
+  - {fileID: 1410114555}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1 &1417055595
@@ -5414,7 +5415,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1822632872}
-  - {fileID: 1410114555}
   m_Father: {fileID: 1410694194}
   m_RootOrder: 1
 --- !u!1 &1692758531
@@ -5930,7 +5930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1079e867a01d6f84fac26353ffef4aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 102
+  radius: 110
   topRotation: 0
   speed: -.00999999978
   projectile: {fileID: 100000, guid: 21e547c9efaf74a44817ef7045cdfb56, type: 2}

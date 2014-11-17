@@ -10,9 +10,9 @@ using System.Collections;
  * 
 */
 public abstract class Projektile<T> : MovableEntity {
-	
-	
-	
+
+
+
 	/// <summary>
 	/// Schaden den das Projektil beim Spieler verursacht
 	/// </summary>
@@ -72,11 +72,12 @@ public abstract class Projektile<T> : MovableEntity {
 	protected override void FixedUpdate() {
 		//Seek-Ziel auf Position setzen
 		Steering.TargetPos = TargetPos;
-		
+
+		//Bewegen
+		base.FixedUpdate();
+
 		//Rotiere das Projektil in Richtung Ziel
 		Rotate();
-		
-		base.FixedUpdate();
 	}
 	
 	
@@ -86,27 +87,18 @@ public abstract class Projektile<T> : MovableEntity {
 	/// </summary>
 
 	protected void Rotate(){
-		//TODO Robin: Rotiert auf falscher Achse
-		transform.LookAt(TargetPos);
 
-		/*
 		Vector3 rotate = rigidbody.velocity.Equals(Vector3.zero) ? TargetPos - Pos : rigidbody.velocity ;
 		
 		//Rotiere zum Ziel entlang der Z-Achse
-		transform.rotation = Quaternion.LookRotation(rotate, zvector);
+		transform.rotation = Quaternion.LookRotation(rotate);
 		
-		//Drehe Sprite um 90°
-		transform.Rotate(-90.0f, 0.0f, -90.0f);
-		*/
+		//Drehe, so dass der Z-Vektor auf das Ziel zeigt
+		transform.Rotate(0f, 90f, 90f);
+
 	}
 
-	
-	/// <summary>
-	/// Rotation um die Z-Achse
-	/// </summary>
-	//private static readonly Vector3 zvector = new Vector3(0.0f, 0.0f, 1.0f);
-	
-	
+
 	
 	/// <summary>
 	/// Kollisionsbehandlungsroutine:

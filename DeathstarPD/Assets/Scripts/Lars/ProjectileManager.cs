@@ -32,13 +32,13 @@ public class ProjectileManager : ScriptableObject{
 	/// <summary>
 	/// Container in den alle Projektile kommen
 	/// </summary>
-	public static GameObject Container { get{
+	public static Transform Container { get{
 			if(_container == null)
-				_container = GameObject.Find("Projectiles");
+				_container = GameObject.Find("Projectiles").transform;
 			return _container;
 		}
 	}
-	private static GameObject _container = null;
+	private static Transform _container = null;
 
 
 }

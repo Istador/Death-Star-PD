@@ -13,7 +13,7 @@ public class MainMenu: MonoBehaviour {
 	
 	void FixedUpdate(){
 		//Rotiere die Kamera
-		float s = Time.deltaTime * 0.5f; //skalierung mit der tatsächlich vergangenen  Zeit
+		float s = Time.fixedDeltaTime * 0.5f; //skalierung mit der tatsächlich vergangenen  Zeit
 		transform.Rotate(s, 2*s, 0f);
 	}
 

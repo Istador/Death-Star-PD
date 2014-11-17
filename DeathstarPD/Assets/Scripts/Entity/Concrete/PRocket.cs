@@ -17,7 +17,14 @@ public class PRocket : Projektile<RocketTower> {
 	/// <summary>
 	/// Explosionsradius der Rakete
 	/// </summary>
-	private static readonly float f_explosionsRadius = 3f;
+	private static readonly float f_explosionsRadius = 8f;
+
+
+
+	/// <summary>
+	/// Radius in dem der volle Schaden verursacht wird.
+	/// </summary>
+	private static readonly float f_explosionsImpactRadius = 3f;
 
 
 
@@ -73,8 +80,8 @@ public class PRocket : Projektile<RocketTower> {
 		base.Init();
 		
 		//Geschwindigkeit setzen
-		MaxSpeed = 15.0f;
-		MaxForce = 15.0f;
+		MaxSpeed = 25.0f;
+		MaxForce = 25.0f;
 		
 		//Startzeitpunkt merken
 		d_startTime = Time.time;
@@ -110,7 +117,12 @@ public class PRocket : Projektile<RocketTower> {
 		Collider[] cs = Physics.OverlapSphere(Pos, f_explosionsRadius, (int)Layer.Enemy);
 		foreach(Collider c in cs){
 			//Entfernung des Objektes zum Explosionszentrum berechnen
-			float range = DistanceSqTo(c.bounds.center) / (f_explosionsRadius * f_explosionsRadius);
+			float impact = f_explosionsImpactRadius * f_explosionsImpactRadius;
+			float range = (DistanceSqTo(c.bounds.center) - impact);
+			//Im Explosionsmittelpunkt den vollen schaden
+			if(range <= 0f) range = 0f;
+			//ansonsten skalieren
+			else range /= (f_explosionsRadius * f_explosionsRadius - impact);
 
 			//Schaden proportional zur Entfernung berechnen
 			int dmg = (int)( f_explosionsDamage * (1.0f - range) );

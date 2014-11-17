@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RocketTower : Tower {
-	
+
 	/*
 	public int test_health = 80;
 	public int test_damage = 20; //20 Schaden pro Treffer
@@ -16,7 +16,7 @@ public class RocketTower : Tower {
 	private static int[] damage_table = { 20, 25, 30, 35 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 	
-	private static float[] range_table = { 8f, 10f, 12f, 14f }; // maximale Distanz zum Ziel
+	private static float[] range_table = { 18f, 22f, 26f, 30f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 	
 	private static float[] attack_cooldown_table = { 3.0f, 2.8f, 2.6f, 2.4f };
@@ -24,8 +24,9 @@ public class RocketTower : Tower {
 	
 	protected override void DoAttack(){
 
-		//TODO Robin: nicht in der mitte erzeugen, sondern an Abschussposition
-		PRocket r = Instantiate("Rocket").GetComponent<PRocket>();
+		//nicht in der mitte erzeugen, sondern an Abschussposition (Mitte der oberen Hälfte)
+		PRocket r = Instantiate("Rocket", Pos + Pos.normalized * transform.localScale.z * 0.25f).GetComponent<PRocket>();
+		r.transform.parent = ProjectileManager.Container;
 		r.Owner = this;
 		r.Init();
 	}

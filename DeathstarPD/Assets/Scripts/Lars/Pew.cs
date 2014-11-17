@@ -4,13 +4,9 @@ using System.Collections;
 public class Pew : MonoBehaviour {
 
 	public float speed;
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
-	void Update () {
-		transform.position += -transform.right *speed;
+	void FixedUpdate () {
+		transform.position += -transform.right * speed * Time.fixedDeltaTime * 50f;
 	}
 }
