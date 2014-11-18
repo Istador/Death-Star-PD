@@ -3,6 +3,9 @@
 			var out = "";
 			var keys = Object.keys(blocks);
 			for(var i = 0; i < keys.length; i++){
+				if(colors[keys[i]] == null || typeof(colors[keys[i]]) === "undefined"){
+					continue;
+				}
 				out += keys[i].toString() + ":" + colors[keys[i]].toString(16) + ":";
 				var k = keys[i].split(",");
 				k[0] = parseInt(k[0]);
