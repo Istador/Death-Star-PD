@@ -72,6 +72,7 @@ public class TowerBuilding : GeneralObject {
 					- Offset
 				);
 				Selected.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
+				Selected.transform.eulerAngles += new Vector3(0,-90,90); //Richtig drehen
 				Selected.Visible = true; //Sichtbar
 				//TODO Lars: farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
 				// if(CanBuild); //Grün
@@ -127,6 +128,7 @@ public class TowerBuilding : GeneralObject {
 			t.transform.parent = Towers.Container.transform;
 			//zum Kugel-Mittelpunkt ausrichten
 			t.transform.LookAt(Vector3.zero);
+			t.transform.eulerAngles += new Vector3(0,-90,90); //Richtig drehen
 			//Collider einschalten (ist beim Prototypen ausgeschaltet)
 			t.collider.enabled = true;
 			//Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
