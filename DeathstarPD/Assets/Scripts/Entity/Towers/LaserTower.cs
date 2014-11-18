@@ -24,6 +24,11 @@ public class LaserTower : Tower {
 
 	protected override void DoAttack(){
 		//TODO Lars: sichtbaren Effekt für Laserstrahl erzeugen
+		GameObject go = (GameObject)Instantiate("Lazer", Pos + Pos.normalized * transform.localScale.z * 0.25f);
+		PLazer lazer = go.GetComponent<PLazer>();
+		lazer.target = Target;
+		go.transform.parent = ProjectileManager.Container;
+
 		DoDamage(Target, Damage);
 		//DoDamage(Target, Damage, 0.5); //Alternativ: erst nach 0,5 sekunden Schaden verursachen
 	}

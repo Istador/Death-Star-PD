@@ -14,6 +14,7 @@ public class FlyAround : MovableEntity {
 	private ProjectileManager pewManager;
 
 	public GameObject projectile;
+	public bool shooting = false;
 
 	// Use this for initialization
 	protected override void Start() {
@@ -32,10 +33,12 @@ public class FlyAround : MovableEntity {
 		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * nradius, Mathf.Sin(topRotation)*radius, Mathf.Sin (rotation) * nradius);
 		transform.position = newPos;
 		transform.LookAt(Vector3.zero);
-		timer += 1;
-		if (timer >= 30) {
-			timer = 0;
-			shoot();
+		if(shooting){
+			timer += 1;
+			if (timer >= 30) {
+				timer = 0;
+				shoot();
+			}
 		}
 	}
 
