@@ -39,11 +39,11 @@
 				}
 				out += ";\n";
 			}
-			document.getElementById("safeCode").value = out;
+			return out;
 		}
 		
 		function safe(){
-			var out = autoSafe();
+			var out = exportModel();
 			document.getElementById("safeCode").value = out;
 			document.getElementById("safeCodeHolder").style.display = "block";
 			getImageData = true;
