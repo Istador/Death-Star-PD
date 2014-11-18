@@ -132,7 +132,7 @@ public class PRocket : Projektile<RocketTower> {
 		}
 
 		//TODO Lars: sichtbare Explosion
-		//GameObject explosion = Instantiate("prefab kleineExplosion");
+		GameObject explosion = (GameObject)Instantiate("SmallExplosion", transform.position);
 		//nach 0.5 Sekunden Explosion wieder auflösen
 		//Destroy(explosion, 1f);
 		

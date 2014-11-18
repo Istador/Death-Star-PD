@@ -4,6 +4,7 @@ using System.Collections;
 public class PLazer : MonoBehaviour {
 
 	public LineRenderer lr;
+	public GameObject sparks;
 	public float preload = 0.5f;
 	public float duration = 0.5f;
 	public MovableEntity target { get; set; }
@@ -26,6 +27,8 @@ public class PLazer : MonoBehaviour {
 		if(t >= preload){
 			if(target != null){
 				lr.SetPosition(1, target.Pos);
+				sparks.transform.position = target.Pos;
+				sparks.SetActive(true);
 			}
 		}
 	}

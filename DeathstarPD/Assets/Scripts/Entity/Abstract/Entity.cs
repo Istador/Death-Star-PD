@@ -130,6 +130,7 @@ public abstract class Entity : GeneralObject {
 	/// </summary>
 	public virtual void Death(){
 		//Debug.Log(name+"<"+tag+">("+GetInstanceID()+"): death");
+		GameObject explosion = (GameObject)Instantiate("PhotonExplosion", transform.position);
 		IsDead = true;
 		Destroy(gameObject);
 	}
