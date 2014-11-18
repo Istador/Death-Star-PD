@@ -1,0 +1,867 @@
+<html>
+	<head>
+		<meta charset="UTF8">
+		<link rel="shortcut icon" href="/Pics/Icon.ico" />
+		<link href="style.css" rel="stylesheet">
+		<script src="js/Colour.js"></script>
+		<script src="js/ColorChooser.js"></script>
+		<script src="js/three.min.js"></script>
+		<script src="js/loaders/JSONLoader.js"></script>
+		<script src="js/loaders/TextureLoader.js"></script>
+		<script src="js/exporter/GeometryExporter.js"></script>
+		<script src="scripts/graphics.js" type="text/javascript"></script>
+		<script src="scripts/cameraMove.js" type="text/javascript"></script>
+		<script src="scripts/modelCreator.js" type="text/javascript"></script>
+		<script src="scripts/SaveLoadModel.js" type="text/javascript"></script>
+		<script src="js/jscolor/jscolor.js" type="text/javascript"></script>
+		<style>canvas { width: 100%; height: 100%;}</style>
+	</head>
+	<body style="margin:0px; padding:0px;" onload="positionElements()">		
+		<div id="imageViewHolder" class="window" style="display:none; position:fixed; z-index:100; width:80%; left:10%;">
+			<img id="imageView" src="icons/t_pipette.png" style="width:100%;"></img>
+			<img id="imageViewClose" src="icons/redo.png" style="position:absolute; right:0px; top:0px; cursor:pointer; z-index:101;" onclick="closeScreenshot()"></img>
+		</div>
+		<div id="scene" style="float:left; width:100%;" onclick="Test()">
+		
+		</div>
+		
+		
+
+		<div id="timeline" class="window" style="top:16px; position:fixed;">
+			
+			<div id="timeElement0" class="timeElement" data-i="0" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement1" class="timeElement" data-i="1" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement2" class="timeElement" data-i="2" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement3" class="timeElement" data-i="3" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement4" class="timeElement" data-i="4" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement5" class="timeElement" data-i="5" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement6" class="timeElement" data-i="6" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement7" class="timeElement" data-i="7" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement8" class="timeElement" data-i="8" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement9" class="timeElement" data-i="9" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement10" class="timeElement" data-i="10" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement11" class="timeElement" data-i="11" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement12" class="timeElement" data-i="12" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement13" class="timeElement" data-i="13" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement14" class="timeElement" data-i="14" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement15" class="timeElement" data-i="15" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement16" class="timeElement" data-i="16" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement17" class="timeElement" data-i="17" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement18" class="timeElement" data-i="18" data-active="false" onclick="timeLineClick(event)"></div>
+			<div id="timeElement19" class="timeElement" data-i="19" data-active="false" onclick="timeLineClick(event)"></div>
+			
+			<span class="icon">
+				<a href="VoxelEditor.erb">
+					<img id="reset" src="icons/p_trash.png"></img>
+				</a>
+				<span>Alles zurücksetzen</span>
+			</span>
+			
+			<span id="export" class="icon">
+				<img src="icons/p_export.png" onclick="safe()"></img>
+				<span>Modell exportieren</span>
+			</span>
+		</div>
+			
+		<div id="colorToolbar" class="window" style="right:80px; position:fixed; top:290px; width:96px;">
+			<div id="colorChooser" style="display:none;">
+				<input id="colorTextfield" class="button" value="#FF0000" style="width:100%;border:solid; border-width:2px;	border-color:#99B2B7; margin:0px; margin-bottom:8px;"></input>
+				<canvas id="colorCanvas" height="243px" width="96px" style="float:left; width:96px; height:243px; margin:0px; padding:0px; position:relative; top:0px; left:0px;"></canvas>
+				<img id="colorGradient" src="Img/color-picker.png" style="display:none"></img>
+			</div>
+			<div id="colors">
+				<div id="colorField0" class="colorBox" style="background-color:#1b1a16;" onclick="colorClicked(event)"></div>
+				<div id="colorField1" class="colorBox" style="background-color:#64492A;" onclick="colorClicked(event)"></div>
+				<div id="colorField2" class="colorBox" style="background-color:#9B1800;" onclick="colorClicked(event)"></div>
+				<div id="colorField3" class="colorBox" style="background-color:#bd6e50;" onclick="colorClicked(event)"></div>
+				<div id="colorField4" class="colorBox" style="background-color:#cfb610;" onclick="colorClicked(event)"></div>
+				<div id="colorField5" class="colorBox" style="background-color:#d8e85d;" onclick="colorClicked(event)"></div>
+				<div id="colorField6" class="colorBox" style="background-color:#365c03;" onclick="colorClicked(event)"></div>
+				<div id="colorField7" class="colorBox" style="background-color:#558E08;" onclick="colorClicked(event)"></div>
+				<div id="colorField8" class="colorBox" style="background-color:#40188d;" onclick="colorClicked(event)"></div>
+				<div id="colorField9" class="colorBox" style="background-color:#9acff3;" onclick="colorClicked(event)"></div>
+				<div id="colorField10" class="colorBox_active" style="background-color:#909090;" onclick="colorClicked(event)"></div>
+				<div id="colorField11" class="colorBox" style="background-color:#d1cfbe;" onclick="colorClicked(event)"></div>
+			</div>
+			<br style="clear:both;">
+
+			<div id="colorButton" class="button" style="height:24px;" onclick="startColorChange()">Ändern</div>
+		</div>
+		
+		<div id="toolbar" class="window" style="position:fixed; right:80px; top:104px;">
+			<input id="colorPicker" class="color" onblur="colorPicked()" onclick="PickingColor()" style="display:none;">
+			<span id="setMode" class="icon iconActive">
+				<img src="icons/t_add.png" onclick="setMode('setMode');"></img>
+				<span>Voxel erzeugen <i>(Linksklick)</i></span>
+			</span>
+			<span  id="deleteMode" class="icon">
+				<img src="icons/t_erase.png" onclick="setMode('deleteMode');"></img>
+				<span>Voxel löschen <i>(Rechtsklick)</i></span>
+			</span>	
+			<br>
+			<span id="pipette" class="icon">
+				<img src="icons/t_pipette.png" onclick="setMode('pipette');"></img>
+				<span>Voxelfarbe aufnehmen</span>
+			</span>
+			<span id="repaint" class="icon">
+				<img src="icons/t_paintroller.png" onclick="setMode('repaint');"></img>
+				<span>Voxel neu einfärben</span>
+			</span>
+			<br>
+			<!-- <img id="replaceIcon" src="Pics/Replace.png" class="icon" onclick="Replace()"></img> -->
+			<span id="cubeMode" class="icon">
+				<img src="icons/t_magictrowel.png" onclick="setMode('cubeMode');"></img>
+				<span>Voxelblöcke erzeugen</span>
+			</span>
+			<span id="double" class="icon">
+				<img src="icons/t_enlarge.png" onclick="Double()"></img>
+				<span>Modell vergrößern</span>
+			</span>
+			<br>
+			<div id="replace" style="display:none;">
+				<input id="replacePicker" class="color" onblur="replacePicked()">
+			</div>
+		</div>		
+		
+		<!-- <div id="projectBar" class="window" style="right: 80px; top:16px; height: 48px; position: fixed;">	
+			<span id="screenshot" class="icon">
+				<img src="icons/t_enlarge.png" onclick="screenShot()"></img>
+				<span>Modellfoto aufnehmen</span>
+			</span>
+		</div>	 -->	
+		
+		<!-- 	
+		<br>
+			
+			<button id="safeButton" onclick="safe()">Save</button>
+			<button id="loadButton" onclick="load()">Load</button>
+			<button id="loadButton" onclick="exportModel()">Export</button>
+			<button id="screenshotButton" onclick="screenShot()">Screenshot</button> -->
+		
+		<div id="safeCodeHolder" style="position:fixed; left:25%; top:15%; width:50%; height:400px; display:none;">
+			<textarea id="safeCode" align="top" style="width:100%; height:95%;" onfocus="this.select()">
+				
+			</textarea>
+			<button onclick="document.getElementById('safeCodeHolder').style.display = 'none';" value="OK">OK</button>
+			<button onclick="download('model.uvg');" value="Download">Download</button>
+			<button onclick="load()" value="Load">Load</button>
+		</div>
+	</body>	
+	
+	<!-- Shader -->
+	<script id="2d-vertex-shader" type="x-shader/x-vertex">
+	uniform vec4 myCcolor;
+	uniform float myTransparenz;
+	varying vec2 vUv;
+
+	void main() {
+	  vUv = uv;
+	  gl_Position = projectionMatrix *
+                  modelViewMatrix *
+                  vec4(position,1.0);
+	}
+	</script>
+
+	<script id="2d-fragment-shader" type="x-shader/x-fragment">
+	uniform vec3 myColor;
+	uniform float myTransparenz;
+	varying vec2 vUv;
+	void main() {
+		if(vUv[0] < 0.025 || vUv[1] < 0.025 || vUv[0] > 0.975 || vUv[1] > 0.975){
+			gl_FragColor = vec4(myColor - vec3(0.2,0.2,0.2), myTransparenz);
+		}else{
+			gl_FragColor = vec4(myColor, myTransparenz);  // color
+		}
+	}
+	</script>
+	
+	<script>
+		var blocks = {};
+		var colors = {};
+		var usedColors = {};
+		var mode = 'setMode';
+		var pipette = false;
+		var replace = false;
+		var repaint = false;
+		var cubeMode = false;
+		var pickingColor = false;
+		var deleteMode = false;
+		var setMode = true;
+		var cubePreview;
+		var cubeModeSelections = [];
+		var actions = [];
+		var actionCounter = 0;
+		var activeColorfield = document.getElementById("colorField10");
+		var toReplace;
+		var center = new THREE.Vector3(0,0,0);
+		var color = "909090";
+		var colorHex = "909090";
+		document.getElementById("colorPicker").value = color;
+		var replace = parseInt(document.getElementById("replacePicker").value, 16);
+		var imageData;
+		var getImageData = true;
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		var renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: false});
+		renderer.setClearColor( 0xFFFFFF, 1);		
+		
+		var allGeometry = new THREE.BoxGeometry(1,1,1);
+		for(var i =-5; i <= 5; i++){
+			for(var h = -5; h <= 5; h++){
+				makeBlock(i,h,0, 0x99B2B7);
+			}
+		}
+		
+		var projector = new THREE.Projector();
+		var intersected;
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild( renderer.domElement );
+		
+		camera.position.z = 5;
+		camera.lookAt(new THREE.Vector3(0,10,0));
+		camera.useQuaternion = true;
+		camera.up = new THREE.Vector3(0,0,1);
+		
+		var manager = new THREE.LoadingManager();
+		var loader = new THREE.JSONLoader( manager );
+		
+		function render() { 
+			requestAnimationFrame(render);
+			renderer.render(scene, camera);
+			if(getImageData == true){
+				imgData = renderer.domElement.toDataURL();
+				getImageData = false;
+			}
+		} 
+		render();
+		
+		var geometry = new THREE.CubeGeometry( 1, 1, 1 );
+		var uniforms = {myColor: { type: "c", value: new THREE.Color( convertHex(color) )}, myTransparenz:{type: "f", value: 0.7}};
+		var material = new THREE.ShaderMaterial({
+			uniforms: uniforms,
+			vertexShader: document.getElementById('2d-vertex-shader').innerHTML,
+			fragmentShader: document.getElementById('2d-fragment-shader').innerHTML,
+			transparent:true
+		});
+		var previewCube = new THREE.Mesh( geometry, material );
+		scene.add( previewCube );
+		
+		initColorChooser();
+	</script>
+	<script>	
+
+		
+		function screenShot(){
+			previewCube.visible = false;
+			getImageData = true;
+			render();
+			document.getElementById("imageViewHolder").style.display = "block";
+			document.getElementById("imageView").src = imgData;
+			previewCube.visible = true;
+		}
+		
+		function closeScreenshot(){
+			document.getElementById("imageViewHolder").style.display = "none";
+		}
+		
+		function ClickCheck(event){
+			
+			var x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.width ) * 2 - 1;
+			var y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.height ) * 2 + 1;
+			var vector = new THREE.Vector3(x, y, 0.5);
+
+			var rayCaster = projector.pickingRay(vector, camera);
+
+			var intersections = rayCaster.intersectObjects(scene.children, true);
+			
+			if ( intersections.length > 0 ) {
+				if ( intersected != intersections[ 0 ].object ) {
+					var i = 0;
+					while(intersections[i].object == previewCube || intersections[i].object == cubePreview && i < 10){
+						i += 1;
+					}
+					var n = intersections[i].face.normal;
+					var x = Math.floor(intersections[i].object.position.x)
+					var y = Math.floor(intersections[i].object.position.y)
+					var z = Math.floor(intersections[i].object.position.z)
+					
+					//console.debug("Clicked: " + x + ", " + y + ", " + z);
+					//console.debug("Normal: " + intersections[0].face.normal.x + ", " + intersections[0].face.normal.y + ", " + intersections[0].face.normal.z);
+					if(mode == 'pipette'){
+						if(colors[[x,y,z]] != null){
+							color = colors[[x,y,z]];
+							//document.getElementById("colorPicker").value = color.toString(16);
+							//document.getElementById("colorPicker").focus();	
+							//document.getElementById("colorPicker").blur();	
+							setMode('setMode');
+							
+							activeColorfield.style.backgroundColor = color.toString(16);
+				
+							var c = color.toString(16);
+							console.debug(c);
+							//color = parseInt(c, 16);
+							
+							uniforms = {myColor: { type: "c", value: new THREE.Color( convertHex(c) )}, myTransparenz:{type: "f", value: 0.7}};
+							material = new THREE.ShaderMaterial({
+								uniforms: uniforms,
+								vertexShader: document.getElementById('2d-vertex-shader').innerHTML,
+								fragmentShader: document.getElementById('2d-fragment-shader').innerHTML,
+								transparent:true
+							});
+							previewCube.material = material;
+				
+						}
+					}else if(mode == 'repaint'){
+						removeBlock(x,y,z);
+						addBlock(x,y,z, color);
+					}else if(mode == 'cubeMode'){
+						if(cubeModeSelections.length < 1){
+							cubeModeSelections.push(previewCube.position);
+							var p = previewCube.position;
+							x = p.x;
+							y = p.y;
+							z = p.z;		
+							addBlock(x,y,z, color);
+							
+							//color = parseInt(c, 16);
+							var geometry = new THREE.CubeGeometry( 1, 1, 1 );
+							var uniforms = {myColor: { type: "c", value: new THREE.Color( color )}, myTransparenz:{type: "f", value: 0.7}};
+							var material = new THREE.ShaderMaterial({
+								uniforms: uniforms,
+								vertexShader: document.getElementById('2d-vertex-shader').innerHTML,
+								fragmentShader: document.getElementById('2d-fragment-shader').innerHTML,
+								transparent:true
+							});
+							cubePreview = new THREE.Mesh( geometry, material );
+							scene.add( cubePreview );
+							//console.debug("added");
+						}else{
+							cubeModeSelections.push(previewCube.position);
+							var cm = cubeModeSelections;
+							var xmin = [1000,-1000];
+							var ymin = [1000,-1000];
+							var zmin = [1000,-1000];
+							for(var i = 0; i < cm.length; i++){
+								if(cm[i].x < xmin[0]){
+									xmin[0] = cm[i].x;
+								}
+								if(cm[i].x > xmin[1]){
+									xmin[1] = cm[i].x;
+								}
+								if(cm[i].y < ymin[0]){
+									ymin[0] = cm[i].y;
+								}
+								if(cm[i].y > ymin[1]){
+									ymin[1] = cm[i].y;
+								}
+								if(cm[i].z < zmin[0]){
+									zmin[0] = cm[i].z;
+								}
+								if(cm[i].z > zmin[1]){
+									zmin[1] = cm[i].z;
+								}
+							}
+							for(var dx = xmin[0]; dx <= xmin[1]; dx++){
+								for(var dy = ymin[0]; dy <= ymin[1]; dy++){
+									for(var dz = zmin[0]; dz <= zmin[1]; dz++){
+										addBlock(dx,dy,dz, color);
+									}
+								}
+							}
+							scene.remove(cubePreview);
+							actionPerformed();
+							cubeModeSelections = [];
+							//CubeMode();
+						}
+					}else if(mode == 'deleteMode'){
+						if(intersections[0].object == previewCube){
+							var toDelete = intersections[1];
+						}else{
+							var toDelete = intersections[0];
+						}
+						var x = toDelete.object.position.x;
+						var y = toDelete.object.position.y;
+						var z = toDelete.object.position.z;
+						//console.debug("Clicked: " + x + ", " + y + ", " + z);
+						var r = removeBlock(x,y,z);
+						if(r == true){
+							actionPerformed();
+						}
+					}else{
+						var p = previewCube.position;
+						x = p.x;
+						y = p.y;
+						z = p.z;		
+						addBlock(x,y,z, color);
+						actionPerformed();
+					}
+				}
+			}
+		}
+		
+		function RightClickCheck(event){
+			event.preventDefault();
+			var x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.width ) * 2 - 1;
+			var y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.height ) * 2 + 1;
+			var vector = new THREE.Vector3(x, y, 0.5);
+
+			var rayCaster = projector.pickingRay(vector, camera);
+
+			var intersections = rayCaster.intersectObjects(scene.children, true);
+			
+			if ( intersections.length > 0 ) {
+				if ( intersected != intersections[ 0 ].object ) {
+					if(intersections[0].object == previewCube){
+						var toDelete = intersections[1];
+					}else{
+						var toDelete = intersections[0];
+					}
+					var x = toDelete.object.position.x;
+					var y = toDelete.object.position.y;
+					var z = toDelete.object.position.z;
+					//console.debug("Clicked: " + x + ", " + y + ", " + z);
+					var r = removeBlock(x,y,z);
+					if(r == true){
+						actionPerformed();
+					}
+				}
+			}
+		}
+		
+		function setMode(newMode){
+			document.getElementById(mode).className = "icon";
+			mode = newMode;
+			document.getElementById(mode).className = "icon iconActive";
+		}
+	</script>
+	<script>
+		renderer.domElement.onmousedown = function(event){CamMove(event);};
+		document.body.onmouseup = function(event){CamStopMove(event);};
+		renderer.domElement.addEventListener('mousemove', function(event){CalcDeltaPos(event);});
+		renderer.domElement.addEventListener('contextmenu', function(ev){RightClickCheck(ev);});
+		colorPicked();
+		
+		if (renderer.domElement.addEventListener) {
+			// IE9, Chrome, Safari, Opera
+			renderer.domElement.addEventListener("mousewheel", MouseWheelHandler, false);
+			// Firefox
+			renderer.domElement.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+		}
+		// IE 6/7/8
+		else{
+			renderer.domElement.attachEvent("onmousewheel", MouseWheelHandler);
+		}
+
+		CalcRotation();
+		camera.lookAt(new THREE.Vector3(0,0,0));
+		
+		window.addEventListener( 'positionElements()', onWindowResize, false );
+		
+		function positionElements(){
+			var pos = (window.innerWidth -588) /2;
+			document.getElementById("timeline").style.left = pos;
+		}
+		
+		function addBlock(x,y,z,c){
+			if(blocks[[x,y,z]] == null){
+				blocks[[x,y,z]] = makeBlock(x,y,z, c);	
+				colors[[x,y,z]] = c;
+				c = c.toString(16);
+				while(c.length < 6){
+					c = "0" + c;
+				}
+			}
+		}
+		
+		function PreviewBlock(event){
+			var x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.width ) * 2 - 1;
+			var y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.height ) * 2 + 1;
+			var vector = new THREE.Vector3(x, y, 0.5);
+
+			var rayCaster = projector.pickingRay(vector, camera);
+
+			var intersections = rayCaster.intersectObjects(scene.children, true);
+			
+			if ( intersections.length > 0 ) {
+				if ( intersected != intersections[ 0 ].object) {
+					var i = 0;
+					while(intersections[i].object == previewCube || intersections[i].object == cubePreview && i < 10){
+						i += 1;
+					}
+					var n = intersections[i].face.normal;
+					var x = Math.floor(intersections[i].object.position.x)
+					var y = Math.floor(intersections[i].object.position.y)
+					var z = Math.floor(intersections[i].object.position.z)
+					if(mode != 'repaint' && mode != 'pipette' && mode != 'deleteMode'){
+						x += n.x;
+						y += n.y;
+						z += n.z;
+					}
+					previewCube.position = new THREE.Vector3(x,y,z);
+					//Wenn CubeMode aktiv und ein Punkt wurde bereits gewählt
+					if(cubeModeSelections.length >= 1){
+						
+						var cm = [cubeModeSelections[0], new THREE.Vector3(x,y,z)];
+						var xmin = [1000,-1000];
+						var ymin = [1000,-1000];
+						var zmin = [1000,-1000];
+						for(var i = 0; i < cm.length; i++){
+							if(cm[i].x < xmin[0]){
+								xmin[0] = cm[i].x;
+							}
+							if(cm[i].x > xmin[1]){
+								xmin[1] = cm[i].x;
+							}
+							if(cm[i].y < ymin[0]){
+								ymin[0] = cm[i].y;
+							}
+							if(cm[i].y > ymin[1]){
+								ymin[1] = cm[i].y;
+							}
+							if(cm[i].z < zmin[0]){
+								zmin[0] = cm[i].z;
+							}
+							if(cm[i].z > zmin[1]){
+								zmin[1] = cm[i].z;
+							}
+						}
+						var dx = xmin[1] - xmin[0];
+						var dy = ymin[1] - ymin[0];
+						var dz = zmin[1] - zmin[0];
+						cubePreview.scale.set(Math.max(dx +1, 1), Math.max(dy +1, 1), Math.max(dz+1, 1));
+						cubePreview.position.set(xmin[0] + dx/2, ymin[0] + dy/2, zmin[0] + dz/2);
+					}
+				}
+			}
+		}
+		
+		function removeBlock(x,y,z){
+			var block = blocks[[x,y,z]];				
+			scene.remove(block);
+			blocks[[x,y,z]] = null;
+			colors[[x,y,z]] = null;
+			if(block == null || block === "undefined"){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+		function onWindowResize( e ) {
+			var containerWidth = window.innerWidth *0.8;
+			var containerHeight = window.innerHeight;
+			renderer.setSize(containerWidth, containerHeight  );
+			camera.aspect = containerWidth / containerHeight;
+			camera.updateProjectionMatrix();
+		}
+		
+		function colorClicked(e){
+			activeColorfield = e.target;
+			var c =  rgb2hex(e.target.style.backgroundColor);
+			document.getElementById("colorTextfield").style.backgroundColor = c;
+			document.getElementById("colorTextfield").value = c;
+			for(var i = 0; i < 12; i++){
+				document.getElementById("colorField" + i).className = "colorBox";
+			}
+			e.target.className = "colorBox_active";
+			color = parseInt(c, 16);
+			uniforms = {myColor: { type: "c", value: new THREE.Color( convertHex(c) )}, myTransparenz:{type: "f", value: 0.7}};
+			material = new THREE.ShaderMaterial({
+				uniforms: uniforms,
+				vertexShader: document.getElementById('2d-vertex-shader').innerHTML,
+				fragmentShader: document.getElementById('2d-fragment-shader').innerHTML,
+				transparent:true
+			});
+			previewCube.material = material;
+			//document.getElementById("colorPicker").value = c;
+			//document.getElementById("colorPicker").focus();
+			//document.getElementById("colorPicker").blur();
+			console.debug(color);
+		}
+		
+		function startColorChange(){
+			if(pickingColor == false){
+				replace = true;
+				toReplace = [];
+				var keys = Object.keys(blocks);
+				for(var i = 0; i < keys.length; i++){
+					if(colors[keys[i]] == color){
+						toReplace.push(keys[i]);
+					}
+				}
+				
+				document.getElementById("colorChooser").style.display = "block";
+				document.getElementById("colorButton").innerHTML = "Speichern";
+				document.getElementById("colors").style.display = "none";
+				pickingColor = true;
+			}else{
+				document.getElementById("colorChooser").style.display = "none";
+				document.getElementById("colors").style.display = "block";
+				document.getElementById("colorButton").innerHTML = "Ändern";
+				var newColor = document.getElementById("colorTextfield").style.backgroundColor;
+				activeColorfield.style.backgroundColor = newColor;
+				
+				var c =  rgb2hex(newColor);
+				color = parseInt(c, 16);
+				
+				uniforms = {myColor: { type: "c", value: new THREE.Color( convertHex(c) )}, myTransparenz:{type: "f", value: 0.7}};
+				material = new THREE.ShaderMaterial({
+					uniforms: uniforms,
+					vertexShader: document.getElementById('2d-vertex-shader').innerHTML,
+					fragmentShader: document.getElementById('2d-fragment-shader').innerHTML,
+					transparent:true
+				});
+				previewCube.material = material;
+				pickingColor = false;
+			}
+		}
+		
+		function PickingColor(){
+			pickingColor = true;
+		}
+		
+		function colorPicked(){
+			color = parseInt(document.getElementById("colorPicker").value, 16);
+			//previewCube.material.color.setHex(color);
+			pickingColor = false;
+			//console.debug(color);
+		}
+		
+		function replacePicked(replace){
+			
+			var keys = toReplace;
+			for(var i = 0; i < keys.length; i++){
+				colors[keys[i]] = replace;
+				var k = keys[i].split(",");
+				removeBlock(k[0], k[1], k[2]);					
+				addBlock(k[0], k[1], k[2], replace);					
+			}
+			actionPerformed();
+		}
+		
+		function Replace(){
+			if(replace == false){
+				replace = true;
+				toReplace = [];
+				var keys = Object.keys(blocks);
+				for(var i = 0; i < keys.length; i++){
+					if(colors[keys[i]] == color){
+						toReplace.push(keys[i]);
+					}
+				}
+			}else{
+				replace = false;
+				document.getElementById("replace").style.display = "none";
+			}
+		}
+		
+		function getBlock(x,y,z){
+			return blocks[x + "," + y + "," + z]
+		}
+			
+		function timeLineClick(e){
+			var te = e.target;
+			var c = parseInt(te.dataset.i)
+			if(te.dataset.active == "true"){
+				for(var i = 0; i < 20; i++){
+					element = document.getElementById("timeElement" + i);
+					if(i != c){
+						if(element.dataset.active == "true"){
+							element.style.backgroundColor = "#99B2B7";
+						}else{
+							element.style.backgroundColor = "transparent";
+						}
+						element.style.borderColor = "#948C75";
+					}else{
+						element.style.backgroundColor = "#948C75";
+						element.style.borderColor = "#7A6A53";
+					}
+				}
+				te.style.borderWidth = "2px";
+				autoLoad(actions[c]);
+				actionCounter = c;
+			}
+		}
+		
+		function actionPerformed(){
+			if(actionCounter < actions.length -1){
+				actions.splice(actionCounter +1, actions.length);
+				for(var i = actionCounter+1; i < 20; i++){
+					element = document.getElementById("timeElement" + i);
+					element.style.backgroundColor = "transparent";
+					element.dataset.active = "false";
+				}
+			}
+			if(actions.length >= 20){
+				actions.shift();
+			}
+			actions.push(autoSafe());
+			actionCounter = actions.length -1;
+			var te = document.getElementById("timeElement" + actionCounter);
+			for(var i = 0; i < 20; i++){
+				element = document.getElementById("timeElement" + i);
+				element.style.borderColor = "";
+				if(i < actionCounter){
+					element.style.backgroundColor = "#99B2B7";
+				}
+			}
+			te.style.backgroundColor = "#948C75";
+			te.style.borderColor = "#7A6A53";
+			te.dataset.active = true;
+		}
+		
+		function revertAction(){
+			actionCounter -= 1;
+			if(actionCounter >= 0){
+				autoLoad(actions[actionCounter]);
+			}else{
+				actionCounter = 0;
+			}
+		}
+		
+		function forwardAction(){
+			actionCounter += 1;
+			if(actionCounter < actions.length){
+				autoLoad(actions[actionCounter]);
+			}else{
+				actionCounter = actions.length;
+			}
+		}
+		
+		function Pipette(){
+			if(pipette == true){
+				pipette = false;
+				document.getElementById("pipette").className = "icon";
+			}else{
+				pipette = true;
+				document.getElementById("pipette").className = "iconActive";
+			}
+		}
+		
+		function SetMode(){
+			if(setMode == true){
+				setMode = false;
+				document.getElementById("setMode").className = "icon";
+			}else{
+				setMode = true;
+				document.getElementById("setMode").className = "icon iconActive";
+			}
+		}
+		
+		function DeleteMode(){
+			if(deleteMode == true){
+				pipette = false;
+				document.getElementById("deleteMode").className = "icon";
+			}else{
+				deleteMode = true;
+				document.getElementById("deleteMode").className = "icon iconActive";
+			}
+		}
+		
+		function Repaint(){
+			if(repaint == true){
+				repaint = false;
+				document.getElementById("repaint").className = "icon";
+			}else{
+				repaint = true;
+				document.getElementById("repaint").className = "icon iconActive";
+			}
+			
+		}
+		
+		function CubeMode(){
+			if(cubeMode == false){
+				cubeMode = true;
+				cubeModeSelections = [];
+				document.getElementById("cubeMode").className = "icon iconActive";
+			}else{
+				cubeMode = false;
+				document.getElementById("cubeMode").className = "icon";
+			}
+		}
+		
+		function Double(){
+			var newAr = {}
+			var keys = Object.keys(blocks);
+			for(var i = 0; i < keys.length; i++){
+				if(colors[keys[i]] != null){
+					var ar = keys[i].split(",");
+					ar[0] = ar[0]*2;
+					ar[1] = ar[1]*2;
+					ar[2] = ar[2]*2;
+					newAr[[parseInt(ar[0]) - 0, parseInt(ar[1]) - 0, parseInt(ar[2]) - 0]] = colors[keys[i]];
+					newAr[[parseInt(ar[0]) - 1, parseInt(ar[1]) - 0, parseInt(ar[2]) - 0]] = colors[keys[i]];
+					newAr[[parseInt(ar[0]) - 0, parseInt(ar[1]) - 1, parseInt(ar[2]) - 0]] = colors[keys[i]];
+					newAr[[parseInt(ar[0]) - 1, parseInt(ar[1]) - 1, parseInt(ar[2]) - 0]] = colors[keys[i]];
+					
+					newAr[[parseInt(ar[0]) - 0, parseInt(ar[1]) - 0, parseInt(ar[2]) - 1]] = colors[keys[i]];
+					newAr[[parseInt(ar[0]) - 1, parseInt(ar[1]) - 0, parseInt(ar[2]) - 1]] = colors[keys[i]];
+					newAr[[parseInt(ar[0]) - 0, parseInt(ar[1]) - 1, parseInt(ar[2]) - 1]] = colors[keys[i]];
+					newAr[[parseInt(ar[0]) - 1, parseInt(ar[1]) - 1, parseInt(ar[2]) - 1]] = colors[keys[i]];
+				}
+			}
+			reset();
+			//console.debug(newAr);
+			var keys = Object.keys(newAr);
+			for(var i = 0; i < keys.length; i++){
+				var ar = keys[i].split(",");
+				addBlock(ar[0], ar[1], ar[2], newAr[keys[i]]);
+			}
+			actionPerformed();
+		}
+	</script>
+	<script>
+		function moveAllBlocks(vector){
+			var newAr = {}
+			var keys = Object.keys(blocks);
+			for(var i = 0; i < keys.length; i++){
+				if(colors[keys[i]] != null){
+					var ar = keys[i].split(",");
+					newAr[[parseInt(ar[0]) + vector[0], parseInt(ar[1]) + vector[1], parseInt(ar[2]) + vector[2]]] = colors[keys[i]];
+				}
+			}
+			reset();
+			//console.debug(newAr);
+			var keys = Object.keys(newAr);
+			for(var i = 0; i < keys.length; i++){
+				var ar = keys[i].split(",");
+				addBlock(ar[0], ar[1], ar[2], newAr[keys[i]]);
+			}
+			actionPerformed();
+		}
+	</script>
+	<script>
+		function getFace(Vec1, Vec2){
+			camera.position.x = Vec1.x;
+			camera.position.y = Vec1.y;
+			camera.position.z = Vec1.z;
+			camera.lookAt(Vec2);
+			
+			var x = 0;
+			var y = -0;
+			var vector = new THREE.Vector3(x, y, 0.5);
+			
+			var rayCaster = projector.pickingRay(vector, camera);
+			var intersections = rayCaster.intersectObjects(scene.children, true);
+			
+			if ( intersections.length > 0 ) {
+				if ( intersected != intersections[ 0 ].object ) {
+					var n = intersections[0].object.position;
+					return n;
+				}
+			}
+		}
+		function exportToJson(){
+			var a = getFace(new THREE.Vector3(10,0,1), new THREE.Vector3(-0.5,0,1));
+			console.debug(a);
+		}
+	</script>
+	<script>
+		var modelId = "null";
+		autoLoad("<%= @load.split("\n").join("\\n") %>");
+		<% if params[:id] %>
+			 modelId = <%= params[:id] %>;
+		<% end %>
+	</script>
+</html>
