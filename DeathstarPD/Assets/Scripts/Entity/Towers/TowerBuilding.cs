@@ -21,6 +21,7 @@ public class TowerBuilding : GeneralObject {
 	public int SelectedIndex { get; private set; }
 	public Tower Selected { get { return (SelectedIndex == -1) ? null : Prototypes[SelectedIndex] ; } }
 	public Tower[] Prototypes { get; private set; }
+	private float height = 0f;
 
 	protected override void Start() {
 		SelectedIndex = -1;
@@ -68,11 +69,11 @@ public class TowerBuilding : GeneralObject {
 				//Position, wo der gezeichnet werden soll
 				Selected.transform.position = hit.point.normalized * (
 					hit.point.magnitude
-					+ Selected.transform.localScale.z * 0.5f
+					+ height * 0.5f
 					- Offset
 				);
 				Selected.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
-				Selected.transform.eulerAngles += new Vector3(0,-90,90); //Richtig drehen
+				Selected.transform.Rotate(0, -90, 90); //Richtig drehen
 				Selected.Visible = true; //Sichtbar
 				//TODO Lars: farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
 				// if(CanBuild); //Grün
@@ -103,6 +104,20 @@ public class TowerBuilding : GeneralObject {
 			//gameObject aktivieren
 			Selected.Active = true;
 
+			//Höhe berechnen
+			BoxCollider bc = Selected.GetComponent<BoxCollider>();
+			if(bc != null) height = bc.size.y * Selected.transform.localScale.y;
+			else{
+				SphereCollider sc = Selected.GetComponent<SphereCollider>();
+				if(sc != null) height = sc.radius * Selected.transform.localScale.y;
+				else{
+					CapsuleCollider cc = Selected.GetComponent<CapsuleCollider>();
+					if(cc != null) height = (cc.radius + cc.height) * Selected.transform.localScale.y;
+					else height = 5f;
+				}
+			}
+			//Debug.Log("Height: "+height);
+
 			//Debug.Log("Info: "+Selected.GetType()+" ausgewählt.");
 		}
 	}
@@ -128,7 +143,7 @@ public class TowerBuilding : GeneralObject {
 			t.transform.parent = Towers.Container.transform;
 			//zum Kugel-Mittelpunkt ausrichten
 			t.transform.LookAt(Vector3.zero);
-			t.transform.eulerAngles += new Vector3(0,-90,90); //Richtig drehen
+			t.transform.Rotate(0, -90, 90); //Richtig drehen
 			//Collider einschalten (ist beim Prototypen ausgeschaltet)
 			t.collider.enabled = true;
 			//Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)

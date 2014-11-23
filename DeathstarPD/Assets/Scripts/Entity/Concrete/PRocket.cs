@@ -131,18 +131,21 @@ public class PRocket : Projektile<RocketTower> {
 			if(dmg > 0) Owner.DoDamage(c, dmg);
 		}
 
-		//TODO Lars: sichtbare Explosion
-		GameObject explosion = (GameObject)Instantiate("SmallExplosion", transform.position);
-		//nach 0.5 Sekunden Explosion wieder auflösen
-		//Destroy(explosion, 1f);
-		
-		//TODO: Explosionsgeräusch
-		//PlaySound("explode");
-		
-		//ansonsten normal sterben
+		//normal sterben
 		base.Death();
 	}
-	
+
+	public override void DeathEffect(){
+		//Partikeleffekt
+		//TODO: Explosion visuell zu klein. Schaden wird derzeit in einem Radius von 8f zugefügt.
+		GameObject explosion = Instantiate("SmallExplosion", Pos);
+
+		//TODO: Explosionsgeräusch
+		//PlaySound("explode");
+
+		//nach 1.0 Sekunden Explosion wieder zerstören
+		Destroy(explosion, 1f);
+	}
 	
 	
 }

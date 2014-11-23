@@ -130,14 +130,21 @@ public abstract class Entity : GeneralObject {
 	/// </summary>
 	public virtual void Death(){
 		//Debug.Log(name+"<"+tag+">("+GetInstanceID()+"): death");
-		GameObject explosion = (GameObject)Instantiate("PhotonExplosion", transform.position);
 		IsDead = true;
+		DeathEffect();
 		Destroy(gameObject);
 	}
 
 	//Referenzen auf das objekt könnten noch existieren
 	public bool IsDead { get; private set; }
-	
+
+	//grafischer Todes-Effekt (Explosion)
+	public virtual void DeathEffect(){
+		//Partikeleffekt
+		GameObject explosion = Instantiate("PhotonExplosion", Pos);
+		//nach 2.0 Sekunden Explosion wieder zerstören
+		Destroy(explosion, 2f);
+	}
 	
 	
 }
