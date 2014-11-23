@@ -15,11 +15,13 @@ public class Pause : MonoBehaviour {
 	private Canvas canvas;
 	private GraphicRaycaster raycaster;
 	private GraphicRaycaster gameRaycaster;
+	private SettingsMenu settings;
 
 	void Start(){
 		canvas = GetComponent<Canvas>();
 		raycaster = GetComponent<GraphicRaycaster>();
 		gameRaycaster = GameObject.Find("GameCanvas").GetComponent<GraphicRaycaster>();
+		settings = GameObject.Find("SettingsMenuCanvas").GetComponent<SettingsMenu>();
 
 		//Spiel fortsetzen falls noch pausiert
 		Time.timeScale = 1.0f;
@@ -29,13 +31,25 @@ public class Pause : MonoBehaviour {
 			//prüfen ob das Spiel pausiert
 			if(!Paused) PauseGame();
 			//oder fortgesetzt werden soll
-			else ResumeGame();
+			else if(canvas.enabled) ResumeGame();
+			//oder die Settings geschlossen werden soll
+			else settings.Cancel();
 		});
 	}
 
 	public void QuitGame(){ Game.Quit(); }
 	
 	public void ToMainMenu() { Game.ToMainMenu(); }
+
+	public void OpenSettings(){
+		if(settings != null){
+			canvas.enabled = false;
+			raycaster.enabled = false;
+
+			settings.GetComponent<Canvas>().enabled = true;
+			settings.GetComponent<GraphicRaycaster>().enabled = true;
+		}
+	}
 
 	/// <summary>
 	/// Ist das Spiel jetzt gerade pausiert?
