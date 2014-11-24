@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
   - 136: {fileID: 13600000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StatellitenTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -34,6 +34,7 @@ public class CameraControler : MonoBehaviour {
 	void Update () {
 		//Click to place a building
 		if(Input.GetMouseButtonUp(0) && !moving){
+			TowerSelect.I.Click();
 			TowerBuilding.I.Build();
 		}
 
