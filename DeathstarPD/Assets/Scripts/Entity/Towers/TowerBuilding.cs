@@ -6,7 +6,7 @@ public class TowerBuilding : GeneralObject {
 	/// <summary>
 	/// Minimale Distanz zum nächsten Turm um bauen zu können
 	/// </summary>
-	//private float MinimumDistanceToNextTower = 5f;
+	private float MinimumDistanceToNextTower = 13f;
 
 	/// <summary>
 	/// wie weit das Objekt in den Planeten hineinragt
@@ -21,6 +21,15 @@ public class TowerBuilding : GeneralObject {
 	public int SelectedIndex { get; private set; }
 	public Tower Selected { get { return (SelectedIndex == -1) ? null : Prototypes[SelectedIndex] ; } }
 	public Tower[] Prototypes { get; private set; }
+
+	/// <summary>
+	/// gespeicherte Original Materials
+	/// </summary>
+	private Material[] materials;
+
+	/// <summary>
+	/// Höhe des Objektes, um es nicht halb im Planeten anzuzeigen
+	/// </summary>
 	private float height = 0f;
 
 	protected override void Start() {
@@ -75,9 +84,10 @@ public class TowerBuilding : GeneralObject {
 				Selected.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
 				Selected.transform.Rotate(0, -90, 90); //Richtig drehen
 				Selected.Visible = true; //Sichtbar
-				//TODO Lars: farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
-				// if(CanBuild); //Grün
-				// else ; //Rot
+
+				//farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
+				Selected.renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
+
 			} else {
 				//wenn die Maus über dem All ist
 				Selected.Visible = false; //Unsichtbar
@@ -85,10 +95,16 @@ public class TowerBuilding : GeneralObject {
 		}
 	}
 
+
+
+	/// <summary>
+	/// Ob der Abstand zum nächsten Turm eingehalten wird
+	/// </summary>
 	public bool CanBuild { get {
-		//TODO Robin: Funktion um Abstand zu nächstem Turm einzuhalten
-		return true;
+		return Physics.OverlapSphere(Selected.Pos, MinimumDistanceToNextTower, (int)Layer.Building | (int)Layer.Tower).Length == 0;
 	}}
+
+
 
 	public void Select(int index){
 		if(index < 0 || index >= Prototypes.Length){
@@ -118,6 +134,9 @@ public class TowerBuilding : GeneralObject {
 			}
 			//Debug.Log("Height: "+height);
 
+			//Materials speichern
+			materials = Selected.renderer.materials;
+
 			//Debug.Log("Info: "+Selected.GetType()+" ausgewählt.");
 		}
 	}
@@ -130,6 +149,9 @@ public class TowerBuilding : GeneralObject {
 			Selected.Active = false;
 			//unsichtbar
 			Selected.Visible = false;
+			//Materials wiederherstellen
+			Selected.renderer.materials = materials;
+
 			SelectedIndex = -1;
 		}
 	}
@@ -146,6 +168,8 @@ public class TowerBuilding : GeneralObject {
 			t.transform.Rotate(0, -90, 90); //Richtig drehen
 			//Collider einschalten (ist beim Prototypen ausgeschaltet)
 			t.collider.enabled = true;
+			//Materials wiederherstellen
+			t.renderer.materials = materials;
 			//Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
 			t.enabled = true;
 			//Verlasse den Baumodus
