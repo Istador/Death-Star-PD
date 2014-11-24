@@ -78,6 +78,9 @@ public class UVGImportWindow : EditorWindow {
 			}
 			if(parts.Length >= 3){
 				char[] fac = parts[2].ToCharArray();
+				for(int i = 0; i < 6; i++){
+					faces[i] = false;
+				}
 				foreach(char ch in fac){
 
 					if(ch == '0') faces[0] = true;
