@@ -68,7 +68,10 @@
 		for(var y = 0; y < h; y++){
 			var hue = y * 360 / h;
 			for(var x = 0; x < w; x++){
-				if(x < w/2){
+				if(x > w - 10){
+					colour = new HSVColour(0, 0, y);
+					colourTable[x + "," + y] = colour;
+				}else if(x < w/2){
 					colour = new HSVColour(hue, x*100/(w/2), 100);
 					colourTable[x + "," + y] = colour;
 				}else{

@@ -29,7 +29,7 @@
 
 		<div id="timeline" class="window" style="top:16px; position:fixed;">
 			<span class="icon">
-				<a href="VoxelEditor.erb">
+				<a href="VoxelEditor.html">
 					<img id="reset" src="icons/p_trash.png"></img>
 				</a>
 				<span>Alles zurücksetzen</span>
@@ -65,9 +65,9 @@
 			
 		<div id="colorToolbar" class="window" style="right:80px; position:fixed; top:290px; width:96px;">
 			<div id="colorChooser" style="display:none;">
-				<input id="colorTextfield" class="button" value="#FF0000" style="width:100%;border:solid; border-width:2px;	border-color:#99B2B7; margin:0px; margin-bottom:8px;"></input>
+				<input id="colorTextfield" class="button" value="#FF0000" onblur="colorPicked()" style="width:100%;border:solid; border-width:2px;	border-color:#99B2B7; margin:0px; margin-bottom:8px;"></input>
 				<canvas id="colorCanvas" height="243px" width="96px" style="float:left; width:96px; height:243px; margin:0px; padding:0px; position:relative; top:0px; left:0px;"></canvas>
-				<img id="colorGradient" src="Img/color-picker.png" style="display:none"></img>
+				<img id="colorGradient" src="" style="display:none"></img>
 			</div>
 			<div id="colors">
 				<div id="colorField0" class="colorBox" style="background-color:#1b1a16;" onclick="colorClicked(event)"></div>
@@ -645,6 +645,7 @@
 				});
 				previewCube.material = material;
 				pickingColor = false;
+				storePalette();
 			}
 		}
 		
@@ -653,10 +654,30 @@
 		}
 		
 		function colorPicked(){
-			color = parseInt(document.getElementById("colorPicker").value, 16);
-			//previewCube.material.color.setHex(color);
-			pickingColor = false;
-			//console.debug(color);
+			color = hexToVec3(document.getElementById("colorTextfield").value);
+			color = new RGBColour(color.x *255, color.y *255, color.z *255);
+			document.getElementById("colorTextfield").style.backgroundColor = color.getCSSHexadecimalRGB();
+			//pickingColor = false;
+		}
+	 
+		function storePalette(){
+			for(var i = 0; i < 12; i++){
+				localStorage.setItem("Color" + i.toString(), document.getElementById("colorField" + i).style.backgroundColor);
+			}
+		}
+		
+		function restorePalette(){
+			for(var i = 0; i < 12; i++){
+				var loadColor = localStorage.getItem("Color" + i.toString());
+				console.debug(loadColor);
+				if(loadColor != null && loadColor != ""){
+					document.getElementById("colorField" + i).style.backgroundColor = loadColor;
+				}
+			}
+		}
+		
+		function resetPalette(){
+			localStorage.clear();
 		}
 		
 		function replacePicked(replace){
@@ -890,9 +911,8 @@
 	</script>
 	<script>
 		var modelId = "null";
-		autoLoad("<%= @load.split("\n").join("\\n") %>");
-		<% if params[:id] %>
-			 modelId = <%= params[:id] %>;
-		<% end %>
+		restorePalette();
+		storePalette();
+
 	</script>
 </html>

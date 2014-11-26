@@ -35,10 +35,14 @@ function convertHex(hex){
 }
 
 function hexToVec3(hex){
+	if(hex.substring(0,1) == "#"){
+		hex = hex.substring(1, hex.length);
+		console.debug(hex);
+	}
 	var r = parseInt(hex.substring(0,2),16)/255;
 	var g = parseInt(hex.substring(2,2),16)/255;
 	var b = parseInt(hex.substring(4,2),16)/255;
-	return new THREE.Vector3(r,g,b);
+	return new THREE.Vector3(r,b,g);
 }
 
 function myCallback(){

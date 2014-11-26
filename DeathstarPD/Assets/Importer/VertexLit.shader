@@ -1,8 +1,9 @@
 ﻿Shader "Custom/VertexLit" {
 	Properties {
 		_Color ("Main Color", Color) = (0.5,0.5,0.5,1)
-		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_Ramp ("Toon Ramp (RGB)", 2D) = "gray" {} 
+		_TColor ("Team Color", Color) = (0.5,0.5,0.5,1)
+
+
 	}
 
 	SubShader {
@@ -12,7 +13,6 @@
 CGPROGRAM
 #pragma surface surf ToonRamp
 
-sampler2D _Ramp;
 
 // custom lighting function that uses a texture ramp based
 // on angle between light direction and normal
@@ -24,17 +24,18 @@ inline half4 LightingToonRamp (SurfaceOutput s, half3 lightDir, half atten)
 	#endif
 	
 	half d = dot (s.Normal, lightDir)*0.5 + 0.5;
-	half3 ramp = tex2D (_Ramp, float2(d,d)).rgb;
+	
 	
 	half4 c;
-	c.rgb = s.Albedo * _LightColor0.rgb * ramp * (atten * 2);
+	c.rgb = s.Albedo * _LightColor0.rgb  * (atten * 2);
 	c.a = 0;
 	return c;
 }
 
 
-sampler2D _MainTex;
+
 float4 _Color;
+float4 _TColor;
 
 struct Input {
 	float2 uv_MainTex : TEXCOORD0;
@@ -42,7 +43,12 @@ struct Input {
 };
 
 void surf (Input IN, inout SurfaceOutput o) {
-	half4 c = IN.color * _Color;
+	half4 c;
+	if(IN.color[1] == 1 && IN.color[2] == 0.0f){
+		c = _TColor * _Color;
+	}else{
+		c = IN.color * _Color;
+	}
 	o.Albedo = c.rgb;
 	o.Alpha = c.a;
 }
