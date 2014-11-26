@@ -5,6 +5,7 @@ public class CameraControler : MonoBehaviour {
 
 	//The GameObject to place on Click
 	public GameObject tower;
+	public Transform backCamera;
 
 	//Delay till a hold mousebutton is aknowledged
 	public int delay = 10;
@@ -84,6 +85,10 @@ public class CameraControler : MonoBehaviour {
 		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * nradius, Mathf.Sin(topRotation)*radius, Mathf.Sin (rotation) * nradius);
 		transform.position = newPos;
 		transform.LookAt(new Vector3(0,0,0));
+
+		newPos = new Vector3 (Mathf.Cos (rotation - 3.14f) * nradius, Mathf.Sin(topRotation)*radius, Mathf.Sin (rotation - 3.14f) * nradius);
+		backCamera.position = newPos;
+		backCamera.LookAt(new Vector3(0,0,0));
 	}
 	
 }
