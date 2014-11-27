@@ -150,8 +150,8 @@ function CalcDeltaPos(e){
 	}
 	if(centerMoving == true){
 		center.z += deltaPos[1]/20;
-		center.x += Math.sin(-rotation)*deltaPos[0]/20;
-		center.y += Math.cos(-rotation)*deltaPos[0]/20;
+		center.x += Math.sin(-rotation)*deltaPos[0]*-1/20;
+		center.y += Math.cos(-rotation)*deltaPos[0]*-1/20;
 		console.debug(rotation);
 		//center.y += deltaPos[0]/20;
 		CalcRotation();
