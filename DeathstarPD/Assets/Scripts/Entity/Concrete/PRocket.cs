@@ -137,14 +137,12 @@ public class PRocket : Projektile<RocketTower> {
 
 	public override void DeathEffect(){
 		//Partikeleffekt
-		//TODO: Explosion visuell zu klein. Schaden wird derzeit in einem Radius von 8f zugefügt.
+		//Sound hängt am Effekt mit PlayOnAwake muss also nicht im Script gestartet werden.
 		GameObject explosion = Instantiate("SmallExplosion", Pos);
-
-		//TODO: Explosionsgeräusch
-		//PlaySound("explode");
+		explosion.transform.LookAt(new Vector3(0,0,0));
 
 		//nach 1.0 Sekunden Explosion wieder zerstören
-		Destroy(explosion, 1f);
+		Destroy(explosion, 3f);
 	}
 	
 	
