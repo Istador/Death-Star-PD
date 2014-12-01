@@ -1,0 +1,8 @@
+Christopher Glese	Projektleitung, GUI
+Laura Gohl		Concept Arts, 3D-Modelling
+Lars Krafft		Grafikprogrammierung, Sounds
+Robin C. Ladiges	Konzept, K.I., Spiellogik
+
+Fremdquellen
+SkyBox Volume 2 (Nebula)	Hedgehog Team, https://www.assetstore.unity3d.com/en/#!/content/3392
+Standard Assets			???
