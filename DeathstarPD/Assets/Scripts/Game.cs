@@ -30,4 +30,13 @@ public static class Game {
 		#endif
 	}
 
+	public static void GameOver(){
+		//Spiel anhalten
+		//Time.timeScale = 0.0f;
+
+		//TODO: GameOver-Screen anzeigen
+
+		ToMainMenu();
+	}
+
 }
