@@ -1,0 +1,81 @@
+﻿using UnityEngine;
+using System.Collections;
+
+
+/// <summary>
+/// Diese Klasse erzeugt Primärgebäude auf der Planetenoberfläche und verteilt sie zufällig mit einem Mindestabstand.
+/// </summary>
+public class SpawnBuildings : GeneralObject {
+
+	//Radius des Planetens
+	private static float radius = 100f;
+
+	//Mindestabstand
+	private static float min_dist_sq = 80f*80f;
+
+	//Namen der Prefabs die erzeugt werden sollen
+	//Warnung: bei 80*80 nicht mehr als 14 Gebäude, sonst Endlosschleife!
+	private static string[] names = { "CommandCenter", "Hangar", "Hangar", "Hole", "Hole", "Hole", "Hole" };
+
+
+	private static Building[] buildings = new Building[names.Length];
+
+	protected override void Start () {
+		base.Start();
+
+		Spawn();
+
+		//Inputs.I.Register("Fire2", ()=>{Spawn();});
+
+		//Deaktiviere und Entferne dieses Skript nach einmaliger Ausführung.
+		enabled = false;
+		Destroy(this);
+	}
+
+	private void Spawn(){
+		//Entferne bereits erzeugte Gebäude
+		foreach(Building b in buildings){
+			if(b != null) Destroy(b.gameObject);
+		}
+
+		int index = 0;
+		
+		foreach(string name in names){
+			
+			Vector3 pos;
+			while(true) {
+				float alpha = Utility.NextFloat(0f, Mathf.PI);
+				float beta = Utility.NextFloat(0f, 2f * Mathf.PI);
+				pos = new Vector3(
+					radius * Mathf.Sin(alpha) * Mathf.Cos(beta)
+					, radius * Mathf.Sin(alpha) * Mathf.Sin(beta)
+					, radius * Mathf.Cos(alpha)
+					);
+				
+				// Wenn alle anderen Gebäude weit genug weg sind
+				if(IsDistanceOk(pos)){
+					//neues Gebäude erzeugen
+					Building b = Instantiate("Buildings/"+name, pos).GetComponent<Building>();
+					b.transform.parent = Buildings.Container.transform;
+					b.transform.LookAt(Vector3.zero);
+					b.transform.Rotate(0, -90, 90); //Richtig drehen
+					buildings[index++] = b;
+					
+					break; //while-Schleife verlassen
+				}
+			} // end while
+		} // end foreach
+	} // end Spawn()
+
+	private bool IsDistanceOk(Vector3 pos){
+		//für alle bisherigen Gebäude den Abstand prüfen
+		for(int i = 0; i < buildings.Length; i++){
+			Building b = buildings[i];
+			if(b == null) return true; //Ende des Arrays
+			else if( b.DistanceSqTo(pos) < min_dist_sq ) return false; //Mindestabstand wird nicht eingehalten
+		}
+		//alle erfolgreich
+		return true;
+	}
+
+}
