@@ -40,8 +40,9 @@ public class TowerBuilding : GeneralObject {
 
 		//Prototypen erzeugen
 		Prototypes = new Tower[]{
-			  Instantiate("LaserTower").GetComponent<Tower>()
-			, Instantiate("RocketTower").GetComponent<Tower>()
+			  Instantiate("Towers/LaserTower").GetComponent<Tower>()
+			, Instantiate("Towers/RocketTower").GetComponent<Tower>()
+			, Instantiate("Towers/LightningTower").GetComponent<Tower>()
 		};
 
 		//für jeden Prototyp
@@ -111,6 +112,9 @@ public class TowerBuilding : GeneralObject {
 			Debug.Log("Error: Trying to select non-existant tower "+index+".");
 			return;
 		}
+
+		//TODO Ressourcen: Turm nur auswählbar, wenn genug Geld
+
 		//Wenn sich die Auswahl ändert
 		if(SelectedIndex != index){
 			//Wenn vorher schon einer ausgewählt war, ihn deselecten
@@ -159,6 +163,8 @@ public class TowerBuilding : GeneralObject {
 	public void Build(){
 		//Nur wenn ein Turm zum bauen ausgewählt ist, dieser gezeichnet wird, und bauen möglich ist
 		if(SelectedIndex != -1 && Selected.Visible && CanBuild){
+			//TODO Ressourcen: Dem Spieler Geld für den Turmbau abziehen
+
 			//Turm erzeugen
 			Tower t = Selected.Instantiate(Selected.gameObject).GetComponent<Tower>();
 			//in Turm-Container

@@ -8,6 +8,23 @@ public class TowerSelect : GeneralObject {
 
 
 
+	public void UpgradeTower(){
+		if(Selected != null){
+			//if(enough money && enough energy)
+			//TODO Ressourcen: Dem Spieler Geld für den Turmausbau abziehen
+			Selected.LevelUp();
+		}
+	}
+
+
+	public void SellTower(){
+		if(Selected != null){
+			//TODO Ressourcen: Dem Spieler Geld für den Turmverkauf geben.
+			Selected.Sell();
+		}
+	}
+
+
 	/// <summary>
 	/// Einen Turm auswählen
 	/// </summary>
@@ -18,7 +35,7 @@ public class TowerSelect : GeneralObject {
 			//Positioniere Panel über den Turm
 			panel.position = Camera.main.WorldToScreenPoint(t.Pos);
 
-			//TODO: fülle SelectPanel mit den Turmdaten des ausgewählten Turms
+			//TODO GUI: fülle SelectPanel mit den Turmdaten des ausgewählten Turms
 
 			//zeige das Panel an
 			panel.gameObject.SetActive(true);

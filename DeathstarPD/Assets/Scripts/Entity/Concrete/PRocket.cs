@@ -69,8 +69,8 @@ public class PRocket : Projektile<RocketTower> {
 	
 	
 
-	public override void Init(){
-		Target = Owner.Target;
+	public void Init(MovableEntity target){
+		Target = target;
 		f_explosionsDamage = Owner.Damage;
 		d_timeToLife = Owner.Range * 2f;
 		

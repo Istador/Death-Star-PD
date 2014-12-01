@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class ProjectileManager : ScriptableObject{
+public class ProjectileManager : ScriptableObject {
 	private GameObject[] projectiles;
-	private int size;
+	private int size {get {return projectiles.Length;}}
 	private int count = 0;
 
-	public ProjectileManager(int size){
+	public void Init(int size){
 		projectiles = new GameObject[size];
-		this.size = size;
 	}
 
 	public void Add(GameObject obj){

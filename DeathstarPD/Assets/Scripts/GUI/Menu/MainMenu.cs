@@ -33,7 +33,9 @@ public class MainMenu: MonoBehaviour {
 		}
 	}
 
-	public void OpenHighscore(){ /* TODO: Highscore anzeigen */ }
+	public void OpenHighscore(){ /* TODO GUI: Highscore anzeigen */ }
+
+	public void OpenCredits(){ /* TODO GUI: Credits anzeigen */ }
 
 	public void QuitGame(){ Game.Quit(); }
 

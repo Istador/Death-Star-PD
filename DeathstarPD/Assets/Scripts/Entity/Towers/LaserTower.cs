@@ -19,17 +19,18 @@ public class LaserTower : Tower {
 	private static float[] range_table = { 20f, 24f, 28f, 32f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 
-	private static float[] attack_cooldown_table = { 0.5f, 0.6f, 0.7f, 0.8f }; // Angriffe die Sekunde
+	private static float[] attack_cooldown_table = { 0.8f, 0.7f, 0.6f, 0.5f }; // Zeit in Sekunden zw. Angriffen
 	public override float[] AttackCooldownTable { get{ return attack_cooldown_table; } }
 
-	protected override void DoAttack(){
+	public override EAttackPattern AttackPattern { get {return EAttackPattern.SingleTarget;} }
 
-		GameObject go = (GameObject)Instantiate("Lazer", Pos + Pos.normalized * transform.localScale.z * 0.25f);
-		PLazer lazer = go.GetComponent<PLazer>();
-		lazer.target = Target;
-		go.transform.parent = ProjectileManager.Container;
+	protected override void DoAttack(MovableEntity target){
 
-		DoDamage(Target, Damage, 0.5f);
+		PLazer lazer = Instantiate("Lazer", Pos + Pos.normalized * transform.localScale.z * 0.25f).GetComponent<PLazer>();
+		lazer.target = target;
+		lazer.transform.parent = ProjectileManager.Container;
+
+		DoDamage(target, Damage, 0.5f);
 	}
 
 }

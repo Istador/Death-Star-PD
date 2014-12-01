@@ -136,7 +136,7 @@ public abstract class Entity : GeneralObject {
 	}
 
 	//Referenzen auf das objekt könnten noch existieren
-	public bool IsDead { get; private set; }
+	public bool IsDead { get; protected set; }
 
 	//grafischer Todes-Effekt (Explosion)
 	public virtual void DeathEffect(){

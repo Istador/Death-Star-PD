@@ -23,7 +23,8 @@ public class FlyAround : MovableEntity {
 		/* pew = new GameObject[10]; */ //unused
 		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * radius, 0f, Mathf.Sin (rotation) * radius);
 		transform.position = newPos;
-		pewManager = new ProjectileManager(10);
+		pewManager = ScriptableObject.CreateInstance<ProjectileManager>();
+		pewManager.Init(10);
 	}
 	
 	// Fixed Update is called in fixed time intervals

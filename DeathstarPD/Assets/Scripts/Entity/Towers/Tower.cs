@@ -47,7 +47,7 @@ public abstract class Tower : ImmovableEntity {
 		if(frame_nr == update_on_frame){
 
 			//Target lebt nicht mehr?
-			if(Target == null || !Target.enabled || Target.IsDead){
+			if(AttackPattern == EAttackPattern.SingleTarget && (Target == null || !Target.enabled || Target.IsDead)){
 				Target = null;
 
 				//finde neues Target
@@ -72,13 +72,16 @@ public abstract class Tower : ImmovableEntity {
 					//Wenn der Cooldown noch nicht läuft
 					if(Target != null && !isAttackCooldownActive){
 						//Greife das Ziel jetzt an
-						DoAttack();
+						DoAttack(Target);
 						//Nachricht an selbst für später
 						MessageDispatcher.I.Dispatch(this, "AttackCooldownReached", AttackCooldown);
 						//merke das der Cooldown läuft
 						isAttackCooldownActive = true;
 					}
 				}
+			}
+			else if(AttackPattern == EAttackPattern.MultiTarget && !isAttackCooldownActive){
+				AttackAllInRange();
 			}
 		}
 
@@ -96,7 +99,7 @@ public abstract class Tower : ImmovableEntity {
 			//Ziel existiert noch und ist in Reichweite 
 			if(Target != null && Target.enabled && !Target.IsDead && DistanceTo(Target) <= Range){
 				//Greife das Ziel jetzt an
-				DoAttack();
+				DoAttack(Target);
 				//Nachricht an selbst für später
 				MessageDispatcher.I.Dispatch(this, "AttackCooldownReached", AttackCooldown);
 			}
@@ -105,6 +108,9 @@ public abstract class Tower : ImmovableEntity {
 				Target = null;
 				isAttackCooldownActive = false;
 			}
+			return true;
+		case "MultiTargetCooldownReached":
+			AttackAllInRange();
 			return true;
 		default:
 			return base.HandleMessage(msg);
@@ -119,6 +125,17 @@ public abstract class Tower : ImmovableEntity {
 
 		//Death von Superklasse
 		base.Death();
+	}
+
+
+
+	public void Sell(){
+		//Entferne den Turm von der Towers-Collection
+		Towers.I.Remove(this);
+
+		//Death ohne DeathEffekt
+		IsDead = true;
+		Destroy(gameObject);
 	}
 
 
@@ -151,12 +168,35 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// Der Angriffscooldown ist abgelaufen und das Target existiert nocht
+	/// Der Angriffscooldown ist abgelaufen und das Target existiert noch
 	/// </summary>
-	protected abstract void DoAttack();
+	protected abstract void DoAttack(MovableEntity target);
 
 
 
+	private void AttackAllInRange(){
+		if(AttackPattern != EAttackPattern.MultiTarget) return;
+
+		//Alle Gegner in Reichweite finden
+		Collider[] hits = Physics.OverlapSphere(Pos, Range, (int)Layer.EnemyFighter);
+		//bei mindestens einem Gegner
+		if(hits.Length > 0){
+			//Alle Gegner
+			foreach(Collider hit in hits){
+				MovableEntity e = hit.gameObject.GetComponent<MovableEntity>();
+				//Greife das Ziel an
+				if(e != null) DoAttack(e);
+			}
+			isAttackCooldownActive = true;
+			MessageDispatcher.I.Dispatch(this, "MultiTargetCooldownReached", AttackCooldown);
+		}
+		//bei keinen Gegnern in Reichweite
+		else {
+			isAttackCooldownActive = false;
+		}
+	}
+	
+	
 	/// <summary>
 	/// maximale Trefferpunkte abhängig vom Level des Turmes
 	/// </summary>
@@ -198,6 +238,15 @@ public abstract class Tower : ImmovableEntity {
 	/// Ob der Cooldown Aktiv ist
 	/// </summary>
 	private bool isAttackCooldownActive = false;
+
+
+
+	/// <summary>
+	/// Angriffsmuster des Turmes
+	/// Keine Angriffe, Einzelnes Ziel oder alle Ziele in Reichweite.
+	/// </summary>
+	public abstract EAttackPattern AttackPattern { get; }
+	public enum EAttackPattern { None, SingleTarget, MultiTarget }
 
 
 
