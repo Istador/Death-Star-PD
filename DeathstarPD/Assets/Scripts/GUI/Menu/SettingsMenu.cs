@@ -13,7 +13,8 @@ public class SettingsMenu : MonoBehaviour {
 	private Slider antialias;
 	private Text antialiastext;
 	private Toggle anisotr;
-
+	private Slider bgm;
+	private Slider sfx;
 
 	void Start(){
 		//Referenzen auf die Widgets laden
@@ -23,6 +24,8 @@ public class SettingsMenu : MonoBehaviour {
 		antialias = panel.FindChild("AntiAliasingSlider").GetComponent<Slider>();
 		antialiastext = antialias.transform.FindChild("Text").GetComponent<Text>();
 		anisotr = panel.FindChild("AnisotropicFilteringToggle").GetComponent<Toggle>();
+		bgm = panel.FindChild("BGMVolumeSlider").GetComponent<Slider>();
+		sfx = panel.FindChild("SFXVolumeSlider").GetComponent<Slider>();
 
 		Load();
 	}
@@ -53,19 +56,25 @@ public class SettingsMenu : MonoBehaviour {
 
 	private void Load(){
 		//Setze Interface entsprechend der gespeicherten Einstellungen
-		vsync.isOn = GraphicSettings.I.VSync;
-		simpleModels.isOn = GraphicSettings.I.SimpleModells;
-		antialias.value = FromAA(GraphicSettings.I.AntiAliasing);
-		antialiastext.text = GraphicSettings.I.AntiAliasing.ToString();
-		anisotr.isOn = GraphicSettings.I.AnisotrFiltering;
+		vsync.isOn = GameGraphicSettings.I.VSync;
+		simpleModels.isOn = GameGraphicSettings.I.SimpleModells;
+		antialias.value = FromAA(GameGraphicSettings.I.AntiAliasing);
+		antialiastext.text = GameGraphicSettings.I.AntiAliasing.ToString();
+		anisotr.isOn = GameGraphicSettings.I.AnisotrFiltering;
+		bgm.value = GameAudioSettings.I.BGMVolume;
+		sfx.value = GameAudioSettings.I.SFXVolume;
 	}
 
 	public void Save(){
-		GraphicSettings.I.VSync = vsync.isOn;
-		GraphicSettings.I.SimpleModells = simpleModels.isOn;
-		GraphicSettings.I.AntiAliasing = ToAA((int)antialias.value);
-		GraphicSettings.I.AnisotrFiltering = anisotr.isOn;
-		GraphicSettings.I.Save();
+		GameGraphicSettings.I.VSync = vsync.isOn;
+		GameGraphicSettings.I.SimpleModells = simpleModels.isOn;
+		GameGraphicSettings.I.AntiAliasing = ToAA((int)antialias.value);
+		GameGraphicSettings.I.AnisotrFiltering = anisotr.isOn;
+		GameGraphicSettings.I.Save();
+
+		GameAudioSettings.I.BGMVolume = bgm.value;
+		GameAudioSettings.I.SFXVolume = sfx.value;
+		GameAudioSettings.I.Save();
 
 		//Frame schließen
 		Cancel();

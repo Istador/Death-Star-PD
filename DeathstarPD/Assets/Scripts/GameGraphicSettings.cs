@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GraphicSettings {
+public class GameGraphicSettings {
 
     public bool VSync {
         get{ return _vsync; }
@@ -44,7 +44,7 @@ public class GraphicSettings {
 
 
 
-    private GraphicSettings(){
+	private GameGraphicSettings(){
         //Default Werte aus den Unity Settings laden
         _vsync = QualitySettings.vSyncCount > 0;
         _simpMods = false;
@@ -92,11 +92,11 @@ public class GraphicSettings {
     /**
      * Singleton
     */
-    private static GraphicSettings instance;
-    public static GraphicSettings Instance{get{
-            if(instance==null) instance = new GraphicSettings();
+	private static GameGraphicSettings instance;
+	public static GameGraphicSettings Instance{get{
+			if(instance==null) instance = new GameGraphicSettings();
             return instance;
         }}
-    public static GraphicSettings I{get{return Instance;}}
+	public static GameGraphicSettings I{get{return Instance;}}
 
 }
