@@ -78,18 +78,13 @@ public class UVGImportWindow : EditorWindow {
 			}
 			if(parts.Length >= 3){
 				char[] fac = parts[2].ToCharArray();
-				for(int i = 0; i < 6; i++){
-					faces[i] = false;
-				}
+				
+				//faces muss ein neues Objekt sein, sonst teilen sich alle das selbe array...
+				faces = new bool[]{ false, false, false, false, false, false };
+				
 				foreach(char ch in fac){
-
-					if(ch == '0') faces[0] = true;
-					else if(ch == '1') faces[1] = true;
-					else if(ch == '2') faces[2] = true;
-					else if(ch == '3') faces[3] = true;
-					else if(ch == '4') faces[4] = true;
-					else if(ch == '5') faces[5] = true;
-
+					if('0' <= ch && ch <= '5')
+						faces[ch - 0x30] = true;
 				}
 			}else{
 				useFaces = false;
@@ -131,7 +126,7 @@ public class UVGImportWindow : EditorWindow {
 			colors.Add(f.Color);
 
 			//Front
-			if(f.Faces[0]){
+			if(f.Faces[1]){
 				triangles.Add(counter + 2);
 				triangles.Add(counter + 1);
 				triangles.Add(counter + 0);
@@ -141,7 +136,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 0);
 			}
 			//Left
-			if(f.Faces[1]){				
+			if(f.Faces[2]){
 				triangles.Add(counter + 4);
 				triangles.Add(counter + 3);
 				triangles.Add(counter + 0);
@@ -151,7 +146,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 4);
 			}
 			//Back
-			if(f.Faces[2]){				
+			if(f.Faces[3]){
 				triangles.Add(counter + 5);
 				triangles.Add(counter + 7);
 				triangles.Add(counter + 4);
@@ -161,7 +156,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 7);
 			}
 			//Right
-			if(f.Faces[3]){				
+			if(f.Faces[0]){
 				triangles.Add(counter + 5);
 				triangles.Add(counter + 2);
 				triangles.Add(counter + 6);
@@ -171,7 +166,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 5);
 			}
 			//Top
-			if(f.Faces[4]){				
+			if(f.Faces[4]){
 				triangles.Add(counter + 3);
 				triangles.Add(counter + 7);
 				triangles.Add(counter + 2);
@@ -181,7 +176,7 @@ public class UVGImportWindow : EditorWindow {
 				triangles.Add(counter + 2);
 			}
 			//Bottom
-			if(f.Faces[5]){				
+			if(f.Faces[5]){
 				triangles.Add(counter + 0);
 				triangles.Add(counter + 1);
 				triangles.Add(counter + 4);
