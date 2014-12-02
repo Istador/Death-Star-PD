@@ -76,7 +76,7 @@ MonoBehaviour:
   mute: 0
   playOnAwake: 1
   loop: 0
-  volume: .699999988
+  volume: .5
   rolloffMode: 1
   panLevel: 1
   spread: 150

@@ -6,6 +6,7 @@ public class PLightning : MonoBehaviour {
 	public float speed = 10;
 	public float wobble = 0.5f;
 	public float lifetime = 1;
+	public float trailLifetime = 0.25f;
 
 	public MovableEntity target;
 
@@ -19,6 +20,9 @@ public class PLightning : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		t += Time.deltaTime;
+		if(t > trailLifetime){
+			gameObject.GetComponent<TrailRenderer>().enabled = false;
+		}
 		if(t > lifetime){
 			Destroy(gameObject);
 		}

@@ -50,7 +50,7 @@ public class UVGImportWindow : EditorWindow {
 		string fileContents = sr.ReadToEnd();
 		sr.Close();
 		
-		string[] lines = fileContents.Split(";\n"[0]); // TODO: \n wird nicht benutzt. gewollt?
+		string[] lines = fileContents.Split(";\n"[0]);
 		foreach (string line in lines) {
 			int x = 0;
 			int y = 0;
