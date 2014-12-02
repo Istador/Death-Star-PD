@@ -20,9 +20,9 @@ public class LightningTower : Tower {
 	protected override void DoAttack(MovableEntity target){
 		//TODO Lars: anderen Angriffseffekt für den Blitzturm
 
-		PLazer lazer = Instantiate("Lazer", Pos + Pos.normalized * transform.localScale.z * 0.25f).GetComponent<PLazer>();
-		lazer.target = target;
-		lazer.transform.parent = ProjectileManager.Container;
+		PLightning lightning = Instantiate("LightningShot", Pos + Pos.normalized * transform.localScale.z * 0.25f).GetComponent<PLightning>();
+		lightning.target = target;
+		lightning.transform.parent = ProjectileManager.Container;
 		
 		DoDamage(target, Damage, 0.5f);
 	}
