@@ -24,10 +24,20 @@ public class RocketTower : Tower {
 
 	public override EAttackPattern AttackPattern { get {return EAttackPattern.SingleTarget;} }
 
+	private Vector3 projectilePos;
+
+	protected override void Start (){
+		BoxCollider bc = GetComponent<BoxCollider>();
+		float height = (bc.size.y + bc.center.y) * transform.localScale.y;
+		projectilePos = Pos + Pos.normalized * height * 0.325f;
+
+		base.Start();
+	}
+
 	protected override void DoAttack(MovableEntity target){
 
 		//nicht in der mitte erzeugen, sondern an Abschussposition (Mitte der oberen Hälfte)
-		PRocket r = Instantiate("Rocket", Pos + Pos.normalized * 2).GetComponent<PRocket>();
+		PRocket r = Instantiate("Rocket", projectilePos).GetComponent<PRocket>();
 		r.transform.parent = ProjectileManager.Container;
 		r.Owner = this;
 		r.Init(target);

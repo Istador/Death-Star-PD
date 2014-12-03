@@ -11,7 +11,7 @@ public class TowerBuilding : GeneralObject {
 	/// <summary>
 	/// wie weit das Objekt in den Planeten hineinragt
 	/// </summary>
-	private float Offset = 1.5f;
+	private float Offset = 2.0f;
 
 	/// <summary>
 	/// Container in den alle Prototyp-Türme kommen
@@ -126,13 +126,13 @@ public class TowerBuilding : GeneralObject {
 
 			//Höhe berechnen
 			BoxCollider bc = Selected.GetComponent<BoxCollider>();
-			if(bc != null) height = bc.size.y * Selected.transform.localScale.y;
+			if(bc != null) height = (bc.size.y + bc.center.y) * Selected.transform.localScale.y;
 			else{
 				SphereCollider sc = Selected.GetComponent<SphereCollider>();
-				if(sc != null) height = sc.radius * Selected.transform.localScale.y;
+				if(sc != null) height = (sc.radius + sc.center.y) * Selected.transform.localScale.y;
 				else{
 					CapsuleCollider cc = Selected.GetComponent<CapsuleCollider>();
-					if(cc != null) height = (cc.radius + cc.height) * Selected.transform.localScale.y;
+					if(cc != null) height = (cc.radius + cc.height + cc.center.y) * Selected.transform.localScale.y;
 					else height = 5f;
 				}
 			}
