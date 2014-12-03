@@ -18,8 +18,6 @@ public class LightningTower : Tower {
 	public override EAttackPattern AttackPattern { get {return EAttackPattern.MultiTarget;} }
 
 	protected override void DoAttack(MovableEntity target){
-		//TODO Lars: anderen Angriffseffekt für den Blitzturm
-
 		PLightning lightning = Instantiate("LightningShot", Pos + Pos.normalized * transform.localScale.z * 0.25f).GetComponent<PLightning>();
 		lightning.target = target;
 		lightning.transform.parent = ProjectileManager.Container;

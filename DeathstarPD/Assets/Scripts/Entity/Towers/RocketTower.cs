@@ -27,7 +27,7 @@ public class RocketTower : Tower {
 	protected override void DoAttack(MovableEntity target){
 
 		//nicht in der mitte erzeugen, sondern an Abschussposition (Mitte der oberen Hälfte)
-		PRocket r = Instantiate("Rocket", Pos + Pos.normalized * transform.localScale.z * 0.25f).GetComponent<PRocket>();
+		PRocket r = Instantiate("Rocket", Pos + Pos.normalized * 2).GetComponent<PRocket>();
 		r.transform.parent = ProjectileManager.Container;
 		r.Owner = this;
 		r.Init(target);
