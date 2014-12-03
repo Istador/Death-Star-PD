@@ -214,6 +214,31 @@ public static class Utility {
 		//Länge des Kreisbogens berechnen
 		return Mathf.Abs(Mathf.PI * radius * angle / 180f);
 	}
+
+
+
+	/// <summary>
+	/// Berechnet die Höhe des GameObjekts basierend auf dem Collider entlang der y-Achse
+	/// </summary>
+	/// <returns>Die Höhe des Objektes.</returns>
+	/// <param name="obj">Object dessen Höhe man wissen will.</param>
+	public static float HeightYByCollider(GameObject obj){
+		float height = 5f;
+		float s = obj.transform.localScale.y;
+
+		BoxCollider bc = obj.GetComponent<BoxCollider>();
+		if(bc != null) height = (bc.size.y + bc.center.y) * s;
+		else{
+			SphereCollider sc = obj.GetComponent<SphereCollider>();
+			if(sc != null) height = (sc.radius + sc.center.y) * s;
+			else{
+				CapsuleCollider cc = obj.GetComponent<CapsuleCollider>();
+				if(cc != null) height = (cc.radius + cc.height + cc.center.y) * s;
+			}
+		}
+
+		return height;
+	}
 	
 	
 }

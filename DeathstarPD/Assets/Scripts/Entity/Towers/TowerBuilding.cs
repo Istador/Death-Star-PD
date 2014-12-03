@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class TowerBuilding : GeneralObject {
 
@@ -125,17 +124,7 @@ public class TowerBuilding : GeneralObject {
 			Selected.Active = true;
 
 			//Höhe berechnen
-			BoxCollider bc = Selected.GetComponent<BoxCollider>();
-			if(bc != null) height = (bc.size.y + bc.center.y) * Selected.transform.localScale.y;
-			else{
-				SphereCollider sc = Selected.GetComponent<SphereCollider>();
-				if(sc != null) height = (sc.radius + sc.center.y) * Selected.transform.localScale.y;
-				else{
-					CapsuleCollider cc = Selected.GetComponent<CapsuleCollider>();
-					if(cc != null) height = (cc.radius + cc.height + cc.center.y) * Selected.transform.localScale.y;
-					else height = 5f;
-				}
-			}
+			height = Utility.HeightYByCollider(Selected.gameObject);
 			//Debug.Log("Height: "+height);
 
 			//Materials speichern

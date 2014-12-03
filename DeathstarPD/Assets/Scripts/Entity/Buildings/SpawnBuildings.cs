@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 
 /// <summary>
@@ -12,6 +11,11 @@ public class SpawnBuildings : GeneralObject {
 
 	//Mindestabstand
 	private static float min_dist_sq = 80f*80f;
+	
+	/// <summary>
+	/// wie weit das Objekt in den Planeten hineinragt
+	/// </summary>
+	private float Offset = 2.0f;
 
 	//Namen der Prefabs die erzeugt werden sollen
 	//Warnung: bei 80*80 nicht mehr als 14 Gebäude, sonst Endlosschleife!
@@ -46,6 +50,7 @@ public class SpawnBuildings : GeneralObject {
 			while(true) {
 				float alpha = Utility.NextFloat(0f, Mathf.PI);
 				float beta = Utility.NextFloat(0f, 2f * Mathf.PI);
+				
 				pos = new Vector3(
 					radius * Mathf.Sin(alpha) * Mathf.Cos(beta)
 					, radius * Mathf.Sin(alpha) * Mathf.Sin(beta)
@@ -56,6 +61,16 @@ public class SpawnBuildings : GeneralObject {
 				if(IsDistanceOk(pos)){
 					//neues Gebäude erzeugen
 					Building b = Instantiate("Buildings/"+name, pos).GetComponent<Building>();
+					
+					//Höhe berechnen
+					float height = Utility.HeightYByCollider(b.gameObject);
+					
+					b.transform.position = pos.normalized * (
+						pos.magnitude
+						+ height * 0.5f
+						- Offset
+					);
+					
 					b.transform.parent = Buildings.Container.transform;
 					b.transform.LookAt(Vector3.zero);
 					b.transform.Rotate(0, -90, 90); //Richtig drehen

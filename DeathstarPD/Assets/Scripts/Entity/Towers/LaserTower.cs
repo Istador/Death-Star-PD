@@ -27,9 +27,7 @@ public class LaserTower : Tower {
 	private Vector3 projectilePos;
 	
 	protected override void Start (){
-		BoxCollider bc = GetComponent<BoxCollider>();
-		float height = (bc.size.y + bc.center.y) * transform.localScale.y;
-		projectilePos = Pos + Pos.normalized * height * 0.25f;
+		projectilePos = Pos + Pos.normalized * Utility.HeightYByCollider(gameObject) * 0.25f;
 		
 		base.Start();
 	}
