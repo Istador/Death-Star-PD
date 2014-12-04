@@ -8,8 +8,6 @@ public class Aiming : MonoBehaviour {
 
 	public MovableEntity target;
 
-	private float lastAngle = 0;
-
 	// Use this for initialization
 	void Start () {
 	}
@@ -18,9 +16,14 @@ public class Aiming : MonoBehaviour {
 	void Update () {
 		target = gameObject.GetComponent<Tower>().Target;
 		if(target){
-			Vector3 t = new Vector3(target.Pos.x , transform.position.y, target.Pos.z);
-			basis.LookAt(t);
-			basis.Rotate(new Vector3( 0, -90, 0));
+			Vector3 delta = basis.InverseTransformPoint(target.Pos);
+			delta.y = 0;
+			delta = basis.TransformPoint(delta);
+
+			Debug.DrawLine(basis.position, delta, Color.blue);
+
+			transform.LookAt(delta, basis.TransformPoint(Vector3.up));
+			transform.Rotate(0, -90, 0);
 
 			//#TODO Lars: Barrel Ausrichtung der Tower implemntieren
 //			float x = Vector3.Distance(transform.position, new Vector3(target.Pos.x, transform.position.y, target.Pos.z));
