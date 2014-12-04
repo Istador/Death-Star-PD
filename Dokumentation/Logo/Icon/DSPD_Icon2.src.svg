@@ -32,8 +32,8 @@
      showgrid="false"
      inkscape:window-width="1120"
      inkscape:window-height="896"
-     inkscape:window-x="111"
-     inkscape:window-y="45"
+     inkscape:window-x="1332"
+     inkscape:window-y="69"
      inkscape:window-maximized="0"
      fit-margin-top="12"
      fit-margin-bottom="12"
@@ -64,70 +64,70 @@
        sodipodi:cy="516.85712"
        sodipodi:rx="285.71429"
        sodipodi:ry="304.28571"
-       d="m 805.71429,516.85712 a 285.71429,304.28571 0 1 1 -571.42858,0 285.71429,304.28571 0 1 1 571.42858,0 z"
+       d="m 805.71429,516.85712 c 0,168.05235 -127.91864,304.2857 -285.71429,304.2857 -157.79565,0 -285.71429,-136.23335 -285.71429,-304.2857 0,-168.05236 127.91864,-304.28571 285.71429,-304.28571 157.79565,0 285.71429,136.23335 285.71429,304.28571 z"
        transform="matrix(1.7499999,0,0,1.6431925,-397.99997,-308.93357)" />
     <rect
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect3763"
        width="359.42609"
        height="863.09558"
-       x="617.08551"
-       y="66.210747"
-       transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+       x="685.1283"
+       y="-114.91863"
+       transform="matrix(0.8660254,0.5,-0.5,0.8660254,0,0)" />
     <rect
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect3791"
        width="250"
        height="80"
-       x="375.96768"
-       y="179.9019"
-       transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+       x="444.01038"
+       y="-1.227477"
+       transform="matrix(0.8660254,0.5,-0.5,0.8660254,0,0)" />
     <rect
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect3793"
        width="200"
        height="40"
-       x="75.967674"
-       y="199.9019"
-       transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+       x="144.01039"
+       y="18.772524"
+       transform="matrix(0.8660254,0.5,-0.5,0.8660254,0,0)" />
     <rect
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect3791-4"
        width="250"
        height="80"
-       x="396.43985"
-       y="232.46884"
-       transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+       x="464.48254"
+       y="51.339447"
+       transform="matrix(0.8660254,0.5,-0.5,0.8660254,0,0)" />
     <rect
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect3793-0"
        width="200"
        height="40"
-       x="96.439835"
-       y="252.46884"
-       transform="matrix(0.96592583,0.25881905,-0.25881905,0.96592583,0,0)" />
+       x="164.48256"
+       y="71.339447"
+       transform="matrix(0.8660254,0.5,-0.5,0.8660254,0,0)" />
     <text
        xml:space="preserve"
        style="font-size:350px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Impact;-inkscape-font-specification:Impact"
-       x="-726.01202"
-       y="581.98242"
+       x="-544.88263"
+       y="650.02521"
        id="text3862"
        sodipodi:linespacing="125%"
-       transform="matrix(0.25881905,-0.96592583,0.96592583,0.25881905,0,0)"><tspan
+       transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"><tspan
          sodipodi:role="line"
          id="tspan3864"
-         x="-726.01202"
-         y="581.98242">DS</tspan></text>
+         x="-544.88263"
+         y="650.02521">DS</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3866"
-       y="931.98242"
-       x="-631.01233"
+       y="1000.0252"
+       x="-449.88293"
        style="font-size:350px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;fill-opacity:1;stroke:none;font-family:Impact;-inkscape-font-specification:Impact"
        xml:space="preserve"
-       transform="matrix(0.25881905,-0.96592583,0.96592583,0.25881905,0,0)"><tspan
-         y="931.98242"
-         x="-631.01233"
+       transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"><tspan
+         y="1000.0252"
+         x="-449.88293"
          sodipodi:role="line"
          id="tspan3870">PD</tspan></text>
   </g>
