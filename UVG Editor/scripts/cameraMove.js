@@ -5,38 +5,24 @@ var moveEnabled = true;
 var offset = new THREE.Vector3(0,0,0);
 
 document.onkeydown = checkKey;
+document.onkeyup = checkKeyUp;
+
+function checkKeyUp(e){
+	e = e || window.event;
+		//Strg down
+		if(e.keyCode == '17'){
+			strgDown = false;
+		}
+}
+
 function checkKey(e) {
 	if(moveEnabled == true){
 		e = e || window.event;
+		//Strg down
+		if(e.keyCode == '17'){
+			strgDown = true;
+		}
 		
-		//e
-		if (e.keyCode == '69') {
-			camera.position.z += 1;
-		}
-		//f
-		if (e.keyCode == '70') {
-			Pipette();
-		}
-		//q
-		if (e.keyCode == '81') {
-			camera.position.z -= 1;
-		}
-		//a
-		if (e.keyCode == '65') {
-			rotation += -0.04;
-		}
-		//d
-		if (e.keyCode == '68') {
-			rotation += 0.04;
-		}
-		//w
-		if (e.keyCode == '87') {
-			radius -= 0.5;
-		}
-		//s
-		if (e.keyCode == '83') {
-			radius += 0.5;
-		}
 		//left
 		if (e.keyCode == '100'){
 			moveAllBlocks([0,-1,0]);

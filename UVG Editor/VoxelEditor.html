@@ -218,6 +218,7 @@
 		var pickingColor = false;
 		var deleteMode = false;
 		var setMode = true;
+		var strgDown = false;
 		var cubePreview;
 		var cubeModeSelections = [];
 		var actions = [];
@@ -344,8 +345,13 @@
 				
 						}
 					}else if(mode == 'repaint'){
-						removeBlock(x,y,z);
-						addBlock(x,y,z, color);
+						if(strgDown == false){
+							removeBlock(x,y,z);
+							addBlock(x,y,z, color);
+						}else{
+							repaintArea(x,y,z);
+						}
+						actionPerformed();
 					}else if(mode == 'cubeMode'){
 						if(cubeModeSelections.length < 1){
 							cubeModeSelections.push(previewCube.position);
@@ -488,6 +494,25 @@
 		camera.lookAt(new THREE.Vector3(0,0,0));
 		
 		window.addEventListener( 'positionElements()', onWindowResize, false );
+		
+		function repaintArea(x,y,z){
+			var oldColor = colors[[x,y,z]];
+			removeBlock(x,y,z);
+			addBlock(x,y,z, color);
+			console.debug("Old Color " + oldColor.toString());
+			var min = [x -1, y -1, z -1];
+			var max = [x + 1, y + 1, z+ 1];
+			for(var i = min[0]; i <= max[0]; i++){
+				for(var h = min[1]; h <= max[1]; h++){
+					for(var k = min[2]; k <= max[2]; k++){
+						if(colors[[i,h,k]] == oldColor){
+							console.debug("Next Iteration");
+							repaintArea(i,h,k);
+						}
+					}
+				}
+			}
+		}
 		
 		function positionElements(){
 			var pos = (window.innerWidth -588) /2;
