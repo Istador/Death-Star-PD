@@ -86,6 +86,7 @@ public class TowerBuilding : GeneralObject {
 				Selected.Visible = true; //Sichtbar
 
 				//farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
+				//TODO Robin: Wenn wie abgesprochen die Tower ein leeres GameObject als Parent haben wird die Farbe nicht übernommen
 				Selected.renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
 
 			} else {
