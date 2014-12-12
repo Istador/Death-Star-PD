@@ -21,6 +21,7 @@ public class MainMenu: MonoBehaviour {
 
 
 	public void StartGame(){ Game.LoadLevel(1); }
+	public void StartShowRoom(){ Game.LoadLevel(2); }
 
 	public void OpenSettings(){
 		if(settings != null){
