@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12d43f1df0990148ae585ec88446e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 4
 --- !u!1 &1151641909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,11 +1980,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towers:
+  - {fileID: 243786473}
   - {fileID: 2091079044}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1481750818}
+  - {fileID: 1707555309}
 --- !u!1 &1771389772
 GameObject:
   m_ObjectHideFlags: 0
