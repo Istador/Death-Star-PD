@@ -29,13 +29,11 @@ public class Aiming : MonoBehaviour {
 			Debug.DrawLine(basis.position, delta, Color.blue);
 
 			basis.LookAt(delta, basis.TransformPoint(Vector3.up));
-			basis.Rotate(0, -90, 0);
-			//barrel.rotation = basis.rotation;
-
+			basis.Rotate(0,-90,0);
 			//Barrel Ausrichtung
-			float dist = Vector3.Distance(barrel.position, target.Pos);
-			float angle = Mathf.Asin(height/dist);
-			barrel.Rotate(0, 0, angle);
+			//float dist = Vector3.Distance(barrel.position, target.Pos);
+			//float angle = Mathf.Asin(height/dist);
+			//barrel.Rotate(0, 0, angle);
 		}
 	}
 }
