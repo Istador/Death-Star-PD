@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// Das Pausen-Menü wird aktiviert wenn man im Spiel Escape drückt (oder 
@@ -24,9 +25,10 @@ public class Pause : MonoBehaviour {
 		settings = GameObject.Find("SettingsMenuCanvas").GetComponent<SettingsMenu>();
 
 		//Spiel fortsetzen falls noch pausiert
-		Time.timeScale = 1.0f;
+		Time.timeScale = 1f;
 		Paused = false;
 
+		//Pausieren über Escape, öffnet Pausen-Menü
 		Inputs.I.Register("Pause", ()=>{
 			//prüfen ob das Spiel pausiert
 			if(!Paused) PauseGame();
@@ -35,6 +37,17 @@ public class Pause : MonoBehaviour {
 			//oder die Settings geschlossen werden soll
 			else settings.Cancel();
 		});
+
+
+		//Pausieren über Pause-Taste oder P, nur in der Debug Version
+		if(Debug.isDebugBuild){
+			Action a_hiddenPause = ()=>{
+				if(Time.timeScale != 0f) Time.timeScale = 0f;
+				else Time.timeScale = 1f;
+			};
+			Inputs.I.Register(KeyCode.Pause, a_hiddenPause);
+			Inputs.I.Register(KeyCode.P, a_hiddenPause);
+		}
 	}
 
 	public void QuitGame(){ Game.Quit(); }

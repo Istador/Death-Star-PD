@@ -30,7 +30,7 @@ public class Aiming : MonoBehaviour {
 			//Rotation der Basis
 			basis.rotation = startRot;
 			Vector3 delta = basis.InverseTransformPoint(target.Pos);
-			float height = delta.y;
+			//float height = delta.y;
 			delta.y = 0;
 			delta = basis.TransformPoint(delta);
 			Debug.DrawLine(basis.position, delta, Color.blue);
