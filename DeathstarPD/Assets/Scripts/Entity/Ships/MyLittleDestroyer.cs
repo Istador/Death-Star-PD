@@ -1,43 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fighter : Ship {
+public class MyLittleDestroyer : Ship {
 
 
 
-	public override int Damage { get{ return 10; } }
-	public override float Range { get{ return 20f; } }
-	public override float AttackCooldown { get{ return 1f; } }
+	public override int Damage { get{ return 2; } }
+	public override float Range { get{ return 18f; } }
+	public override float AttackCooldown { get{ return 0.5f; } }
 	
 
 
 	protected override void Start(){
-		MaxHealth = 100;
+		MaxHealth = 40;
 		
-		MaxSpeed = 20f;
-		MaxForce = 15f;
+		MaxSpeed = 25f;
+		MaxForce = 20f;
 
 		// Positionen der 4 Kanonen
-		tl = transform.FindChild("topleft");
-		tr = transform.FindChild("topright");
-		bl = transform.FindChild("bottomleft");
-		br = transform.FindChild("bottomright");
+		l = transform.FindChild("left");
+		r = transform.FindChild("right");
 
 		base.Start();
 	}
 
 
 
-	private Transform tl, tr, bl, br;
+	private Transform l, r;
 
 	// Ziel angreifen
 	public override void DoAttack(Entity target){
 		// ein zufällige Kanone abfeuern
-		switch(Utility.Rnd.Next(0, 4)){
-		default: lazer(target, tl.position); break;
-		case 1:  lazer(target, tr.position); break;
-		case 2:  lazer(target, bl.position); break;
-		case 3:  lazer(target, br.position); break;
+		switch(Utility.Rnd.Next(0, 2)){
+		default: lazer(target, l.position); break;
+		case 1:  lazer(target, r.position); break;
 		}
 
 		//Schaden verursachen

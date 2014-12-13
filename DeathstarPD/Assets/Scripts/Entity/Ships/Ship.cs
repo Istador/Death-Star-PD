@@ -18,6 +18,8 @@ public abstract class Ship : MovableEntity {
 		Steering.f_SeekFactor = 1f;
 		Steering.f_AvoidFactor = 4f;
 
+		isAttackCooldownActive = false;
+
 		base.Start();
 
 		transform.LookAt(Vector3.zero);
@@ -88,7 +90,7 @@ public abstract class Ship : MovableEntity {
 	/// <summary>
 	/// Ob der Cooldown Aktiv ist
 	/// </summary>
-	public bool isAttackCooldownActive = false;
+	public bool isAttackCooldownActive { get; set; }
 
 
 
