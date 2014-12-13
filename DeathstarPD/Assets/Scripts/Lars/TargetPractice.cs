@@ -3,13 +3,7 @@ using System.Collections;
 
 public class TargetPractice : MovableEntity {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
 		int width = Screen.width / 2;
 		Vector3 newPos = new Vector3(0,0,-500);
 		if(Input.GetMouseButton(1)){

@@ -51,7 +51,8 @@ public class SettingsMenu : MonoBehaviour {
 	}
 
 	public void ChangeAALabel(){
-		antialiastext.text = ToAA((int)antialias.value).ToString();
+		if(antialiastext != null && antialiastext.text != null && antialias != null)
+			antialiastext.text = ToAA((int)antialias.value).ToString();
 	}
 
 	private void Load(){

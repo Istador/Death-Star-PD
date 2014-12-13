@@ -24,7 +24,7 @@ public class TowerBuilding : GeneralObject {
 	/// <summary>
 	/// gespeicherte Original Materials
 	/// </summary>
-	private Material[] materials;
+	private Material[][] materials;
 
 	/// <summary>
 	/// Höhe des Objektes, um es nicht halb im Planeten anzuzeigen
@@ -86,8 +86,9 @@ public class TowerBuilding : GeneralObject {
 				Selected.Visible = true; //Sichtbar
 
 				//farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
-				//TODO Robin: Wenn wie abgesprochen die Tower ein leeres GameObject als Parent haben wird die Farbe nicht übernommen
-				Selected.renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
+				for(int i = 0; i < Selected.transform.childCount; i++){
+					Selected.transform.GetChild(i).renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
+				}
 
 			} else {
 				//wenn die Maus über dem All ist
@@ -129,7 +130,11 @@ public class TowerBuilding : GeneralObject {
 			//Debug.Log("Height: "+height);
 
 			//Materials speichern
-			materials = Selected.renderer.materials;
+			materials = new Material[Selected.transform.childCount][];
+			for(int i = 0; i < Selected.transform.childCount; i++){
+				if(Selected.transform.GetChild(i).renderer != null)
+					materials[i] = Selected.transform.GetChild(i).renderer.materials;
+			}
 
 			//Debug.Log("Info: "+Selected.GetType()+" ausgewählt.");
 		}
@@ -144,7 +149,10 @@ public class TowerBuilding : GeneralObject {
 			//unsichtbar
 			Selected.Visible = false;
 			//Materials wiederherstellen
-			Selected.renderer.materials = materials;
+			for(int i = 0; i < Selected.transform.childCount; i++){
+				if(Selected.transform.GetChild(i).renderer != null)
+					Selected.transform.GetChild(i).renderer.materials = materials[i];
+			}
 
 			SelectedIndex = -1;
 		}
@@ -165,7 +173,10 @@ public class TowerBuilding : GeneralObject {
 			//Collider einschalten (ist beim Prototypen ausgeschaltet)
 			t.collider.enabled = true;
 			//Materials wiederherstellen
-			t.renderer.materials = materials;
+			for(int i = 0; i < t.transform.childCount; i++){
+				if(t.transform.GetChild(i).renderer != null)
+					t.transform.GetChild(i).renderer.materials = materials[i];
+			}
 			//Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
 			t.enabled = true;
 			//Verlasse den Baumodus

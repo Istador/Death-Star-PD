@@ -98,9 +98,17 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <c>true</c> wenn sichtbar; ansonsten, <c>false</c>.
 	/// </value>
 	public bool Visible {
-		get{return renderer.enabled;}
-		set{renderer.enabled = value;}
+		get{ return _visible; }
+		set{ 
+			_visible = value; 
+			if(renderer != null) renderer.enabled = value;
+			for(int i = 0; i < transform.childCount; i++){
+				if(transform.GetChild(i).renderer != null)
+					transform.GetChild(i).renderer.enabled = value;
+			}
+		}
 	}
+	private bool _visible = true;
 	
 
 #if GO_USE_SPRITE_CONTROLER
