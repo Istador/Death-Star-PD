@@ -227,6 +227,36 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
+	/// wieviele Kekse es kostet Level 1 zu bauen
+	/// </summary>
+	public int CookieBuildCost { get{return CookieTable[0];} }
+	/// <summary>
+	/// wieviele Kekse es kostet upzugraden
+	/// </summary>
+	public int CookieUpgradeCost { get{return CookieTable[Level];} }
+	/// <summary>
+	/// Tabelle mit den Kekskosten
+	/// </summary>
+	public abstract int[] CookieTable { get; }
+
+
+
+	/// <summary>
+	/// wieviel Geld es kostet Level 1 zu bauen
+	/// </summary>
+	public int MoneyBuildCost { get{return CookieTable[0];} }
+	/// <summary>
+	/// wieviel Geld es kostet upzugraden
+	/// </summary>
+	public int MoneyUpgradeCost { get{return CookieTable[Level];} }
+	/// <summary>
+	/// Tabelle mit den Geldkosten
+	/// </summary>
+	public abstract int[] MoneyTable { get; }
+
+
+
+	/// <summary>
 	/// Abklingzeit zwischen Angriffen in Sekunden, abhängig vom aktuellem Level.
 	/// </summary>
 	public float AttackCooldown { get{return AttackCooldownTable[Level - 1];} }

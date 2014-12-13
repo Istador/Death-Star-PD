@@ -10,7 +10,7 @@ public class Hangar : Building {
 	}
 
 	public override void DeathEffect(){
-		//TODO: Zerstöre alle Verteidiger-Schiffe
+		//TODO Robin: Zerstöre alle Verteidiger-Schiffe
 		base.DeathEffect();
 	}
 

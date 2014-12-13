@@ -114,16 +114,21 @@ public class TowerBuilding : GeneralObject {
 			return;
 		}
 
-		//TODO Ressourcen: Turm nur auswählbar, wenn genug Geld
+		//nicht genug Geld zum bauen
+		if(!GameResources.I.EnoughMoney(Prototypes[index].MoneyBuildCost) || !GameResources.I.EnoughCookies(Prototypes[index].CookieBuildCost)){
+			//TODO GUI: Fehlermeldung, weil nicht genug Geld zum bauen des Turms vorhanden
+			return;
+		}
 
+			
 		//Wenn sich die Auswahl ändert
 		if(SelectedIndex != index){
-			//Wenn vorher schon einer ausgewählt war, ihn deselecten
-			Deselect();
-			//Auswahl ändern
-			SelectedIndex = index;
-			//gameObject aktivieren
-			Selected.Active = true;
+
+			Deselect(); //Wenn vorher schon einer ausgewählt war, ihn erst deselektieren
+
+			SelectedIndex = index; //Auswahl ändern
+
+			Selected.Active = true; //gameObject aktivieren
 
 			//Höhe berechnen
 			height = Utility.HeightYByCollider(Selected.gameObject);
@@ -135,19 +140,14 @@ public class TowerBuilding : GeneralObject {
 				if(Selected.transform.GetChild(i).renderer != null)
 					materials[i] = Selected.transform.GetChild(i).renderer.materials;
 			}
-
-			//Debug.Log("Info: "+Selected.GetType()+" ausgewählt.");
 		}
 	}
 
 	public void Deselect(){
 		//wenn ein Turm ausgewählt ist
 		if(SelectedIndex != -1){
-			//Debug.Log("Info: "+Selected.GetType()+" nicht mehr ausgewählt.");
-			//gameObjekt deaktivieren
-			Selected.Active = false;
-			//unsichtbar
-			Selected.Visible = false;
+			Selected.Active = false; //gameObjekt deaktivieren
+			Selected.Visible = false; //unsichtbar
 			//Materials wiederherstellen
 			for(int i = 0; i < Selected.transform.childCount; i++){
 				if(Selected.transform.GetChild(i).renderer != null)
@@ -161,28 +161,24 @@ public class TowerBuilding : GeneralObject {
 	public void Build(){
 		//Nur wenn ein Turm zum bauen ausgewählt ist, dieser gezeichnet wird, und bauen möglich ist
 		if(SelectedIndex != -1 && Selected.Visible && CanBuild){
-			//TODO Ressourcen: Dem Spieler Geld für den Turmbau abziehen
-
+			//Dem Spieler Geld für den Turmbau abziehen
+			GameResources.I.Money -= Selected.MoneyBuildCost;
+			GameResources.I.Cookies -= Selected.CookieBuildCost;
+			
 			//Turm erzeugen
 			Tower t = Selected.Instantiate(Selected.gameObject).GetComponent<Tower>();
-			//in Turm-Container
-			t.transform.parent = Towers.Container.transform;
-			//zum Kugel-Mittelpunkt ausrichten
-			t.transform.LookAt(Vector3.zero);
+			t.transform.parent = Towers.Container.transform; //in Turm-Container
+			t.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
 			t.transform.Rotate(0, -90, 90); //Richtig drehen
-			//Collider einschalten (ist beim Prototypen ausgeschaltet)
-			t.collider.enabled = true;
+			t.collider.enabled = true; //Collider einschalten (ist beim Prototypen ausgeschaltet)
 			//Materials wiederherstellen
-			for(int i = 0; i < t.transform.childCount; i++){
+			for(int i = 0; i < t.transform.childCount; i++)
 				if(t.transform.GetChild(i).renderer != null)
 					t.transform.GetChild(i).renderer.materials = materials[i];
-			}
-			//Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
-			t.enabled = true;
+			t.enabled = true; //Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
+
 			//Verlasse den Baumodus
 			Deselect();
-
-			//Debug.Log("Info: "+t.GetType()+" gebaut.");
 		}
 	}
 

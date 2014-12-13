@@ -2,21 +2,20 @@
 using System.Collections;
 
 public class RocketTower : Tower {
-
-	/*
-	public int test_health = 80;
-	public int test_damage = 20; //20 Schaden pro Treffer
-	public float test_range = 8f;
-	public float test_cooldown = 3f; // 0,33~ Angriffe die Sekunde
-	*/
 	
 	private static int[] health_table = { 80, 90, 100, 110 }; // Trefferpunkte
 	public override int[] MaxHealthTable { get{ return health_table; } }
+
+	private static int[] cookie_table = { 2, 4, 6, 8 };
+	public override int[] CookieTable { get{ return cookie_table;} }
 	
-	private static int[] damage_table = { 20, 25, 30, 35 }; // Schaden pro Treffer
+	private static int[] money_table = { 500, 600, 700, 800 };
+	public override int[] MoneyTable { get{ return money_table;} }
+
+	private static int[] damage_table = { 40, 50, 60, 70 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 	
-	private static float[] range_table = { 18f, 22f, 26f, 30f }; // maximale Distanz zum Ziel
+	private static float[] range_table = { 20f, 24f, 28f, 32f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 	
 	private static float[] attack_cooldown_table = { 3.0f, 2.8f, 2.6f, 2.4f }; // Zeit in Sekunden zw. Angriffen

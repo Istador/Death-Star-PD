@@ -5,6 +5,8 @@ public static class Game {
 	public static void LoadLevel(int id){
 		//Nachrichtenwarteschlange leeren
 		MessageDispatcher.I.EmptyQueue();
+		//Ressourcen zurücksetzen
+		GameResources.I.Reset();
 		//Level laden
 		Application.LoadLevel(id);
 		//Spiel fortsetzen
@@ -34,7 +36,7 @@ public static class Game {
 		//Spiel anhalten
 		//Time.timeScale = 0.0f;
 
-		//TODO: GameOver-Screen anzeigen
+		//TODO GUI: GameOver-Screen anzeigen
 
 		ToMainMenu();
 	}

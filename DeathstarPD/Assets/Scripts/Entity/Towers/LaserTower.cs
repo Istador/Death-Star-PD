@@ -3,15 +3,14 @@ using System.Collections;
 
 public class LaserTower : Tower {
 
-	/*
-	public int test_health = 100;
-	public int test_damage = 10; //10 Schaden pro Treffer
-	public float test_range = 10f;
-	public float test_cooldown = 0.5f; // 2 Angriffe die Sekunde
-	*/
-
 	private static int[] health_table = { 100, 125, 150, 175 }; // Trefferpunkte
 	public override int[] MaxHealthTable { get{ return health_table; } }
+
+	private static int[] cookie_table = { 1, 2, 3, 4 };
+	public override int[] CookieTable { get{ return cookie_table;} }
+
+	private static int[] money_table = { 250, 300, 350, 400 };
+	public override int[] MoneyTable { get{ return money_table;} }
 
 	private static int[] damage_table = { 10, 12, 14, 16 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
