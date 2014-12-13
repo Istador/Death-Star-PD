@@ -22,7 +22,7 @@ public class Inputs : MonoBehaviour {
 	private class STInputs : IInputs {
 
 		private Dictionary<string, bool> states = new Dictionary<string, bool>();
-		private Dictionary<string, Action<bool>> actions = new Dictionary<string, Action<bool>>();
+		private Dictionary<string, HashSet<Action<bool>>> actions = new Dictionary<string, HashSet<Action<bool>>>();
 		
 		public void Unregister(string name){
 			actions.Remove(name);
@@ -34,8 +34,10 @@ public class Inputs : MonoBehaviour {
 		}
 
 		public void Register(string name, Action<bool> action){
-			actions[name] = action;
 			states[name] = false;
+			if(!actions.ContainsKey(name))
+				actions[name] = new HashSet<Action<bool>>();
+			actions[name].Add(action);
 		}
 		
 		public void Clear(){
@@ -51,7 +53,8 @@ public class Inputs : MonoBehaviour {
 				//bei einer Änderung
 				if(oldstate ^ newstate){
 					states[name] = newstate; //change state
-					actions[name](newstate); //call method
+					foreach(Action<bool> action in actions[name])
+						action(newstate); //call method
 				}
 			}
 		}
