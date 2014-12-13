@@ -7,4 +7,4 @@ rem ### java -jar statsvn.jar -output-dir Output -title "Brain of teh Zwarm" -ch
 
 rem ### default charset
 
-java -jar statsvn.jar -output-dir Output -title "Deathstar PD" -disable-twitter-button -exclude "DeathstarPD/Library/**;DeathstarPD/Assets/UVersionControl/**;Statistics/**;Dokumentation/**;UVG Editor/**;**/*.meta;**/*.csproj;**/*.sln;**/*.userprefs;**/*.prefab;**/*.asset;**/*.mat;**/*.uvg;**/*.svg" logfile.log ..
+java -jar statsvn.jar -output-dir Output -title "Deathstar PD" -disable-twitter-button -exclude "DeathstarPD/Library/**;DeathstarPD/Assets/UVersionControl/**;Statistics/**;Dokumentation/**;UVG Editor/**;**/*.meta;**/*.csproj;**/*.sln;**/*.userprefs;**/*.prefab;**/*.asset;**/*.mat;**/*.uvg;**/*.svg;**/*.unity" logfile.log ..
