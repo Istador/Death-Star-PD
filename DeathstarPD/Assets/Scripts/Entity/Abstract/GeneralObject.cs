@@ -401,7 +401,7 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
-	public Vector3 Posi(GameObject other){ 
+	public static Vector3 Posi(GameObject other){ 
 		if(other.collider != null)
 			return other.collider.bounds.center;
 		else
@@ -410,15 +410,15 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
-	public Vector3 Posi(Collider other){ return Posi(other.gameObject); }
+	public static Vector3 Posi(Collider other){ return Posi(other.gameObject); }
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
-	public Vector3 Posi(Collision other){ return Posi(other.gameObject); }
+	public static Vector3 Posi(Collision other){ return Posi(other.gameObject); }
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
-	public Vector3 Posi(GeneralObject other){ return other.Pos; }
+	public static Vector3 Posi(GeneralObject other){ return other.Pos; }
 
 	
 	/// <summary>

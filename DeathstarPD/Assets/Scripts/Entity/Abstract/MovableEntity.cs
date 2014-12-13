@@ -94,6 +94,10 @@ public abstract class MovableEntity : Entity {
 		set{ _maxForce = value; }
 	}
 	private float _maxForce;
+
+
+
+	protected ForceMode FMode = ForceMode.Impulse;
 	
 	
 	
@@ -174,12 +178,12 @@ public abstract class MovableEntity : Entity {
 			
 			//Kraft auf die Unity-Physik-Engine übertragen, um Bewegung zu erzeugen
 			//rigidbody.AddRelativeForce(f); //nicht für Projektile
-			rigidbody.AddForce(f, ForceMode.Impulse);
-				
-			//Bewegungsgeschwindigkeit limitieren
-			if(Mathf.Abs(rigidbody.velocity.magnitude) > MaxSpeed)
-				rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
+			rigidbody.AddForce(f, FMode);
 		}
+
+		//Bewegungsgeschwindigkeit limitieren
+		if(Mathf.Abs(rigidbody.velocity.magnitude) > MaxSpeed)
+			rigidbody.velocity = rigidbody.velocity.normalized * MaxSpeed;
 	}
 	
 	
