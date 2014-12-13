@@ -3,7 +3,7 @@
 public class CommandCenter : Building {
 
 	protected override void Start() {
-		MaxHealth = 5000;
+		MaxHealth = 2000;
 		
 		//Start in Superklasse
 		base.Start();

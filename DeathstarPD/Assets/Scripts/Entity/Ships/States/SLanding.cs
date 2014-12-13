@@ -13,6 +13,18 @@ public class SLanding : State<MovableEntity> {
 	}
 
 
+	
+	public override bool OnMessage(MovableEntity owner, Telegram msg){
+		switch(msg.message){
+		case "AttackCooldownReached":
+			((Ship)owner).isAttackCooldownActive = false;
+			return true;
+		default:
+			return false;
+		}
+	}
+
+
 
 	/**
 	 * Singleton

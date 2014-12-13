@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 /*
  * Steering Behaviors System
@@ -33,6 +32,14 @@ public class SteeringBehaviors {
 	/// Offset vom Ziel das fOffset Pursuit benötigt wird
 	/// </summary>
 	public Vector3 Offset {get; set;}
+
+
+
+	/// <summary>
+	/// Entfernung zum Ziel die nicht unterschritten werden soll
+	/// </summary>
+	/// <value>The avoid distance.</value>
+	public float AvoidDistance {get; set;}
 	
 	
 	
@@ -164,7 +171,32 @@ public class SteeringBehaviors {
 	}
 	
 	private static float f_ArriveDeceleration = 0.1f;
-	
+
+
+	/// <summary>
+	/// Distanz zum Ziel halten.
+	/// </summary>
+	/// <param name="targetPos">Target position.</param>
+	private Vector3 Avoid(Vector3 targetPos){
+		Vector3 ToTarget = targetPos - owner.Pos;
+		
+		float dist = ToTarget.magnitude;
+
+		if(dist > AvoidDistance) return Vector3.zero;
+
+		float factor = 1f - dist / AvoidDistance;
+
+		// vom Ziel weg
+		return factor * Flee(targetPos);
+	}
+
+	public void DoAvoid(Vector3 targetPos, float distance){
+		Stop();
+		Seeking = true;
+		Avoiding = true;
+		AvoidDistance = distance;
+		TargetPos = targetPos;
+	}
 	
 	/// <summary>
 	/// Abfangen eines Objektes anhand dessen vorraussichtlich zukünftigen Position.
@@ -302,6 +334,14 @@ public class SteeringBehaviors {
 	/// true=ein, false=aus
 	/// </param>
 	public bool Arriving {get; set;}
+
+	/// <summary>
+	/// Distanz zum Ziel halten ein-/ausschalten
+	/// </summary>
+	/// <param name='on'>
+	/// true=ein, false=aus
+	/// </param>
+	public bool Avoiding {get; set;}
 	
 	/// <summary>
 	/// Abfangen ein-/ausschalten
@@ -354,6 +394,7 @@ public class SteeringBehaviors {
 		Seeking = false;
 		Fleeing = false;
 		Arriving = false;
+		Avoiding = false;
 		Pursuing = false;
 		Evading = false;
 		Wandering = false;
@@ -375,6 +416,7 @@ public class SteeringBehaviors {
 		if(Seeking) f += Seek(TargetPos) * f_SeekFactor;
 		if(Fleeing) f += Flee(TargetPos) * f_FleeFactor;
 		if(Arriving) f += Arrive(TargetPos) * f_ArriveFactor;
+		if(Avoiding) f += Avoid(TargetPos) * f_AvoidFactor;
 		if(Pursuing && Target != null) f += Pursuit(Target) * f_PursueFactor;
 		if(Evading && Target != null) f += Evade(Target) * f_EvadeFactor;
 		if(Wandering) f += Wander() * f_WanderFactor;
@@ -393,6 +435,7 @@ public class SteeringBehaviors {
 	public float f_SeekFactor = 1f;
 	public float f_FleeFactor = 1f;
 	public float f_ArriveFactor = 1f;
+	public float f_AvoidFactor = 1f;
 	public float f_PursueFactor = 1f;
 	public float f_EvadeFactor = 1f;
 	public float f_WanderFactor = 1f;

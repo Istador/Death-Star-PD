@@ -6,7 +6,6 @@ public abstract class Ship : MovableEntity {
 	public readonly static float orbit_range = 110f;
 	public readonly static float orbit_interval = 5f;
 
-
 	/// <summary>
 	/// Das Ziel, dass verfolgt wird
 	/// </summary>
@@ -15,6 +14,9 @@ public abstract class Ship : MovableEntity {
 	protected override void Start(){
 		MoveFSM.CurrentState = SLanding.I;
 		FMode = ForceMode.Force;
+
+		Steering.f_SeekFactor = 1f;
+		Steering.f_AvoidFactor = 4f;
 
 		base.Start();
 
@@ -54,8 +56,6 @@ public abstract class Ship : MovableEntity {
 		}
 		rigidbody.AddForce(f, ForceMode.Force);
 
-		//TODO KI Robin: Abstand zum Gebäude einhalten
-
 		//KI Bewegung
 		base.FixedUpdate();
 
@@ -88,7 +88,13 @@ public abstract class Ship : MovableEntity {
 	/// <summary>
 	/// Ob der Cooldown Aktiv ist
 	/// </summary>
-	//private bool isAttackCooldownActive = false;
-	//TODO KI Robin: Gebäude angreifen
+	public bool isAttackCooldownActive = false;
+
+
+
+	/// <summary>
+	/// Der Angriffscooldown ist abgelaufen und das Target existiert noch
+	/// </summary>
+	public abstract void DoAttack(Entity target);
 
 }

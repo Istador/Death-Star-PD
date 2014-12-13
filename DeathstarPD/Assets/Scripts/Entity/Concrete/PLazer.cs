@@ -7,7 +7,7 @@ public class PLazer : MonoBehaviour {
 	public GameObject sparks;
 	public float preload = 0.5f;
 	public float duration = 0.5f;
-	public MovableEntity target { get; set; }
+	public Entity target { get; set; }
 
 	private float t = 0.0f;
 

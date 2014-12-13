@@ -6,7 +6,6 @@ public class SSteer : State<MovableEntity> {
 
 	public override void Enter(MovableEntity owner){
 		Ship s = (Ship) owner;
-		Debug.Log("Steer Enter");
 
 		//falls kein Ziel, oder Ziel tot, suche neues Ziel
 		if(s.Target == null || s.Target.IsDead || !s.Target.enabled){
@@ -17,10 +16,11 @@ public class SSteer : State<MovableEntity> {
 			s.Target = b;
 
 			//Fliege zum Gebäude
-			s.Steering.DoSeek(b.Pos);
+			s.Steering.DoAvoid(b.Pos, s.Range);
+			//s.Steering.DoSeek(b.Pos);
 		}
 
-		s.Steering.Seeking = true;
+		s.Steering.f_SeekFactor = 2f;
 	}
 
 
@@ -44,8 +44,20 @@ public class SSteer : State<MovableEntity> {
 
 
 
+	public override bool OnMessage(MovableEntity owner, Telegram msg){
+		switch(msg.message){
+		case "AttackCooldownReached":
+			((Ship)owner).isAttackCooldownActive = false;
+			return true;
+		default:
+			return false;
+		}
+	}
+
+
+
 	public override void Exit(MovableEntity owner){
-		owner.Steering.Seeking = false;
+		((Ship)owner).Steering.f_SeekFactor = 1f;
 	}
 
 

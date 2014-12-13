@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Levels/playground.unity
   - enabled: 1
     path: Assets/Levels/ShowRoom.unity
+  - enabled: 1
+    path: Assets/Levels/aitest.unity

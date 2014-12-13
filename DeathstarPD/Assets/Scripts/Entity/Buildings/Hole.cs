@@ -3,7 +3,7 @@
 public class Hole : Building {
 
 	protected override void Start() {
-		MaxHealth = 7500;
+		MaxHealth = 2000;
 		
 		//Start in Superklasse
 		base.Start();

@@ -3,7 +3,7 @@
 public class Hangar : Building {
 
 	protected override void Start() {
-		MaxHealth = 3000;
+		MaxHealth = 1500;
 		
 		//Start in Superklasse
 		base.Start();
