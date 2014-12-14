@@ -47,6 +47,27 @@ public class Bomber : Ship {
 		base.Start();
 	}
 
+	protected override void Update(){
+		//beim Angreifen aufs Ziel ausrichten
+		if(MoveFSM.IsInState(SBomberAttack.I)){
+			Entity e = null;
+
+			if(SubTarget != null && !SubTarget.IsDead && SubTarget.enabled){
+				e = SubTarget;
+			}
+			else if(Target != null && !Target.IsDead && Target.enabled){
+				e = Target;
+			}
+
+			if(e != null){
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Pos - e.Pos, Pos), Time.deltaTime);
+				return;
+			}
+		}
+
+		base.Update();
+	}
+
 
 
 	private Transform bpos;
