@@ -44,7 +44,7 @@ MonoBehaviour:
   AudioTag: 1
   clip: {fileID: 8300000, guid: 76a687bcae5267646ace664c36dd29ae, type: 3}
   mute: 0
-  playOnAwake: 0
+  playOnAwake: 1
   loop: 0
   volume: .5
   rolloffMode: 1
