@@ -7,7 +7,10 @@ public class Waves : GeneralObject {
 		public readonly float strength;
 		public readonly string[] ships;
 		public readonly int[] amounts;
-		public Wave(float strength, string[] ships, int[] amounts){
+		public Wave(float strength, string[] ships, params int[] amounts){
+			if(ships.Length != amounts.Length){
+				Debug.LogError("Anzahl ships entspricht nicht der Anzahl amounts");
+			}
 			this.strength = strength;
 			this.ships = ships;
 			this.amounts = amounts;
@@ -38,37 +41,40 @@ public class Waves : GeneralObject {
 
 		if(waves == null){
 			waves = new List<Wave>();
+			string l = "MyLittleDestroyer";
+			string f = "Fighter";
+			string b = "Bomber";
 
 			//Mini Fighter Vorstellung
-			waves.Add( new Wave(0.50f, new string[]{"MyLittleDestroyer"}, new int[]{5}) );
-			waves.Add( new Wave(0.75f, new string[]{"MyLittleDestroyer", "MyLittleDestroyer"}, new int[]{5, 5}) );
+			waves.Add( new Wave(0.50f, new string[]{l}, 5) );
+			waves.Add( new Wave(0.75f, new string[]{l, l}, 5, 5) );
 
 			//Fighter Vorstellung
-			waves.Add( new Wave(0.50f, new string[]{"Fighter"}, new int[]{3}) );
-			waves.Add( new Wave(0.75f, new string[]{"Fighter", "Fighter"}, new int[]{3, 3}) );
+			waves.Add( new Wave(0.50f, new string[]{f}, 3) );
+			waves.Add( new Wave(0.75f, new string[]{f, f}, 3, 3) );
 
 			//Bomber Vorstellung
-			waves.Add( new Wave(0.50f, new string[]{"Bomber"}, new int[]{2}) );
-			waves.Add( new Wave(0.75f, new string[]{"Bomber", "Bomber"}, new int[]{2, 2}) );
+			waves.Add( new Wave(0.50f, new string[]{b}, new int[]{2}) );
+			waves.Add( new Wave(0.75f, new string[]{b, b}, 2, 2) );
 
 			// Normal und einzelnd 
-			waves.Add( new Wave(1.00f, new string[]{"MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer"}, new int[]{5, 5, 5, 5}) );
-			waves.Add( new Wave(1.00f, new string[]{"Fighter", "Fighter", "Fighter", "Fighter"}, new int[]{3, 3, 3, 3}) );
-			waves.Add( new Wave(1.00f, new string[]{"Bomber", "Bomber", "Bomber", "Bomber"}, new int[]{2, 2, 2, 2}) );
+			waves.Add( new Wave(1.00f, new string[]{l, l, l, l}, 5, 5, 5, 5) );
+			waves.Add( new Wave(1.00f, new string[]{f, f, f, f}, 3, 3, 3, 3) );
+			waves.Add( new Wave(1.00f, new string[]{b, b, b, b}, 2, 2, 2, 2) );
 			//Normal Kombinationen
-			waves.Add( new Wave(1.00f, new string[]{"Fighter", "Fighter", "Fighter", "Fighter", "Bomber", "Bomber"}, new int[]{3, 3, 3, 3, 2, 2}) );
-			waves.Add( new Wave(1.00f, new string[]{"MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer", "Fighter", "Fighter"}, new int[]{5, 5, 5, 5, 3}) );
+			waves.Add( new Wave(1.00f, new string[]{f, f, f, f, b, b}, 3, 3, 3, 3, 2, 2) );
+			waves.Add( new Wave(1.00f, new string[]{l, l, l, f, f}, 5, 5, 5, 5, 3) );
 
 			//Schwer einzelnd
-			waves.Add( new Wave(1.50f, new string[]{"MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer"}, new int[]{5, 5, 5, 5}) );
-			waves.Add( new Wave(1.50f, new string[]{"Fighter", "Fighter", "Fighter", "Fighter"}, new int[]{3, 3, 3, 3}) );
-			waves.Add( new Wave(1.50f, new string[]{"Bomber", "Bomber", "Bomber", "Bomber"}, new int[]{2, 2, 2, 2}) );
+			waves.Add( new Wave(1.50f, new string[]{l, l, l, l}, 5, 5, 5, 5) );
+			waves.Add( new Wave(1.50f, new string[]{f, f, f, f}, 3, 3, 3, 3) );
+			waves.Add( new Wave(1.50f, new string[]{b, b, b, b}, 2, 2, 2, 2) );
 			//Schwer Kombinationen
-			waves.Add( new Wave(1.50f, new string[]{"Fighter", "Fighter", "Fighter", "Fighter", "Bomber", "Bomber"}, new int[]{3, 3, 3, 3, 2, 2}) );
-			waves.Add( new Wave(1.50f, new string[]{"MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer", "Fighter", "Fighter"}, new int[]{5, 5, 5, 5, 3}) );
+			waves.Add( new Wave(1.50f, new string[]{f, f, f, f, b, b}, 3, 3, 3, 3, 2, 2) );
+			waves.Add( new Wave(1.50f, new string[]{l, l, l, f, f}, 5, 5, 5, 5, 3) );
 
 			//Unmöglich
-			waves.Add( new Wave(1.50f, new string[]{"MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer", "MyLittleDestroyer", "Fighter", "Fighter", "Fighter", "Bomber", "Bomber"}, new int[]{7, 7, 7, 7, 5, 5, 5, 3, 3}) );
+			waves.Add( new Wave(1.50f, new string[]{l, l, l, l, f, f, f, b, b}, 7, 7, 7, 7, 5, 5, 5, 3, 3) );
 		}
 	}
 
@@ -114,9 +120,9 @@ public class Waves : GeneralObject {
 	private void Spawn(Wave w){
 		int n = System.Math.Min(w.ships.Length, w.amounts.Length);
 		for(int i = 0; i < n; i++){
-			//TODO Robin: Gegner Spawn Point zufällig um die Kugel verteilen 
-			Vector3 pos = new Vector3(200f, 0f, 0f);
-			Spawn(w.strength, w.ships[i], w.amounts[i], pos);
+			//Gegner Spawn Points zufällig um die Kugel verteilen 
+			Vector3 pos = SpawnBuildings.RandomPoint();
+			Spawn(w.strength, w.ships[i], w.amounts[i], pos.normalized * Utility.NextFloat(200f, 300f));
 		}
 	}
 

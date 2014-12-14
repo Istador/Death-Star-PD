@@ -46,43 +46,28 @@ public class SpawnBuildings : GeneralObject {
 		
 		foreach(string name in names){
 			
-			Vector3 pos;
-			while(true) {
-				float alpha = Utility.NextFloat(0f, Mathf.PI);
-				float beta = Utility.NextFloat(0f, 2f * Mathf.PI);
-				
-				pos = new Vector3(
-					radius * Mathf.Sin(alpha) * Mathf.Cos(beta)
-					, radius * Mathf.Sin(alpha) * Mathf.Sin(beta)
-					, radius * Mathf.Cos(alpha)
-					);
-				
-				// Wenn alle anderen Gebäude weit genug weg sind
-				if(IsDistanceOk(pos)){
-					//neues Gebäude erzeugen
-					Building b = Instantiate("Buildings/"+name, pos).GetComponent<Building>();
+			Vector3 pos = RandomPoint();
+
+			//neues Gebäude erzeugen
+			Building b = Instantiate("Buildings/"+name, pos).GetComponent<Building>();
 					
-					//Höhe berechnen
-					float height = Utility.HeightYByCollider(b.gameObject);
+			//Höhe berechnen
+			float height = Utility.HeightYByCollider(b.gameObject);
 					
-					b.transform.position = pos.normalized * (
-						pos.magnitude
-						+ height * 0.5f
-						- Offset
-					);
+			b.transform.position = pos.normalized * (
+				pos.magnitude
+				+ height * 0.5f
+				- Offset
+			);
 					
-					b.transform.parent = Buildings.Container.transform;
-					b.transform.LookAt(Vector3.zero);
-					b.transform.Rotate(0, -90, 90); //Richtig drehen
-					buildings[index++] = b;
-					
-					break; //while-Schleife verlassen
-				}
-			} // end while
+			b.transform.parent = Buildings.Container.transform;
+			b.transform.LookAt(Vector3.zero);
+			b.transform.Rotate(0, -90, 90); //Richtig drehen
+			buildings[index++] = b;
 		} // end foreach
 	} // end Spawn()
 
-	private bool IsDistanceOk(Vector3 pos){
+	private static bool IsDistanceOk(Vector3 pos){
 		//für alle bisherigen Gebäude den Abstand prüfen
 		for(int i = 0; i < buildings.Length; i++){
 			Building b = buildings[i];
@@ -91,6 +76,29 @@ public class SpawnBuildings : GeneralObject {
 		}
 		//alle erfolgreich
 		return true;
+	}
+
+	public static Vector3 RandomPoint(){
+		Vector3 pos = Vector3.zero;
+
+		for(int max=500; max > 0; max--) { // Azahl begrenzen, damit keine Endlosschleife
+			//zwei zufällige Winkel
+			float alpha = Utility.NextFloat(0f, Mathf.PI);
+			float beta = Utility.NextFloat(0f, 2f * Mathf.PI);
+
+			//Berechne den Punkt auf der Kugel
+			pos = new Vector3(
+				radius * Mathf.Sin(alpha) * Mathf.Cos(beta)
+				, radius * Mathf.Sin(alpha) * Mathf.Sin(beta)
+				, radius * Mathf.Cos(alpha)
+				);
+			
+			// Wenn alle anderen Gebäude weit genug weg sind
+			if(IsDistanceOk(pos))
+				break; //Verlasse die Schleife
+		}
+
+		return pos;
 	}
 
 }

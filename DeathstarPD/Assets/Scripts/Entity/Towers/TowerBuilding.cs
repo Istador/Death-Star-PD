@@ -39,7 +39,8 @@ public class TowerBuilding : GeneralObject {
 
 		//Prototypen erzeugen
 		Prototypes = new Tower[]{
-			  Instantiate("Towers/LaserTower").GetComponent<Tower>()
+			  Instantiate("Towers/MGTower").GetComponent<Tower>()
+			, Instantiate("Towers/LaserTower").GetComponent<Tower>()
 			, Instantiate("Towers/RocketTower").GetComponent<Tower>()
 			, Instantiate("Towers/LightningTower").GetComponent<Tower>()
 		};
@@ -110,7 +111,7 @@ public class TowerBuilding : GeneralObject {
 
 	public void Select(int index){
 		if(index < 0 || index >= Prototypes.Length){
-			Debug.Log("Error: Trying to select non-existant tower "+index+".");
+			Debug.LogError("Trying to select non-existant tower "+index+".");
 			return;
 		}
 

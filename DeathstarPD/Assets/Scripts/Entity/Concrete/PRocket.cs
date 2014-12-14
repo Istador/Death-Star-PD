@@ -4,7 +4,7 @@ using System.Collections;
 /// 
 /// Raketen verfolgen Gegner
 /// 
-public class PRocket : Projektile<RocketTower> {
+public class PRocket : Projektile<Tower> {
 
 
 	/// <summary>

@@ -23,10 +23,10 @@ public class RocketTower : Tower {
 
 	public override EAttackPattern AttackPattern { get {return EAttackPattern.SingleTarget;} }
 
-	private Vector3 projectilePos;
+	private Transform projectilePos;
 
 	protected override void Start (){
-		projectilePos = Pos + Pos.normalized * Utility.HeightYByCollider(gameObject) * 0.325f;
+		projectilePos = transform.FindChild("rocketTurretUP.uvg").FindChild("rocket_barrelAnchor").FindChild("rocketTurretGun.uvg").FindChild("projectilePos");
 
 		base.Start();
 	}
@@ -34,7 +34,7 @@ public class RocketTower : Tower {
 	protected override void DoAttack(MovableEntity target){
 
 		//nicht in der mitte erzeugen, sondern an Abschussposition (Mitte der oberen Hälfte)
-		PRocket r = Instantiate("Rocket", projectilePos).GetComponent<PRocket>();
+		PRocket r = Instantiate("Rocket", projectilePos.position).GetComponent<PRocket>();
 		r.transform.parent = ProjectileManager.Container;
 		r.Owner = this;
 		r.Init(target);

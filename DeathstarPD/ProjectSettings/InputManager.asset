@@ -119,7 +119,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Tower1
-    descriptiveName: Laserturm bauen
+    descriptiveName: MG-Turm bauen
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 1
@@ -135,7 +135,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Tower2
-    descriptiveName: Raketenturm bauen
+    descriptiveName: Laserturm bauen
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 2
@@ -151,10 +151,26 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Tower3
-    descriptiveName: Blitzturm bauen
+    descriptiveName: Raketenturm bauen
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Tower4
+    descriptiveName: Blitzturm bauen
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 4
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
