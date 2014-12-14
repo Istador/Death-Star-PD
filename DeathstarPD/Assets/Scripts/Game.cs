@@ -33,12 +33,8 @@ public static class Game {
 	}
 
 	public static void GameOver(){
-		//Spiel anhalten
-		//Time.timeScale = 0.0f;
-
-		//TODO GUI: GameOver-Screen anzeigen
-
-		ToMainMenu();
+		//GUI GameOver-Screen anzeigen
+		GameObject.Find("GameOverMenuCanvas").GetComponent<GameOverScreen>().GameOver();
 	}
 
 }
