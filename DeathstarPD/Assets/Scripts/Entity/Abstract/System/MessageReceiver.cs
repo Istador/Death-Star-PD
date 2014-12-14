@@ -40,8 +40,9 @@ public class MessageReceiverWrapper : MessageReceiver {
 	}
 
 	public bool HandleMessage(Telegram msg){
-		//Sende über das Unity-Nachrichten-System
-		obj.SendMessage(msg.message, msg.extraInfo, SendMessageOptions.DontRequireReceiver);
+		if(obj != null)
+			//Sende über das Unity-Nachrichten-System
+			obj.SendMessage(msg.message, msg.extraInfo, SendMessageOptions.DontRequireReceiver);
 		return true;
 	}
 

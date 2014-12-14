@@ -17,7 +17,7 @@ public class MyLittleDestroyer : Ship {
 		MaxSpeed = 25f;
 		MaxForce = 20f;
 
-		// Positionen der 4 Kanonen
+		// Positionen der 2 Kanonen
 		l = transform.FindChild("left");
 		r = transform.FindChild("right");
 
@@ -30,11 +30,11 @@ public class MyLittleDestroyer : Ship {
 
 	// Ziel angreifen
 	public override void DoAttack(Entity target){
-		// ein zufällige Kanone abfeuern
-		switch(Utility.Rnd.Next(0, 2)){
-		default: lazer(target, l.position); break;
-		case 1:  lazer(target, r.position); break;
-		}
+		// eine zufällige Kanone abfeuern
+		if(Utility.NextBool())
+			lazer(target, l.position);
+		else
+			lazer(target, r.position);
 
 		//Schaden verursachen
 		DoDamage(target, Damage, AttackCooldown * 0.5f);

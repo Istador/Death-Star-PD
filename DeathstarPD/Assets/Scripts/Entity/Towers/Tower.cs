@@ -5,7 +5,7 @@ public abstract class Tower : ImmovableEntity {
 
 	/// <summary>
 	/// wie oft geupdatet werden soll.
-	/// default: 3 (jeden 3. Frame)
+	/// default: 7 (jeden 7. Frame)
 	/// </summary>
 	public static readonly int update_each_x_frames = 7;
 	/// <summary>
@@ -91,6 +91,8 @@ public abstract class Tower : ImmovableEntity {
 
 
 	public override bool HandleMessage(Telegram msg){
+		if(this == null || IsDead || !enabled) return true;
+
 		switch(msg.message){
 		case "LevelUp":
 			LevelUp();

@@ -150,6 +150,7 @@ public class StateMachine<T> : MessageReceiver {
 	/// Die Nachricht die verarbeitet werden soll.
 	/// </param>
 	public bool HandleMessage(Telegram msg){
+		if(owner == null) return true;
 		//wenn der aktuelle Zustand die Nachricht verarbeiten kann
 		if(CurrentState!=null && CurrentState.OnMessage(owner, msg))
 			return true;

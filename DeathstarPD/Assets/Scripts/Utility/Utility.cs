@@ -55,6 +55,10 @@ public static class Utility {
 	public static float NextFloat(){
 		return (float)Rnd.NextDouble();
 	}
+
+	public static bool NextBool(){
+		return Rnd.Next(0, 2) != 0;
+	}
 	
 	
 	

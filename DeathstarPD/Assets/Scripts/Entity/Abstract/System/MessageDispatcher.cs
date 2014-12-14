@@ -40,6 +40,8 @@ public class MessageDispatcher {
 	/// Die Nachricht die ausgeliefert werden soll
 	/// </param>
 	public void Dispatch(Telegram msg){
+		if(msg.receiver == null)
+			return;
 		//sofort ausliefern
 		if(msg.dispatchTime <= Time.time)
 			Discharge(msg);

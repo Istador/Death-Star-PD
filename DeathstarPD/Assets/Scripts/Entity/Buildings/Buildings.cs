@@ -100,10 +100,12 @@ public class Buildings {
 
 		//Iteriere über alle Gebäude, und finde das mit der kleinsten Distanz
 		foreach(Building b in All){
-			float dist = b.DistanceSqTo(pos);
-			if(nearest == null || dist < ndist){
-				nearest = b;
-				ndist = dist;
+			if(b != null && !b.IsDead && b.enabled){
+				float dist = b.DistanceSqTo(pos);
+				if(nearest == null || dist < ndist){
+					nearest = b;
+					ndist = dist;
+				}
 			}
 		}
 

@@ -12,7 +12,9 @@ public abstract class Ship : MovableEntity {
 	public Building Target { get; set; }
 
 	protected override void Start(){
-		MoveFSM.CurrentState = SLanding.I;
+		if(MoveFSM.CurrentState == null)
+			MoveFSM.CurrentState = SLanding.I;
+
 		FMode = ForceMode.Force;
 
 		Steering.f_SeekFactor = 1f;
