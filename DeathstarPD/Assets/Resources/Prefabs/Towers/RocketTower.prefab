@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basis: {fileID: 400000}
   barrelAnchor: {fileID: 400008}
+  barrelAxis: 0
   barrelInverse: 1
   target: {fileID: 0}
 --- !u!1001 &100100000

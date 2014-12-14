@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Aiming : MonoBehaviour {
 
+	public enum Axis {x, y, z}
+
 	public Transform basis;
 	public Transform barrelAnchor;
+	public Axis barrelAxis;
 	public bool barrelInverse;
 
 	public MovableEntity target;
@@ -52,7 +55,12 @@ public class Aiming : MonoBehaviour {
 				Utility.MinMax(ref angle, 0f, 90f);
 				if(barrelInverse) angle *= -1;
 				Vector3 r = barrelAnchor.localEulerAngles;
-				r.x = angle;
+				switch(barrelAxis){
+				default: r.x = angle; break;
+				case Axis.x: r.x = angle; break;
+				case Axis.y: r.y = angle; break;
+				case Axis.z: r.z = angle; break;
+				}
 				barrelAnchor.localEulerAngles = r;
 			}
 		}

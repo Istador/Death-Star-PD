@@ -23,17 +23,17 @@ public class LaserTower : Tower {
 
 	public override EAttackPattern AttackPattern { get {return EAttackPattern.SingleTarget;} }
 
-	private Vector3 projectilePos;
+	private Transform projectilePos;
 	
 	protected override void Start (){
-		projectilePos = Pos + Pos.normalized * Utility.HeightYByCollider(gameObject) * 0.25f;
+		projectilePos = transform.FindChild("laserUp").FindChild("laser_barrelAnchor").FindChild("satelliteturretUP.uvg").FindChild("projectilePos");
 		
 		base.Start();
 	}
 
 	protected override void DoAttack(MovableEntity target){
 
-		PLazer lazer = Instantiate("Lazer", projectilePos).GetComponent<PLazer>();
+		PLazer lazer = Instantiate("Lazer", projectilePos.position).GetComponent<PLazer>();
 		lazer.target = target;
 		lazer.transform.parent = ProjectileManager.Container;
 

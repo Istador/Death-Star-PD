@@ -23,16 +23,16 @@ public class LightningTower : Tower {
 
 	public override EAttackPattern AttackPattern { get {return EAttackPattern.MultiTarget;} }
 
-	private Vector3 projectilePos;
+	private Transform projectilePos;
 
 	protected override void Start (){
-		projectilePos = Pos + Pos.normalized * Utility.HeightYByCollider(gameObject) * 0.35f;
+		projectilePos = transform.FindChild("particles1");
 		
 		base.Start();
 	}
 
 	protected override void DoAttack(MovableEntity target){
-		PLightning lightning = Instantiate("LightningShot", projectilePos).GetComponent<PLightning>();
+		PLightning lightning = Instantiate("LightningShot", projectilePos.position).GetComponent<PLightning>();
 		lightning.target = target;
 		lightning.transform.parent = ProjectileManager.Container;
 		

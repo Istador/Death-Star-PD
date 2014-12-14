@@ -87,9 +87,10 @@ public class TowerBuilding : GeneralObject {
 				Selected.Visible = true; //Sichtbar
 
 				//farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
-				for(int i = 0; i < Selected.transform.childCount; i++){
-					Selected.transform.GetChild(i).renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
-				}
+				for(int i = 0; i < Selected.transform.childCount; i++)
+					if(Selected.transform.GetChild(i).renderer != null){
+						Selected.transform.GetChild(i).renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
+					}
 
 			} else {
 				//wenn die Maus über dem All ist
