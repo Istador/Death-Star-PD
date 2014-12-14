@@ -30,6 +30,7 @@ public class Pause : MonoBehaviour {
 
 		//Pausieren über Escape, öffnet Pausen-Menü
 		Inputs.I.Register("Pause", ()=>{
+			if(!enabled) return;
 			//prüfen ob das Spiel pausiert
 			if(!Paused) PauseGame();
 			//oder fortgesetzt werden soll
@@ -42,6 +43,7 @@ public class Pause : MonoBehaviour {
 		//Pausieren über Pause-Taste oder P, nur in der Debug Version
 		if(Debug.isDebugBuild){
 			Action a_hiddenPause = ()=>{
+				if(!enabled) return;
 				if(Time.timeScale != 0f) Time.timeScale = 0f;
 				else Time.timeScale = 1f;
 			};

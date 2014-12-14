@@ -34,6 +34,7 @@ public class GameOverScreen : MonoBehaviour {
 		Show(gameCanvas, false);
 		Show(settings, false);
 		Show(pause, false);
+		Pause.I.enabled = false;
 
 		//selbst einblenden
 		Show(gameObject, true);
