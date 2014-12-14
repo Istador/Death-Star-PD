@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class Ship : MovableEntity {
 
+	//TODO Robin: Spieler beim töten von Gegnern Geld als Belohnung geben.
+
 	public readonly static float orbit_range = 110f;
 	public readonly static float orbit_interval = 5f;
 
@@ -21,6 +23,8 @@ public abstract class Ship : MovableEntity {
 		Steering.f_AvoidFactor = 4f;
 
 		isAttackCooldownActive = false;
+
+		Strength = _strength;
 
 		base.Start();
 
@@ -74,8 +78,22 @@ public abstract class Ship : MovableEntity {
 	/// <summary>
 	/// verursachter Schaden pro Treffer
 	/// </summary>
-	public abstract int Damage { get; }
+	public int Damage { get; private set; }
+
+
+	public abstract int BaseDamage { get; }
+	public abstract int BaseHealth { get; }
+
 	
+	public float Strength {
+		get{ return _strength; }
+		set{
+			_strength = value;
+			MaxHealth = Mathf.RoundToInt((float) BaseHealth * value);
+			Damage = Mathf.RoundToInt((float) BaseDamage * value);
+		}
+	}
+	private float _strength = 1f;
 	
 
 	/// <summary>
@@ -100,5 +118,6 @@ public abstract class Ship : MovableEntity {
 	/// Der Angriffscooldown ist abgelaufen und das Target existiert noch
 	/// </summary>
 	public abstract void DoAttack(Entity target);
+
 
 }

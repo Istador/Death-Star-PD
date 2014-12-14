@@ -41,15 +41,18 @@ public class Observer {
 	//sendet an allen Beobachtern des Events (msg) die msg und das Objekt (z.B. einen aktualisierten Wert)
 	public void Update(object sender, string message, object extraInfo){
 		//Wert merken
-		cache[message] = extraInfo;
+		if(extraInfo != null)
+			cache[message] = extraInfo;
 
-		//Debug.Log("update "+msg);
-		//foreach(var k in map.Keys) Debug.Log("key: "+k);
+		UpdateWithoutCache(sender, message, extraInfo);
+	}
 
+	//sendet an allen Beobachtern des Events (msg) die msg und das Objekt (z.B. einen aktualisierten Wert)
+	public void UpdateWithoutCache(object sender, string message, object extraInfo){
 		//Wert mitteilen
 		if(map.ContainsKey(message)){
 			//Debug.Log("update "+message+" "+map[message].Count);
-			foreach(var receiver in map[message])
+			foreach(MessageReceiver receiver in map[message])
 				MessageDispatcher.I.Dispatch(sender, receiver, message, 0, extraInfo);
 		}
 	}

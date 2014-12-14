@@ -13,7 +13,8 @@ public class Bomber : Ship {
 	/// </summary>
 	public readonly int update_on_frame = Utility.Rnd.Next(update_each_x_frames);
 
-	public override int Damage { get{ return 20; } }
+	public override int BaseHealth { get{ return 70; } }
+	public override int BaseDamage { get{ return 20; } }
 	public override float Range { get{ return 15f; } }
 	public override float AttackCooldown { get{ return 1.5f; } }
 
@@ -31,9 +32,7 @@ public class Bomber : Ship {
 	public bool FollowingSubTarget { get; set; }
 
 
-	protected override void Start(){
-		MaxHealth = 70;
-		
+	protected override void Start(){		
 		MaxSpeed = 15f;
 		MaxForce = 10f;
 

@@ -115,7 +115,7 @@ public class PRocket : Projektile<RocketTower> {
 	public override void Death(){
 		//wer Kollidiert alles mit der runden Explosion
 		Collider[] cs = Physics.OverlapSphere(Pos, f_explosionsRadius, (int)Layer.Enemy);
-		foreach(Collider c in cs){
+		foreach(Collider c in cs) if(c.gameObject != null){
 			//Entfernung des Objektes zum Explosionszentrum berechnen
 			float impact = f_explosionsImpactRadius * f_explosionsImpactRadius;
 			float range = (DistanceSqTo(c.bounds.center) - impact);

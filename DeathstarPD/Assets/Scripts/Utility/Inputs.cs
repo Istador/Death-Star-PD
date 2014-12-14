@@ -125,7 +125,7 @@ public class Inputs : MonoBehaviour {
 	}
 
 	//Destruktor
-	~Inputs(){
+	private void OnDestroy(){
 		//registrierte buttons leeren
 		STInputs.I.Clear();
 	}

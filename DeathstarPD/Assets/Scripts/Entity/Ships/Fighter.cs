@@ -4,16 +4,14 @@ using System.Collections;
 public class Fighter : Ship {
 
 
-
-	public override int Damage { get{ return 10; } }
+	public override int BaseHealth { get{ return 100; } }
+	public override int BaseDamage { get{ return 10; } }
 	public override float Range { get{ return 20f; } }
 	public override float AttackCooldown { get{ return 1f; } }
 	
 
 
-	protected override void Start(){
-		MaxHealth = 100;
-		
+	protected override void Start(){		
 		MaxSpeed = 20f;
 		MaxForce = 15f;
 

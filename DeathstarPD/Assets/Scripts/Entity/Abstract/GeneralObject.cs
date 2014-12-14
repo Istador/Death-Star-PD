@@ -401,11 +401,12 @@ public abstract class GeneralObject : MonoBehaviour, MessageReceiver {
 	/// <summary>
 	/// Position eines anderen Objektes
 	/// </summary>
-	public static Vector3 Posi(GameObject other){ 
+	public static Vector3 Posi(GameObject other){
+		if(other == null)
+			return Vector3.zero;
 		if(other.collider != null)
 			return other.collider.bounds.center;
-		else
-			return other.transform.position;
+		return other.transform.position;
 	}
 	/// <summary>
 	/// Position eines anderen Objektes

@@ -28,11 +28,14 @@ public abstract class Entity : GeneralObject {
 	/// Die maximalen Trefferunkte des Subjektes
 	/// </summary>
 	public int MaxHealth {
-		get {return _MaxHealth ?? 1; }
+		get {
+			if(_MaxHealth == -1) return 1;
+			else return _MaxHealth;
+		}
 		protected set {
 			int neu = System.Math.Max(1, value);
 			//beim ersten mal
-			if(!_MaxHealth.HasValue){
+			if(_MaxHealth == -1){
 				//Setze Instanzvariable
 				_MaxHealth = neu;
 				//setze Health auf maximalen Wert
@@ -48,7 +51,7 @@ public abstract class Entity : GeneralObject {
 			}
 		}
 	}
-	private int? _MaxHealth;
+	private int _MaxHealth = -1;
 
 	/// <summary>
 	/// Die aktuellen Trefferunkte des Subjektes
@@ -132,6 +135,7 @@ public abstract class Entity : GeneralObject {
 		//Debug.Log(name+"<"+tag+">("+GetInstanceID()+"): death");
 		IsDead = true;
 		DeathEffect();
+		Observer.I.Update(this, "Death", null);
 		Destroy(gameObject);
 	}
 
