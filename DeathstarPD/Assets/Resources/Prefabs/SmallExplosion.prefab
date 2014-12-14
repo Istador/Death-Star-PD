@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioTag: 1
-  clip: {fileID: 8300000, guid: 5052c8e3ee09ac243893b0fab08ff5d7, type: 3}
+  clip: {fileID: 8300000, guid: 135d7b434c2266841829da17454a1fdc, type: 3}
   mute: 0
   playOnAwake: 1
   loop: 0

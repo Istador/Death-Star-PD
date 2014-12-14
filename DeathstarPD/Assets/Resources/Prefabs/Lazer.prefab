@@ -12,6 +12,7 @@ GameObject:
   - 199: {fileID: 19900000}
   - 120: {fileID: 12000000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Lazer
   m_TagString: Untagged
@@ -164,6 +165,26 @@ MonoBehaviour:
   sparks: {fileID: 100002}
   preload: .5
   duration: .5
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b897a8a7a2278fa42af16edaa29bec9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioTag: 1
+  clip: {fileID: 8300000, guid: 4463bde34f585f841aadc82ec7bf61bf, type: 3}
+  mute: 0
+  playOnAwake: 0
+  loop: 0
+  volume: .5
+  rolloffMode: 1
+  panLevel: 1
+  spread: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
