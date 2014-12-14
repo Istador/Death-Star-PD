@@ -29,7 +29,8 @@ public class PLazer : MonoBehaviour {
 				lr.SetPosition(1, target.Pos);
 				sparks.transform.position = target.Pos;
 				sparks.SetActive(true);
-				gameObject.GetComponent<AudioSource>().Play();
+				if(audio != null && audio.enabled)
+					audio.Play();
 			}
 		}
 	}

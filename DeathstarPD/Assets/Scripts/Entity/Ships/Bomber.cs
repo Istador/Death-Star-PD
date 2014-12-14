@@ -28,6 +28,7 @@ public class Bomber : Ship {
 	/// Das Sub-Ziel, dass verfolgt wird, also ein Turm, falls in Reichweite
 	/// </summary>
 	public Tower SubTarget { get; set; }
+	public bool FollowingSubTarget { get; set; }
 
 
 	protected override void Start(){
@@ -38,6 +39,8 @@ public class Bomber : Ship {
 
 		// Positionen der Kanone
 		bpos = transform.FindChild("bombpos");
+
+		FollowingSubTarget = false;
 
 		MoveFSM.CurrentState = SBomberLanding.I;
 

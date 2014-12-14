@@ -55,9 +55,11 @@ public class SBomberSteer : State<MovableEntity> {
 		if(s.SubTarget != null){
 			//Fliege zu dem Turm
 			s.Steering.DoAvoid(s.SubTarget.Pos, s.Range);
+			s.FollowingSubTarget = true;
 		} else if(s.Target != null){
 			//Fliege zum Gebäude
 			s.Steering.DoAvoid(s.Target.Pos, s.Range);
+			s.FollowingSubTarget = false;
 		} else {
 			//Kein Ziel? o.O
 			s.Steering.Stop();
@@ -73,7 +75,14 @@ public class SBomberSteer : State<MovableEntity> {
 
 		//Falls wir noch kein Sub-Target haben (Turm)
 		if(s.SubTarget == null || s.SubTarget.IsDead || !s.SubTarget.enabled){
-			
+
+			//wenn der Sub-Target dem wir folgten gestorben ist
+			if(s.FollowingSubTarget){
+				//neues Ziel finden
+				owner.MoveFSM.ChangeState(SBomberSteer.I);
+				return;
+			}
+
 			//berechnen der neuen Framenummer
 			if(last_frame_time < Time.time){
 				frame_nr = (frame_nr + 1) % Bomber.update_each_x_frames;
@@ -85,7 +94,7 @@ public class SBomberSteer : State<MovableEntity> {
 				//Find den nahesten Turm in Reichweite
 				s.SubTarget = FindNearestTower(s);
 
-				// FAlls wir einen Turm gefunden haben, strebe den an
+				// Falls wir einen Turm gefunden haben, strebe den an
 				if(s.SubTarget != null){
 					owner.MoveFSM.ChangeState(SBomberSteer.I);
 					return;

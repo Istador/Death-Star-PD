@@ -6015,7 +6015,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &978636884
 Transform:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 400002, guid: 180df51e7452ef74e8dab4c0860094d3, type: 2}
   m_PrefabInternal: {fileID: 1950913818}
   m_GameObject: {fileID: 978636883}
@@ -6029,7 +6029,7 @@ Transform:
   m_RootOrder: 2
 --- !u!114 &978636885
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 11400000, guid: 180df51e7452ef74e8dab4c0860094d3,
     type: 2}
   m_PrefabInternal: {fileID: 1950913818}
@@ -6041,7 +6041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!54 &978636886
 Rigidbody:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 5400000, guid: 180df51e7452ef74e8dab4c0860094d3,
     type: 2}
   m_PrefabInternal: {fileID: 1950913818}
@@ -6057,7 +6057,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!135 &978636887
 SphereCollider:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_PrefabParentObject: {fileID: 13500000, guid: 180df51e7452ef74e8dab4c0860094d3,
     type: 2}
   m_PrefabInternal: {fileID: 1950913818}
@@ -10186,7 +10186,7 @@ GameObject:
   - 23: {fileID: 1674569869}
   - 114: {fileID: 1674569868}
   m_Layer: 10
-  m_Name: LaserTower
+  m_Name: LaserTower(alt)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
