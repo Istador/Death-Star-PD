@@ -70,6 +70,9 @@ public class TowerBuilding : GeneralObject {
 	}
 
 	protected override void Update(){
+		//nicht während das Spiel pausiert ist
+		if(Pause.I.Paused || Time.timeScale == 0f) return;
+
 		//Wenn ein Turm ausgewählt ist
 		if(SelectedIndex != -1){
 			RaycastHit hit;
@@ -116,9 +119,12 @@ public class TowerBuilding : GeneralObject {
 			return;
 		}
 
+		//nicht während das Spiel pausiert ist
+		if(Pause.I.Paused || Time.timeScale == 0f) return;
+
 		//nicht genug Geld zum bauen
 		if(!GameResources.I.EnoughMoney(Prototypes[index].MoneyBuildCost) || !GameResources.I.EnoughCookies(Prototypes[index].CookieBuildCost)){
-			//TODO GUI: Fehlermeldung, weil nicht genug Geld zum bauen des Turms vorhanden
+			//TODO GUI: Fehlermeldung ausgeben, weil nicht genug Geld zum bauen des Turms vorhanden ist
 			return;
 		}
 

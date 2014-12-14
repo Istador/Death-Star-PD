@@ -33,9 +33,9 @@ public class CameraControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//TODO Lars: Fehler, weil Update auch bei pausiertem Spiel aufgerufen wird.
-		// z.B.: if(Pause.I.Paused) return; verwenden.
-		// im Pause-Modus soll weder die Kamera bewegt werden können, noch etwas angeklickt werden.
+		//Update kann auch bei pausiertem Spiel aufgerufen werden.
+		// im Pause-Modus soll weder die Kamera bewegt werden können, noch etwas angeklickt werden können.
+		if(Pause.I.Paused || Time.timeScale == 0f) return;
 	
 		//Click to place a building
 		if(Input.GetMouseButtonUp(0) && !moving){

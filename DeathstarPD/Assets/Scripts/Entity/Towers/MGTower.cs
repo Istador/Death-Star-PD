@@ -42,6 +42,7 @@ public class MGTower : Tower {
 		seitenwechsel = !seitenwechsel;
 
 		//Erzeugen
+		//TODO Lars: eigener Projektiltyp für den MG-Tower
 		PRocket r = Instantiate("Rocket", pos).GetComponent<PRocket>();
 		r.transform.parent = ProjectileManager.Container;
 		r.Owner = this;
