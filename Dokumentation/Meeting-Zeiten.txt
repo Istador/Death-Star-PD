@@ -1,0 +1,31 @@
+2014-09-19
+11:15 - 12:28	1h 13m	Weg: Anfahrt zum Meeting
+12:28 - 14:56	2h 28m	Kommunikation: Teammeeting mit allen.
+14:56 ~ 16:00	1h 04m	Weg: Rückfahrt vom Meeting (geschätzt)
+
+2014-10-17
+12:40 - 15:03	2h 23m	Kommunikation: Meeting zu GUI. Ohne Laura.
+					keine An-/Rückfahrt für mich (Robin), weil Vorlesung davor.
+
+2014-11-19
+15:45 - 16:39	54m		Kommunikation: Team-Meeting nach den MG3-Präsentationen, mit Lars, Laura, Christopher und Robin
+					keine An-/Rückfahrt für alle, weil Vorlesung davor.
+
+2014-11-24
+10:43 - 12:05	1h 22m	Weg: Anfahrt zum Meeting
+12:05 - 13:17	1h 12m	Kommunikation: Team-Meeting mit Lars (verspätet), Laura, Christopher und Robin
+13:17 - 14:27	1h 10m	Weg: Rückfahrt vom Meeting
+
+2014-12-08
+10:53 - 12:03	1h 10m	Weg: Anfahrt zum Meeting
+12:03 - 13:17	1h 14m	Kommunikation: Team-Meeting mit Lars (verspätet), Laura, Christopher (früher weg ~12:45) und Robin
+13:17 - 14:27	1h 10m	Weg: Rückfahrt vom Meeting
+
+2014-12-15
+10:54 - 12:05	1h 11m	Weg: Anfahrt zum Meeting
+12:05 - 13:39	1h 34m	Kommunikation: Team-Meeting mit Lars, Laura (21m verspätet), Christopher und Robin
+13:39 - 14:54	1h 15m	Weg: Rückfahrt vom Meeting
+
+Gesamt:
+Wege (Robin)	8h (13+4+22+10+10+10+11+15)m = 9h 35m
+Meetings		(2+2+1+1+1)h (28+23+54+12+14+34)m = 9h 45m

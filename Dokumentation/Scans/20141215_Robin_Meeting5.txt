@@ -1,0 +1,21 @@
+TODOS
+- KI: um Ziel rotieren beim Schießen
+- Sounds: Lasersounds / Lautstärken / MaxDistances. Blitzturm nur noch ein Sound und nicht pro Effekt.
+- Modells: Planet rund (Blender Modell) und texturiert (im 3D-Programm auf der Kugel zeichnen)
+- Modells/Skripts: Support-Tower mit Modell 2
+- Tower: Reichweite beim Bauen anzeigen (Robin)
+- GameOver: alle Objekte entfernen/verstecken und große Explosion
+- GUI: klicks auf Selection-Buttons mit Auswirkung
+- GUI: Hauptmenü / Pausenmenü / Credits
+- Präsentation
+
+Präsentationsabfolge
+- Vorstellung des Teams und Kurzbeschreibung des Spiels
+- Logo
+- Konzept / Detailiertere Beschreibung
+- Tab ins Game
+	- Showroom
+	- GUI mit Pause (Debug-Build !)
+	- KI / Gameplay
+- Tab zur Präsi
+- Fragen / Danke
