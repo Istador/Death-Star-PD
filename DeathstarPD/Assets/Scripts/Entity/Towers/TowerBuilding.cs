@@ -46,6 +46,7 @@ public class TowerBuilding : GeneralObject {
 			, Instantiate("Towers/LaserTower").GetComponent<Tower>()
 			, Instantiate("Towers/LightningTower").GetComponent<Tower>()
 			, Instantiate("Towers/RocketTower").GetComponent<Tower>()
+			, Instantiate("Towers/SupportTower").GetComponent<Tower>()
 
 		};
 

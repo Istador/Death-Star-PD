@@ -151,7 +151,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Tower3
-    descriptiveName: Raketenturm bauen
+    descriptiveName: Blitzturm bauen
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 3
@@ -167,10 +167,26 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Tower4
-    descriptiveName: Blitzturm bauen
+    descriptiveName: Raketenturm bauen
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 4
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Tower5
+    descriptiveName: "Unterst\xFCtzungsturm bauen"
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 5
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
