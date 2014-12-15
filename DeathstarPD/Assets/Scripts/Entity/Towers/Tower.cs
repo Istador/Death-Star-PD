@@ -246,11 +246,11 @@ public abstract class Tower : ImmovableEntity {
 	/// <summary>
 	/// wieviel Geld es kostet Level 1 zu bauen
 	/// </summary>
-	public int MoneyBuildCost { get{return CookieTable[0];} }
+	public int MoneyBuildCost { get{return MoneyTable[0];} }
 	/// <summary>
 	/// wieviel Geld es kostet upzugraden
 	/// </summary>
-	public int MoneyUpgradeCost { get{return CookieTable[Level];} }
+	public int MoneyUpgradeCost { get{return MoneyTable[Level];} }
 	/// <summary>
 	/// Tabelle mit den Geldkosten
 	/// </summary>

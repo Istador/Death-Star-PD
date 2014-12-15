@@ -6,13 +6,13 @@ public class LaserTower : Tower {
 	private static int[] health_table = { 100, 125, 150, 175 }; // Trefferpunkte
 	public override int[] MaxHealthTable { get{ return health_table; } }
 
-	private static int[] cookie_table = { 1, 2, 3, 4 };
+	public readonly static int[] cookie_table = { 1, 1, 0, 0 };
 	public override int[] CookieTable { get{ return cookie_table;} }
 
-	private static int[] money_table = { 250, 300, 350, 400 };
+	public readonly static int[] money_table = { 150, 175, 250, 325 };
 	public override int[] MoneyTable { get{ return money_table;} }
 
-	private static int[] damage_table = { 10, 12, 14, 16 }; // Schaden pro Treffer
+	private static int[] damage_table = { 10, 15, 20, 25 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 
 	private static float[] range_table = { 20f, 24f, 28f, 32f }; // maximale Distanz zum Ziel

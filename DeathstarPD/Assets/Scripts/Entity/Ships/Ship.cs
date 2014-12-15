@@ -3,8 +3,6 @@ using System.Collections;
 
 public abstract class Ship : MovableEntity {
 
-	//TODO Robin: Spieler beim töten von Gegnern Geld als Belohnung geben.
-
 	public readonly static float orbit_range = 110f;
 	public readonly static float orbit_interval = 5f;
 

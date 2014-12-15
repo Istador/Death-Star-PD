@@ -6,10 +6,10 @@ public class LightningTower : Tower {
 	private static int[] health_table = { 125, 150, 175, 200 }; // Trefferpunkte
 	public override int[] MaxHealthTable { get{ return health_table; } }
 
-	private static int[] cookie_table = { 1, 1, 2, 3 };
+	public readonly static int[] cookie_table = { 1, 0, 1, 2 };
 	public override int[] CookieTable { get{ return cookie_table;} }
 	
-	private static int[] money_table = { 300, 325, 350, 375 };
+	public readonly static int[] money_table = { 200, 300, 400, 500 };
 	public override int[] MoneyTable { get{ return money_table;} }
 
 	private static int[] damage_table = { 2, 3, 4, 5 }; // Schaden pro Treffer

@@ -7,20 +7,20 @@ public class GameResources {
 	//Geld
 	public int Money {
 		get {return _money;}
-		set {_money = Math.Max(0, value);}
+		set {_money = Math.Max(0, value); Observer.I.Update(this, "MoneyChange", _money); }
 	}
 	private int _money = 7331;
 
 	// Kekse (Energie)
 	public int Cookies {
 		get {return _cookies;}
-		set {_cookies = Math.Max(0, value);}
+		set {_cookies = Math.Max(0, value); Observer.I.Update(this, "CookieChange", _cookies);}
 	}
 	private int _cookies = 42;
 
 
 	public void Reset(){
-		Money = 7331;
+		Money = 1337;
 		Cookies = 42;
 	}
 

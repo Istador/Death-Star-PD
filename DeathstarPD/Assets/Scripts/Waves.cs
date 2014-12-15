@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Waves : GeneralObject {
 
+	public static readonly int i_moneyPerEnemy = 100;
+
 	private struct Wave {
 		public readonly float strength;
 		public readonly string[] ships;
@@ -90,6 +92,10 @@ public class Waves : GeneralObject {
 	protected override void Start(){
 		WaveNumber = 0;
 		AliveEnemies = 0;
+		
+		//Teile anderen die Werte mit
+		Observer.I.Update(this, "Wave", WaveNumber);
+		Observer.I.Update(this, "AliveEnemies", AliveEnemies);
 
 		//Spawnen über die Tastatur
 		if(Debug.isDebugBuild)
@@ -114,6 +120,8 @@ public class Waves : GeneralObject {
 		}
 
 		Spawn(waves[WaveNumber++]);
+
+		Observer.I.Update(this, "Wave", WaveNumber);
 	}
 
 
@@ -139,6 +147,8 @@ public class Waves : GeneralObject {
 			//erhöhe die Anzahl Schiffe
 			AliveEnemies++;
 		}
+
+		Observer.I.Update(this, "AliveEnemies", AliveEnemies);
 	}
 
 
@@ -148,11 +158,14 @@ public class Waves : GeneralObject {
 		switch(msg.message){
 		case "Death":
 			if(msg.sender == null) return true;
-			Entity e = (Entity)msg.sender;
+			Ship s = msg.sender as Ship;
 			//wenn es ein Gegner ist
-			if(e.gameObject.layer == 13){
+			if(s != null && s.gameObject.layer == 13){
 				//Verringere Anzahl lebender Gegner
 				AliveEnemies--;
+				Observer.I.Update(this, "AliveEnemies", AliveEnemies);
+				//Gebe dem Spieler Geld
+				GameResources.I.Money += Mathf.RoundToInt(((float)i_moneyPerEnemy) * s.Strength);
 			}
 			return true;
 		default:

@@ -6,10 +6,10 @@ public class MGTower : Tower {
 	private static int[] health_table = { 50, 60, 70, 80 }; // Trefferpunkte
 	public override int[] MaxHealthTable { get{ return health_table; } }
 
-	private static int[] cookie_table = { 1, 1, 1, 1 };
+	public readonly static int[] cookie_table = { 1, 0, 1, 1 };
 	public override int[] CookieTable { get{ return cookie_table;} }
 	
-	private static int[] money_table = { 100, 150, 200, 250 };
+	public readonly static int[] money_table = { 100, 150, 200, 250 };
 	public override int[] MoneyTable { get{ return money_table;} }
 
 	private static int[] damage_table = { 1, 2, 3, 4 }; // Schaden pro Treffer

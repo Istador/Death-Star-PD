@@ -6,10 +6,10 @@ public class RocketTower : Tower {
 	private static int[] health_table = { 80, 90, 100, 110 }; // Trefferpunkte
 	public override int[] MaxHealthTable { get{ return health_table; } }
 
-	private static int[] cookie_table = { 2, 4, 6, 8 };
+	public readonly static int[] cookie_table = { 2, 1, 1, 2 };
 	public override int[] CookieTable { get{ return cookie_table;} }
 	
-	private static int[] money_table = { 500, 600, 700, 800 };
+	public readonly static int[] money_table = { 250, 375, 500, 625 };
 	public override int[] MoneyTable { get{ return money_table;} }
 
 	private static int[] damage_table = { 40, 50, 60, 70 }; // Schaden pro Treffer
