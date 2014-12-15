@@ -31,6 +31,11 @@ public class Pause : MonoBehaviour {
 		//Pausieren über Escape, öffnet Pausen-Menü
 		Inputs.I.Register("Pause", ()=>{
 			if(!enabled) return;
+			//nich wenn wir einen Turm zum bauen ausgewählt haben
+			if(TowerBuilding.I.SelectedIndex != -1){
+				TowerBuilding.I.Deselect(); // deselektiere den ausgewählten Turm
+				return;
+			}
 			//prüfen ob das Spiel pausiert
 			if(!Paused) PauseGame();
 			//oder fortgesetzt werden soll

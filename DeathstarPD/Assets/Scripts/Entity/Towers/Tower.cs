@@ -26,6 +26,8 @@ public abstract class Tower : ImmovableEntity {
 	protected override void Start() {
 		//Setze Level auf 1 (berechnet Werte)
 		Level = 1;
+		isAttackCooldownActive = false;
+		Buffs = 0;
 
 		//Start in Superklasse
 		base.Start();
@@ -150,8 +152,8 @@ public abstract class Tower : ImmovableEntity {
 		private set {
 			//Setze Instanzvariable
 			_Level = value;
-			//neuen Wert setzen
-			MaxHealth = MaxHealthTable[System.Math.Max(0, Level - 1)];
+			//neuen Wert setzen (+50% pro Buff)
+			MaxHealth = Mathf.RoundToInt(((float)MaxHealthTable[System.Math.Max(0, Level - 1)]) * (1f + (float)Buffs * 0.5f));
 			//Namen setzen
 			name = GetType()+" (Level "+Level+")";
 		}
@@ -207,9 +209,11 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// momentaner Schaden pro Treffer, abhängig vom aktuellem Level.
+	/// momentaner Schaden pro Treffer, abhängig vom aktuellem Level und Anzahl Buffs (je +50%).
 	/// </summary>
-	public int Damage { get{return DamageTable[System.Math.Max(0, Level - 1)];} }
+	public int Damage { get{
+		return Mathf.RoundToInt(((float)DamageTable[System.Math.Max(0, Level - 1)]) * (1f + (float)Buffs * 0.5f));
+	} }
 	/// <summary>
 	/// verursachter Schaden abhängig vom Level des Turmes
 	/// </summary>
@@ -218,9 +222,11 @@ public abstract class Tower : ImmovableEntity {
 
 
 	/// <summary>
-	/// momentane Angriffsreichweite, abhängig vom aktuellem Level.
+	/// momentane Angriffsreichweite, abhängig vom aktuellem Level un Anzahl Buffs (je 2.5f)
 	/// </summary>
-	public float Range { get{return RangeTable[System.Math.Max(0, Level - 1)];} }
+	public float Range { get{
+		return RangeTable[System.Math.Max(0, Level - 1)] + ((float)Buffs * 2.5f) ;
+	} }
 	/// <summary>
 	/// Angriffsreichtweite abhängig vom Level des Turmes
 	/// </summary>
@@ -272,6 +278,17 @@ public abstract class Tower : ImmovableEntity {
 	private bool isAttackCooldownActive = false;
 
 
+	public int Buffs {
+		get {
+			return _buffs;
+		}
+		set {
+			_buffs = System.Math.Max(0, value);
+			//neuen Wert setzen (+50% pro Buff)
+			MaxHealth = Mathf.RoundToInt(((float)MaxHealthTable[System.Math.Max(0, Level - 1)]) * (1f + (float)Buffs * 0.5f));
+		}
+	}
+	private int _buffs = 0;
 
 	/// <summary>
 	/// Angriffsmuster des Turmes

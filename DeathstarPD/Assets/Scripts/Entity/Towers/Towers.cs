@@ -66,6 +66,9 @@ public class Towers : IEnumerable<Tower> {
 			if(!map.ContainsKey(type))
 				map.Add(type, new HashSet<Tower>());
 			map[type].Add(t);
+
+			//andere Objekte informieren
+			Observer.I.UpdateWithoutCache(this, "AddedTower", t);
 		}
 	}
 
@@ -84,6 +87,9 @@ public class Towers : IEnumerable<Tower> {
 			Type type = t.GetType();
 			if(map.ContainsKey(type))
 				map[type].Remove(t);
+
+			//andere Objekte informieren
+			Observer.I.UpdateWithoutCache(this, "RemovedTower", t);
 		}
 	}
 
