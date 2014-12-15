@@ -5,7 +5,7 @@ public class TowerBuilding : GeneralObject {
 	/// <summary>
 	/// Minimale Distanz zum nächsten Turm um bauen zu können
 	/// </summary>
-	private float MinimumDistanceToNextTower = 13f;
+	private float MinimumDistanceToNextTower = 8f;
 
 	/// <summary>
 	/// wie weit das Objekt in den Planeten hineinragt
@@ -177,6 +177,7 @@ public class TowerBuilding : GeneralObject {
 			t.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
 			t.transform.Rotate(0, -90, 90); //Richtig drehen
 			t.collider.enabled = true; //Collider einschalten (ist beim Prototypen ausgeschaltet)
+			t.enabled = true; //Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
 
 			//Verlasse den Baumodus
 			Deselect();

@@ -15,7 +15,7 @@ public class MGTower : Tower {
 	private static int[] damage_table = { 1, 2, 3, 4 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 	
-	private static float[] range_table = { 18f, 22f, 26f, 30f }; // maximale Distanz zum Ziel
+	private static float[] range_table = { 30f, 32.5f, 35f, 37.5f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 	
 	private static float[] attack_cooldown_table = { 0.25f, 0.225f, 0.20f, 0.175f }; // Zeit in Sekunden zw. Angriffen

@@ -15,7 +15,7 @@ public class RocketTower : Tower {
 	private static int[] damage_table = { 40, 50, 60, 70 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 	
-	private static float[] range_table = { 20f, 24f, 28f, 32f }; // maximale Distanz zum Ziel
+	private static float[] range_table = { 30f, 35f, 40f, 45f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 	
 	private static float[] attack_cooldown_table = { 3.0f, 2.8f, 2.6f, 2.4f }; // Zeit in Sekunden zw. Angriffen

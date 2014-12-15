@@ -15,7 +15,7 @@ public class LightningTower : Tower {
 	private static int[] damage_table = { 2, 3, 4, 5 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 
-	private static float[] range_table = { 20f, 22f, 24f, 26f }; // maximale Distanz zum Ziel
+	private static float[] range_table = { 22.5f, 25f, 27.5f, 30f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 
 	private static float[] attack_cooldown_table = { 0.5f, 0.45f, 0.4f, 0.35f }; // Zeit in Sekunden zw. Angriffen
