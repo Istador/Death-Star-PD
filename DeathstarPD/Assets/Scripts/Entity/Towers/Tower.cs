@@ -151,7 +151,7 @@ public abstract class Tower : ImmovableEntity {
 			//Setze Instanzvariable
 			_Level = value;
 			//neuen Wert setzen
-			MaxHealth = MaxHealthTable[Level - 1];
+			MaxHealth = MaxHealthTable[System.Math.Max(0, Level - 1)];
 			//Namen setzen
 			name = GetType()+" (Level "+Level+")";
 		}
@@ -209,7 +209,7 @@ public abstract class Tower : ImmovableEntity {
 	/// <summary>
 	/// momentaner Schaden pro Treffer, abhängig vom aktuellem Level.
 	/// </summary>
-	public int Damage { get{return DamageTable[Level - 1];} }
+	public int Damage { get{return DamageTable[System.Math.Max(0, Level - 1)];} }
 	/// <summary>
 	/// verursachter Schaden abhängig vom Level des Turmes
 	/// </summary>
@@ -220,7 +220,7 @@ public abstract class Tower : ImmovableEntity {
 	/// <summary>
 	/// momentane Angriffsreichweite, abhängig vom aktuellem Level.
 	/// </summary>
-	public float Range { get{return RangeTable[Level - 1];} }
+	public float Range { get{return RangeTable[System.Math.Max(0, Level - 1)];} }
 	/// <summary>
 	/// Angriffsreichtweite abhängig vom Level des Turmes
 	/// </summary>
@@ -261,7 +261,7 @@ public abstract class Tower : ImmovableEntity {
 	/// <summary>
 	/// Abklingzeit zwischen Angriffen in Sekunden, abhängig vom aktuellem Level.
 	/// </summary>
-	public float AttackCooldown { get{return AttackCooldownTable[Level - 1];} }
+	public float AttackCooldown { get{return AttackCooldownTable[System.Math.Max(0, Level - 1)];} }
 	/// <summary>
 	/// Abklingzeit zwischen den Angriffen abhängig vom Level des Turmes
 	/// </summary>

@@ -16,6 +16,8 @@ public class TowerBuilding : GeneralObject {
 	/// Container in den alle Prototyp-Türme kommen
 	/// </summary>
 	private Transform Container;
+	private GameObject RangeSphere;
+	private Vector3 sphereScale = new Vector3(2f, 2f, 2f);
 
 	public int SelectedIndex { get; private set; }
 	public Tower Selected { get { return (SelectedIndex == -1) ? null : Prototypes[SelectedIndex] ; } }
@@ -36,13 +38,15 @@ public class TowerBuilding : GeneralObject {
 
 		//Container holen
 		Container = Towers.Container.transform.FindChild("TowerPrototypes");
+		RangeSphere = Container.FindChild("RangeSphere").gameObject;
 
 		//Prototypen erzeugen
 		Prototypes = new Tower[]{
 			  Instantiate("Towers/MGTower").GetComponent<Tower>()
 			, Instantiate("Towers/LaserTower").GetComponent<Tower>()
-			, Instantiate("Towers/RocketTower").GetComponent<Tower>()
 			, Instantiate("Towers/LightningTower").GetComponent<Tower>()
+			, Instantiate("Towers/RocketTower").GetComponent<Tower>()
+
 		};
 
 		//für jeden Prototyp
@@ -90,14 +94,14 @@ public class TowerBuilding : GeneralObject {
 				Selected.Visible = true; //Sichtbar
 
 				//farbliche rot/grün Markierung (kann bauen / kann nicht bauen)
-				for(int i = 0; i < Selected.transform.childCount; i++)
-					if(Selected.transform.GetChild(i).renderer != null){
-						Selected.transform.GetChild(i).renderer.materials = Resource.UsableMaterial(CanBuild ? "Green" : "Red");
-					}
+				RangeSphere.renderer.materials = Resource.UsableMaterial(CanBuild ? "CanBuild" : "CantBuild");
+				RangeSphere.transform.position = Selected.transform.position;
+				RangeSphere.renderer.enabled = true;
 
 			} else {
 				//wenn die Maus über dem All ist
 				Selected.Visible = false; //Unsichtbar
+				RangeSphere.renderer.enabled = false;
 			}
 		}
 	}
@@ -136,18 +140,14 @@ public class TowerBuilding : GeneralObject {
 
 			SelectedIndex = index; //Auswahl ändern
 
-			Selected.Active = true; //gameObject aktivieren
+			Selected.Active = true; //gameObject aktiviere
+
+			//RangeSphere skalieren
+			RangeSphere.transform.localScale = sphereScale * Selected.Range;
 
 			//Höhe berechnen
 			height = Utility.HeightYByCollider(Selected.gameObject);
 			//Debug.Log("Height: "+height);
-
-			//Materials speichern
-			materials = new Material[Selected.transform.childCount][];
-			for(int i = 0; i < Selected.transform.childCount; i++){
-				if(Selected.transform.GetChild(i).renderer != null)
-					materials[i] = Selected.transform.GetChild(i).renderer.materials;
-			}
 		}
 	}
 
@@ -156,11 +156,9 @@ public class TowerBuilding : GeneralObject {
 		if(SelectedIndex != -1){
 			Selected.Active = false; //gameObjekt deaktivieren
 			Selected.Visible = false; //unsichtbar
-			//Materials wiederherstellen
-			for(int i = 0; i < Selected.transform.childCount; i++){
-				if(Selected.transform.GetChild(i).renderer != null)
-					Selected.transform.GetChild(i).renderer.materials = materials[i];
-			}
+
+			//RangeSphere ausblenden
+			RangeSphere.renderer.enabled = false;
 
 			SelectedIndex = -1;
 		}
@@ -179,11 +177,6 @@ public class TowerBuilding : GeneralObject {
 			t.transform.LookAt(Vector3.zero); //zum Kugel-Mittelpunkt ausrichten
 			t.transform.Rotate(0, -90, 90); //Richtig drehen
 			t.collider.enabled = true; //Collider einschalten (ist beim Prototypen ausgeschaltet)
-			//Materials wiederherstellen
-			for(int i = 0; i < t.transform.childCount; i++)
-				if(t.transform.GetChild(i).renderer != null)
-					t.transform.GetChild(i).renderer.materials = materials[i];
-			t.enabled = true; //Tower Skript aktivieren (ist beim Prototypen ausgeschaltet)
 
 			//Verlasse den Baumodus
 			Deselect();
