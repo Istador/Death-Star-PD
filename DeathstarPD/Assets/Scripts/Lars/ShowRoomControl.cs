@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShowRoomControl : MonoBehaviour {
 
 	public GameObject[] towers;
+	public string[] names;
+
+	public Text label;
 
 	private int current = 0;
 
@@ -47,6 +51,7 @@ public class ShowRoomControl : MonoBehaviour {
 				towers[i].SetActive(false);
 			}
 		}
+		label.text = names[id];
 	}
 
 	public void BackToMainMenu(){
