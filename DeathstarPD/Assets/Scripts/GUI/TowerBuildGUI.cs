@@ -111,22 +111,22 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 
 	private int getMoney(int index){
 		switch(index){
-		case 0: return MGTower.money_table[0];
-		case 1: return LaserTower.money_table[0];
-		case 2: return LightningTower.money_table[0];
-		case 3: return RocketTower.money_table[0];
-		case 4: return SupportTower.money_table[0];
+		case 0: return -MGTower.money_table[0];
+		case 1: return -LaserTower.money_table[0];
+		case 2: return -LightningTower.money_table[0];
+		case 3: return -RocketTower.money_table[0];
+		case 4: return -SupportTower.money_table[0];
 		default: return 0;
 		}
 	}
 
 	private int getCookies(int index){
 		switch(index){
-		case 0: return MGTower.cookie_table[0];
-		case 1: return LaserTower.cookie_table[0];
-		case 2: return LightningTower.cookie_table[0];
-		case 3: return RocketTower.cookie_table[0];
-		case 4: return SupportTower.cookie_table[0];
+		case 0: return -MGTower.cookie_table[0];
+		case 1: return -LaserTower.cookie_table[0];
+		case 2: return -LightningTower.cookie_table[0];
+		case 3: return -RocketTower.cookie_table[0];
+		case 4: return -SupportTower.cookie_table[0];
 		default: return 0;
 		}
 	}
@@ -147,8 +147,10 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 	private void SetDesc(int index){
 		nameText.text = getName(index);
 		desc.text = getDescription(index);
-		money.text = getMoney(index).ToString();
-		cookies.text = getCookies(index).ToString();
+		int m = getMoney(index);
+		int c = getCookies(index);
+		money.text = (m>0?"+":"")+m.ToString();
+		cookies.text = (c>0?"+":"")+c.ToString();
 		EnableDesc(true);
 	}
 

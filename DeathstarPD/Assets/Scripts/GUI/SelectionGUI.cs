@@ -60,11 +60,15 @@ public class SelectionGUI : MonoBehaviour, MessageReceiver {
 				range.text = t.Range.ToString();
 				firerate.text = t.AttackCooldown.ToString();
 
-				upMoney.text = t.MoneyUpgradeCost.ToString();
-				upCookies.text = t.CookieUpgradeCost.ToString();
+				int um = -t.MoneyUpgradeCost;
+				int uc = -t.CookieUpgradeCost;
+				upMoney.text = (um>0?"+":"")+um.ToString();
+				upCookies.text = (uc>0?"+":"")+uc.ToString();
 
-				sellMoney.text = t.MoneyROI.ToString();
-				sellCookies.text = t.CookieROI.ToString();
+				int sm = t.MoneyROI;
+				int sc = t.CookieROI;
+				sellMoney.text = (sm>0?"+":"")+sm.ToString();
+				sellCookies.text = (sc>0?"+":"")+sc.ToString();
 
 				CheckResources(t);
 

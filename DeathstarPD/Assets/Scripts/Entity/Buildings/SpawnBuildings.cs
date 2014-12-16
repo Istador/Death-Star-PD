@@ -19,7 +19,7 @@ public class SpawnBuildings : GeneralObject {
 
 	//Namen der Prefabs die erzeugt werden sollen
 	//Warnung: bei 80*80 nicht mehr als 14 Gebäude, sonst Endlosschleife!
-	private static string[] names = { "CommandCenter", "Hangar", "Hangar", "Hole", "Hole", "Hole", "Hole" };
+	private static string[] names = { "CommandCenter", "Hole", "Hole", "Hole", "Hole", "Hole", "Hole" };
 
 
 	private static Building[] buildings = new Building[names.Length];
