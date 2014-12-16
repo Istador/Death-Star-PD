@@ -22,10 +22,7 @@ public class PLightning : MonoBehaviour {
 		//Update kann auch bei pausiertem Spiel aufgerufen werden.
 		if(Pause.I.Paused || Time.timeScale == 0f) return;
 
-		//TODO Lars: Fehler, weil Time.deltaTime (bzw. in FixedUpdate dann Time.fixedDeltaTime) nicht 
-		// verwendet wird, um die Positionsdifferenz an die Zeit statt der Framerate anzugleichen
-		// (wodurch die Bewegung auf jedem Prozessor unterschiedlich schnell verläuft!!!).
-	
+
 		t += Time.deltaTime;
 		if(t > trailLifetime){
 			gameObject.GetComponent<TrailRenderer>().enabled = false;

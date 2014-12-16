@@ -83,13 +83,10 @@ public class Bomber : Ship {
 	// Schuss-Effekt darstellen
 	private void shoot(Entity target, Vector3 pos){
 		//TODO Lars: Bomben-Effekt statt Laser-Effekt
-		PLazer lazer = Instantiate("Lazer", pos).GetComponent<PLazer>();
-		lazer.target = target;
-		lazer.duration = AttackCooldown * 0.5f; // Anzeigedauer für die hälfte der Angriffszeit
-		lazer.preload = 0.0f; // Sofort anzeigen
-		lazer.lr.SetColors(Color.red, Color.red); // Rot statt grün
-		lazer.particleSystem.renderer.enabled = false; // Keine Partikel, nur Laser
-		lazer.transform.parent = ProjectileManager.Container;
+		PBomb bomb = Instantiate("Bomb", pos).GetComponent<PBomb>();
+		bomb.target = target;
+
+		bomb.transform.parent = ProjectileManager.Container;
 	}
 
 }
