@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400004}
   m_Layer: 10
   m_Name: MGTower
   m_TagString: Untagged
@@ -361,6 +362,26 @@ MonoBehaviour:
   barrelAxis: 0
   barrelInverse: 0
   target: {fileID: 0}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b897a8a7a2278fa42af16edaa29bec9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioTag: 1
+  clip: {fileID: 8300000, guid: 36696389cb63a2741b2ec6f6095ccf4a, type: 3}
+  mute: 0
+  playOnAwake: 0
+  loop: 0
+  volume: .25
+  rolloffMode: 1
+  panLevel: 1
+  spread: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

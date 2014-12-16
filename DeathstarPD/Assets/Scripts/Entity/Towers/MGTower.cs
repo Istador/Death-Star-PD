@@ -43,10 +43,9 @@ public class MGTower : Tower {
 
 		//Erzeugen
 		//TODO Lars: eigener Projektiltyp für den MG-Tower
-		PRocket r = Instantiate("Rocket", pos).GetComponent<PRocket>();
-		r.transform.parent = ProjectileManager.Container;
-		r.Owner = this;
-		r.Init(target);
+		PTurboLaser r = Instantiate("TurboLaser", pos).GetComponent<PTurboLaser>();
+		r.target = target;
+		gameObject.GetComponent<AudioSource>().Play();
 	}
 	
 }
