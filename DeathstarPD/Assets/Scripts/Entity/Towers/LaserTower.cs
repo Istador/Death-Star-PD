@@ -12,7 +12,7 @@ public class LaserTower : Tower {
 	public readonly static int[] money_table = { 150, 175, 250, 325 };
 	public override int[] MoneyTable { get{ return money_table;} }
 
-	private static int[] damage_table = { 10, 15, 20, 25 }; // Schaden pro Treffer
+	private static int[] damage_table = { 25, 30, 35, 40 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 
 	private static float[] range_table = { 35f, 40f, 45f, 50f }; // maximale Distanz zum Ziel

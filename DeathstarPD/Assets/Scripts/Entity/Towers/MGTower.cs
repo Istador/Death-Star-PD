@@ -44,7 +44,12 @@ public class MGTower : Tower {
 		//Erzeugen
 		PTurboLaser r = Instantiate("TurboLaser", pos).GetComponent<PTurboLaser>();
 		r.target = target;
-		gameObject.GetComponent<AudioSource>().Play();
+		r.transform.parent = ProjectileManager.Container;
+
+		DoDamage(target, Damage, 0.5f);
+
+		if(audio != null && audio.enabled)
+			gameObject.GetComponent<AudioSource>().Play();
 	}
 	
 }
