@@ -18,6 +18,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 	private Image i4;
 	private Image i5;
 
+	private Text name;
 	private Text desc;
 
 	private Text money;
@@ -49,6 +50,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 		i4 = t4.GetComponent<Image>();
 		i5 = t5.GetComponent<Image>();
 
+		name = transform.FindChild("TowerDescriptionNameText").GetComponent<Text>();
 		desc = transform.FindChild("TowerDescriptionText").GetComponent<Text>();
 
 		money = transform.FindChild("moneyText").GetComponent<Text>();
@@ -76,6 +78,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 	
 	private void EnableDesc(bool b){
 		//Ein bzw. ausblenden
+		name.enabled = b;
 		desc.enabled = b;
 		money.enabled = b;
 		moneyImg.enabled = b;
@@ -90,7 +93,18 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 		case 1: return "Laserturm";
 		case 2: return "Blitzturm";
 		case 3: return "Raketenturm";
-		case 4: return "Unterstützungsturm";
+		case 4: return "Kraftwerk";
+		default: return "";
+		}
+	}
+	
+	private string getDescription(int index){
+		switch(index){
+		case 0: return "Hohe Feuerrate, aber geringer Schaden. MG-Türme können genutzt werden um ein möglichst großes Gebiet abzudecken.";
+		case 1: return "Sehr hohe Feuerrate, wenig Schaden. Lasertürme feuern einen konstanten Strahl auf ein Ziel um es schnell zu vernichten.";
+		case 2: return "Moderater Schaden, hohe Feuerrate. 			Der Blitzturm schiesst Blitze auf mehrere Ziele und ist somit ideal zur Bereichsverteidigung.";
+		case 3: return "Hoher Schaden, geringe Feuerrate. 						Der Raketenturm richtet hohen Bereichsschaden an, feuert aber sehr langsam.";
+		case 4: return "Kein Schaden. 			Das Kraftwerk kann selber nicht angreifen, dafür verstärkt es Türme in Reichweite und produziert Energie.";
 		default: return "";
 		}
 	}
@@ -131,7 +145,8 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 
 
 	private void SetDesc(int index){
-		desc.text = getName(index);
+		name.text = getName(index);
+		desc.text = getDescription(index);
 		money.text = getMoney(index).ToString();
 		cookies.text = getCookies(index).ToString();
 		EnableDesc(true);
