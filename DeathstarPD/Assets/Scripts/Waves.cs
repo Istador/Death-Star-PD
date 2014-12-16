@@ -162,7 +162,7 @@ public class Waves : GeneralObject {
 			//wenn es ein Gegner ist
 			if(s != null && s.gameObject.layer == 13){
 				//Verringere Anzahl lebender Gegner
-				AliveEnemies--;
+				AliveEnemies = System.Math.Max(0, AliveEnemies - 1);
 				Observer.I.Update(this, "AliveEnemies", AliveEnemies);
 				//Gebe dem Spieler Geld
 				GameResources.I.Money += Mathf.RoundToInt(((float)i_moneyPerEnemy) * s.Strength);
