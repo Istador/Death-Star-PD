@@ -36,6 +36,10 @@ public class Pause : MonoBehaviour {
 				TowerBuilding.I.Deselect(); // deselektiere den ausgewählten Turm
 				return;
 			}
+			if(TowerSelect.I.Selected != null){
+				TowerSelect.I.Unselect();
+				return;
+			}
 			//prüfen ob das Spiel pausiert
 			if(!Paused) PauseGame();
 			//oder fortgesetzt werden soll
@@ -87,11 +91,11 @@ public class Pause : MonoBehaviour {
 		_paused = true;
 
 		//Pausen Menü einblenden
-		canvas.enabled = true;
+		if(canvas != null) canvas.enabled = true;
 		//Pausen Menü  anklickbar
-		raycaster.enabled = true;
+		if(raycaster != null) raycaster.enabled = true;
 		//Game Interface nicht anklickbar
-		gameRaycaster.enabled = false;
+		if(gameRaycaster != null) gameRaycaster.enabled = false;
 		
 		//Zeit anhalten
 		Time.timeScale = 0.0f;
@@ -105,11 +109,11 @@ public class Pause : MonoBehaviour {
 		_paused = false;
 
 		//Pausen Menü ausblenden
-		canvas.enabled = false;
+		if(canvas != null) canvas.enabled = false;
 		//Pausen Menü nicht anklickbar
-		raycaster.enabled = false;
+		if(raycaster != null) raycaster.enabled = false;
 		//Game Interface wieder anklickbar
-		gameRaycaster.enabled = true;
+		if(gameRaycaster != null) gameRaycaster.enabled = true;
 		
 		//Zeit weiterlaufen lassen
 		Time.timeScale = 1.0f;

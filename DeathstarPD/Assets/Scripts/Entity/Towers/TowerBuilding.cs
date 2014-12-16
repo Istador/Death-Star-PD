@@ -149,6 +149,8 @@ public class TowerBuilding : GeneralObject {
 			//Höhe berechnen
 			height = Utility.HeightYByCollider(Selected.gameObject);
 			//Debug.Log("Height: "+height);
+
+			Observer.I.Update(this, "TowerSelected", Selected);
 		}
 	}
 
@@ -162,6 +164,8 @@ public class TowerBuilding : GeneralObject {
 			RangeSphere.renderer.enabled = false;
 
 			SelectedIndex = -1;
+
+			Observer.I.Update(this, "TowerSelected", null);
 		}
 	}
 

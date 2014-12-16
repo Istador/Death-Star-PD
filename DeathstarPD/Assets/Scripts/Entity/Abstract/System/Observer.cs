@@ -43,6 +43,8 @@ public class Observer {
 		//Wert merken
 		if(extraInfo != null)
 			cache[message] = extraInfo;
+		else if(cache.ContainsKey(message))
+			cache.Remove(message);
 
 		UpdateWithoutCache(sender, message, extraInfo);
 	}

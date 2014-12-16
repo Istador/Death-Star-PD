@@ -19,6 +19,11 @@ public class WavesGUI : MonoBehaviour, MessageReceiver {
 		if(a != null) ChangeAlive((int)a);
 	}
 
+	void OnDestroy(){
+		Observer.I.Remove("Wave", this);
+		Observer.I.Remove("AliveEnemies", this);
+	}
+
 
 	private void ChangeWave(int x){
 		waveText.text = "Welle "+x.ToString()+" von "+Waves.I.LastWaveNumber.ToString();

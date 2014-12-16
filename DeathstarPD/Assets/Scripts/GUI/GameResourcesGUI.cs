@@ -18,6 +18,11 @@ public class GameResourcesGUI : MonoBehaviour, MessageReceiver {
 		GameResources.I.Reset();
 	}
 
+	void OnDestroy(){
+		Observer.I.Remove("MoneyChange", this);
+		Observer.I.Remove("CookieChange", this);
+	}
+
 	private void ChangeMoney(int x){ moneyText.text = x.ToString(); }
 	private void ChangeCookies(int x){ cookieText.text = x.ToString(); }
 

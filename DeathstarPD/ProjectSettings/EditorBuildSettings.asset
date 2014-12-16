@@ -8,8 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/mainmenu.unity
   - enabled: 1
-    path: Assets/Levels/playground.unity
+    path: Assets/Levels/gameplay.unity
   - enabled: 1
     path: Assets/Levels/ShowRoom.unity
+  - enabled: 1
+    path: Assets/Levels/playground.unity
   - enabled: 1
     path: Assets/Levels/aitest.unity
