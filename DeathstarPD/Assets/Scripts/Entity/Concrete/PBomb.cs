@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PBomb : MonoBehaviour {
 
-	public float speed = 100;
+	public float speed = 10;
 	public Entity target;
 
 	// Use this for initialization
@@ -16,7 +16,7 @@ public class PBomb : MonoBehaviour {
 		if(target){
 			if(Vector3.Distance(transform.position, target.Pos) <= 1){
 				ParticleSystem ps = gameObject.GetComponent<ParticleSystem>();
-				ps.startSpeed = 15;
+				ps.startSpeed = 5;
 				ps.startLifetime = 2;
 				ps.loop = false;
 				gameObject.GetComponent<AudioSource>().Play();
