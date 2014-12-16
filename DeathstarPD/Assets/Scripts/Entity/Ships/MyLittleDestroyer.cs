@@ -5,8 +5,8 @@ public class MyLittleDestroyer : Ship {
 
 
 
-	public override int BaseHealth { get{ return 40; } }
-	public override int BaseDamage { get{ return 2; } }
+	public override int BaseHealth { get{ return 75; } }
+	public override int BaseDamage { get{ return 4; } }
 	public override float Range { get{ return 18f; } }
 	public override float AttackCooldown { get{ return 0.5f; } }
 	
