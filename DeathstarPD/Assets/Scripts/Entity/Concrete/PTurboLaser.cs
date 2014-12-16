@@ -17,11 +17,13 @@ public class PTurboLaser : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.Translate(Vector3.forward * Time.deltaTime * speed);
-		if(d_startTime + d_timeToLife <= Time.time || Vector3.Distance(transform.position, target.Pos) < 3){
-
+		if(target){
+			transform.Translate(Vector3.forward * Time.deltaTime * speed);
+			if(d_startTime + d_timeToLife <= Time.time || Vector3.Distance(transform.position, target.Pos) < 3){
+				Destroy(gameObject);
+			}
+		}else{
 			Destroy(gameObject);
-
 		}
 	}
 }
