@@ -18,7 +18,7 @@ public class SupportTower : Tower {
 	private static float[] range_table = { 30f, 35f, 40f, 45f }; // maximale Distanz zum Ziel
 	public override float[] RangeTable { get{ return range_table; } }
 
-	private static float[] attack_cooldown_table = { 1f, 1f, 1f, 1f }; // Zeit in Sekunden zw. Angriffen
+	private static float[] attack_cooldown_table = { 0f, 0f, 0f, 0f }; // Zeit in Sekunden zw. Angriffen
 	public override float[] AttackCooldownTable { get{ return attack_cooldown_table; } }
 
 	public override EAttackPattern AttackPattern { get {return EAttackPattern.None;} }

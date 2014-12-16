@@ -1203,6 +1203,7 @@ GameObject:
   - 224: {fileID: 22400138}
   - 222: {fileID: 22200134}
   - 114: {fileID: 11400170}
+  - 114: {fileID: 11400212}
   m_Layer: 0
   m_Name: SelectionPanel
   m_TagString: Untagged
@@ -1221,7 +1222,7 @@ GameObject:
   - 222: {fileID: 22200136}
   - 114: {fileID: 11400172}
   m_Layer: 0
-  m_Name: sellMoneyImage
+  m_Name: sellCookiesImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1239,7 @@ GameObject:
   - 222: {fileID: 22200138}
   - 114: {fileID: 11400174}
   m_Layer: 0
-  m_Name: sellCookieText
+  m_Name: sellCookiesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1255,7 +1256,7 @@ GameObject:
   - 222: {fileID: 22200140}
   - 114: {fileID: 11400176}
   m_Layer: 0
-  m_Name: upCookieImage
+  m_Name: upCookiesImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1323,7 +1324,7 @@ GameObject:
   - 222: {fileID: 22200148}
   - 114: {fileID: 11400184}
   m_Layer: 0
-  m_Name: upCookieText
+  m_Name: upCookiesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3769,7 +3770,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
@@ -3777,7 +3778,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 888
 --- !u!114 &11400176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3840,9 +3841,9 @@ MonoBehaviour:
   m_Color: {r: .113725491, g: .113725491, b: .113725491, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
@@ -3850,7 +3851,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50
+  m_Text: 888
 --- !u!114 &11400182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3868,7 +3869,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
@@ -3876,7 +3877,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50
+  m_Text: 888
 --- !u!114 &11400184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3892,9 +3893,9 @@ MonoBehaviour:
   m_Color: {r: .129411772, g: .129411772, b: .129411772, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 3
@@ -3902,7 +3903,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 888
 --- !u!114 &11400186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3944,7 +3945,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: .501960814, g: .501960814, b: .501960814, a: .501960814}
-    m_HighlightedColor: {r: .501960814, g: .501960814, b: .501960814, a: .698039234}
+    m_HighlightedColor: {r: .250980407, g: .250980407, b: .250980407, a: .698039234}
     m_PressedColor: {r: .345098048, g: .345098048, b: .345098048, a: .698039234}
     m_DisabledColor: {r: .250980407, g: .250980407, b: .250980407, a: .501960814}
     m_ColorMultiplier: 2
@@ -3962,7 +3963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11400186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400212}
+        m_MethodName: UpgradeTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11400190
@@ -4006,7 +4019,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: .501960814, g: .501960814, b: .501960814, a: .501960814}
-    m_HighlightedColor: {r: .501960814, g: .501960814, b: .501960814, a: .698039234}
+    m_HighlightedColor: {r: .250980407, g: .250980407, b: .250980407, a: .698039234}
     m_PressedColor: {r: .345098048, g: .345098048, b: .345098048, a: .698039234}
     m_DisabledColor: {r: .250980407, g: .250980407, b: .250980407, a: .501960814}
     m_ColorMultiplier: 2
@@ -4024,7 +4037,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11400190}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400212}
+        m_MethodName: SellTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11400194
@@ -4361,6 +4386,17 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &11400212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598dd03ed8ff72247ac1d20f9ca22b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -6120,10 +6156,10 @@ RectTransform:
   - {fileID: 22400136}
   - {fileID: 22400164}
   - {fileID: 22400154}
-  - {fileID: 22400158}
-  - {fileID: 22400144}
   - {fileID: 22400148}
   - {fileID: 22400152}
+  - {fileID: 22400158}
+  - {fileID: 22400144}
   - {fileID: 22400156}
   - {fileID: 22400150}
   - {fileID: 22400142}
@@ -6181,7 +6217,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22400138}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_AnchorMin: {x: .50666672, y: .648127139}
   m_AnchorMax: {x: .566666722, y: .704210818}
   m_AnchoredPosition: {x: .259643555, y: .096282959}
@@ -6215,7 +6251,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22400138}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_AnchorMin: {x: .443333358, y: .648127139}
   m_AnchorMax: {x: .51000005, y: .704210818}
   m_AnchoredPosition: {x: -.270050049, y: .096282959}
@@ -6249,7 +6285,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22400138}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_AnchorMin: {x: .566666722, y: .648127139}
   m_AnchorMax: {x: .633333445, y: .704210818}
   m_AnchoredPosition: {x: .0820007324, y: .100000381}
@@ -6300,7 +6336,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22400138}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_AnchorMin: {x: .386666626, y: .648127139}
   m_AnchorMax: {x: .446666688, y: .704210818}
   m_AnchoredPosition: {x: -.308624268, y: .096282959}

@@ -16,6 +16,7 @@ public class TowerSelect : GeneralObject {
 				GameResources.I.Money -= Selected.MoneyUpgradeCost;
 				GameResources.I.Cookies -= Selected.CookieUpgradeCost;
 				Selected.LevelUp();
+				Unselect();
 			}
 		}
 	}
@@ -23,17 +24,11 @@ public class TowerSelect : GeneralObject {
 
 	public void SellTower(){
 		if(Selected != null){
-			//Zähle wieviel Geld/Kekse bereits in diesen Turm investiert wurde
-			int money = 0; int cookies = 0;
-			for(int i=0; i< Selected.Level; i++){
-				money += Selected.MoneyTable[i];
-				cookies += Selected.CookieTable[i];
-			}
-
 			//Dem Spieler Geld für den Turmverkauf geben.
-			GameResources.I.Money += (money * 2 / 3); // nur 2/3 des Geldes wird zurückgegeben
-			GameResources.I.Cookies += cookies; // wir können dem Spieler aber natürlich keine Kekse wegnehmen :3
+			GameResources.I.Money += Selected.MoneyROI; 
+			GameResources.I.Cookies += Selected.CookieROI;
 			Selected.Sell();
+			Unselect();
 		}
 	}
 
@@ -45,13 +40,8 @@ public class TowerSelect : GeneralObject {
 	public void Select(Tower t){
 		if(t != null){
 			Selected = t;
-			//Positioniere Panel über den Turm
-			panel.position = Camera.main.WorldToScreenPoint(t.Pos);
+			Observer.I.Update(this, "TowerSelectSelected", Selected);
 
-			//TODO GUI: fülle SelectPanel mit den Turmdaten des ausgewählten Turms
-
-			//zeige das Panel an
-			panel.gameObject.SetActive(true);
 		} else {
 			Unselect();
 		}
@@ -64,7 +54,7 @@ public class TowerSelect : GeneralObject {
 	/// </summary>
 	public void Unselect(){
 		Selected = null;
-		panel.gameObject.SetActive(false);
+		Observer.I.Update(this, "TowerSelectSelected", null);
 	}
 
 

@@ -249,6 +249,16 @@ public abstract class Tower : ImmovableEntity {
 
 
 
+	public int CookieROI { get{
+		int c = 0;
+		for(int i=0; i< Level; i++){
+			c += CookieTable[i];
+		}
+			return c; // wir können dem Spieler aber natürlich keine Kekse wegnehmen :3
+	}}
+
+
+
 	/// <summary>
 	/// wieviel Geld es kostet Level 1 zu bauen
 	/// </summary>
@@ -261,6 +271,16 @@ public abstract class Tower : ImmovableEntity {
 	/// Tabelle mit den Geldkosten
 	/// </summary>
 	public abstract int[] MoneyTable { get; }
+
+
+
+	public int MoneyROI { get{
+			int m = 0;
+			for(int i=0; i< Level; i++){
+				m += MoneyTable[i];
+			}
+			return m * 2 / 3; // nur 2/3 des Geldes wird zurückgegeben
+		}}
 
 
 
