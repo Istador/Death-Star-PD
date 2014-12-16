@@ -59,23 +59,6 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 
 		EnableDesc(false);
 
-		/*
-		t1.transform.FindChild("RessourceCostText").GetComponent<Text>().text = MGTower.money_table[0].ToString();
-		t1.transform.FindChild("EnergyCostText").GetComponent<Text>().text = MGTower.cookie_table[0].ToString();
-
-		t2.transform.FindChild("RessourceCostText").GetComponent<Text>().text = LaserTower.money_table[0].ToString();
-		t2.transform.FindChild("EnergyCostText").GetComponent<Text>().text = LaserTower.cookie_table[0].ToString();
-
-		t3.transform.FindChild("RessourceCostText").GetComponent<Text>().text = LightningTower.money_table[0].ToString();
-		t3.transform.FindChild("EnergyCostText").GetComponent<Text>().text = LightningTower.cookie_table[0].ToString();
-
-		t4.transform.FindChild("RessourceCostText").GetComponent<Text>().text = RocketTower.money_table[0].ToString();
-		t4.transform.FindChild("EnergyCostText").GetComponent<Text>().text = RocketTower.cookie_table[0].ToString();
-
-		t5.transform.FindChild("RessourceCostText").GetComponent<Text>().text = SupportTower.money_table[0].ToString();
-		t5.transform.FindChild("EnergyCostText").GetComponent<Text>().text = SupportTower.cookie_table[0].ToString();
-		*/
-
 		Observer.I.Add("TowerBuildSelected", this);
 		object m = Observer.I.Add("MoneyChange", this);
 		object c = Observer.I.Add("CookieChange", this);
@@ -98,6 +81,63 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 		moneyImg.enabled = b;
 		cookies.enabled = b;
 		cookiesImg.enabled = b;
+	}
+
+
+	private string getName(int index){
+		switch(index){
+		case 0: return "MG-Turm";
+		case 1: return "Laserturm";
+		case 2: return "Blitzturm";
+		case 3: return "Raketenturm";
+		case 4: return "Unterstützungsturm";
+		default: return "";
+		}
+	}
+
+	private int getMoney(int index){
+		switch(index){
+		case 0: return MGTower.money_table[0];
+		case 1: return LaserTower.money_table[0];
+		case 2: return LightningTower.money_table[0];
+		case 3: return RocketTower.money_table[0];
+		case 4: return SupportTower.money_table[0];
+		default: return 0;
+		}
+	}
+
+	private int getCookies(int index){
+		switch(index){
+		case 0: return MGTower.cookie_table[0];
+		case 1: return LaserTower.cookie_table[0];
+		case 2: return LightningTower.cookie_table[0];
+		case 3: return RocketTower.cookie_table[0];
+		case 4: return SupportTower.cookie_table[0];
+		default: return 0;
+		}
+	}
+
+	private Image getImage(int index){
+		switch(index){
+		case 0: return i1;
+		case 1: return i2;
+		case 2: return i3;
+		case 3: return i4;
+		case 4: return i5;
+		default: return null;
+		}
+	}
+
+
+
+	private void SetDesc(int index){
+		desc.text = getName(index);
+		money.text = getMoney(index).ToString();
+		cookies.text = getCookies(index).ToString();
+		EnableDesc(true);
+	}
+
+	private void unhighlight(){
 		//Farben zurücksetzen
 		i1.color = cNormal;
 		i2.color = cNormal;
@@ -106,15 +146,16 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 		i5.color = cNormal;
 	}
 
-
-
-	private void SetDesc(Image i, string name, int m, int c){
-		desc.text = name;
-		money.text = m.ToString();
-		cookies.text = c.ToString();
-		EnableDesc(true);
-		i.color = cHighlight;
+	private void highlight(int index){
+		unhighlight();
+		//Farbe setzen
+		Image i = getImage(index);
+		if(i != null) i.color = cHighlight;
 	}
+
+
+
+
 
 
 
@@ -133,15 +174,15 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 
 
 	private void ChangeBoth(int m, int c){
-		Check(b1, m, c, MGTower.money_table[0], MGTower.cookie_table[0]);
-		Check(b2, m, c, LaserTower.money_table[0], LaserTower.cookie_table[0]);
-		Check(b3, m, c, LightningTower.money_table[0], LightningTower.cookie_table[0]);
-		Check(b4, m, c, RocketTower.money_table[0], RocketTower.cookie_table[0]);
-		Check(b5, m, c, SupportTower.money_table[0], SupportTower.cookie_table[0]);
+		Check(b1, m, c, 0);
+		Check(b2, m, c, 1);
+		Check(b3, m, c, 2);
+		Check(b4, m, c, 3);
+		Check(b5, m, c, 4);
 	}
 
-	private void Check(Button b, int m, int c, int mn, int cn){
-		b.interactable = (mn <=m) && (cn <= c);
+	private void Check(Button b, int m, int c, int index){
+		b.interactable = (getMoney(index) <=m) && (getCookies(index) <= c);
 	}
 	
 	public bool HandleMessage(Telegram msg){
@@ -158,18 +199,11 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 			if(t == null){
 				//Kein Turm ausgewählt
 				EnableDesc(false);
+				unhighlight();
 			} else {
 				//Turm ändern
-				int m = t.MoneyBuildCost;
-				int c = t.CookieBuildCost;
-				switch(t.GetType().ToString()){
-				case "MGTower": SetDesc(i1, "MG-Turm", m, c ); break;
-				case "LaserTower": SetDesc(i2, "Laserturm", m, c ); break;
-				case "LightningTower": SetDesc(i3, "Blitzturm", m, c ); break;
-				case "RocketTower": SetDesc(i4, "Raketenturm", m, c ); break;
-				case "SupportTower": SetDesc(i5, "Unterstützungsturm", m, c ); break;
-				default: break;
-				}
+				SetDesc(TowerBuilding.I.SelectedIndex);
+				highlight(TowerBuilding.I.SelectedIndex);
 			}
 			return true;
 		default: return false;
@@ -179,6 +213,18 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 
 	public void Select(int index){
 		TowerBuilding.I.Select(index);
+	}
+
+	public void mouseOver(int index){
+		SetDesc(index);
+	}
+
+	public void mouseOut(int index){
+		if(TowerBuilding.I.SelectedIndex == -1){
+			EnableDesc(false);
+		} else {
+			SetDesc(TowerBuilding.I.SelectedIndex);
+		}
 	}
 
 

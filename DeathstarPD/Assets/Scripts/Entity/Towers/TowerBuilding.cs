@@ -150,7 +150,7 @@ public class TowerBuilding : GeneralObject {
 			height = Utility.HeightYByCollider(Selected.gameObject);
 			//Debug.Log("Height: "+height);
 
-			Observer.I.Update(this, "TowerSelected", Selected);
+			Observer.I.Update(this, "TowerBuildSelected", Selected);
 		}
 	}
 
@@ -165,7 +165,7 @@ public class TowerBuilding : GeneralObject {
 
 			SelectedIndex = -1;
 
-			Observer.I.Update(this, "TowerSelected", null);
+			Observer.I.Update(this, "TowerBuildSelected", null);
 		}
 	}
 
