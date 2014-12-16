@@ -49,6 +49,7 @@ public class SelectionGUI : MonoBehaviour, MessageReceiver {
 			if(t == null){
 				gameObject.SetActive(false);
 			} else {
+
 				//Positioniere Panel über den Turm
 				transform.position = Camera.main.WorldToScreenPoint(t.Pos);
 				//fülle SelectPanel mit den Turmdaten des ausgewählten Turms

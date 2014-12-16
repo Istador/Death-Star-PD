@@ -145,10 +145,11 @@ MonoBehaviour:
   mute: 0
   playOnAwake: 1
   loop: 0
-  volume: .5
+  volume: .200000003
   rolloffMode: 1
   panLevel: 1
   spread: 0
+  maxDistance: 200
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

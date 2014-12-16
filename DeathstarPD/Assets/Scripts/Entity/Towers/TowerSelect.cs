@@ -41,7 +41,6 @@ public class TowerSelect : GeneralObject {
 		if(t != null){
 			Selected = t;
 			Observer.I.Update(this, "TowerSelectSelected", Selected);
-
 		} else {
 			Unselect();
 		}

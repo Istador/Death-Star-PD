@@ -41,6 +41,10 @@ public class AudioTaggedSource : MonoBehaviour {
 		audio.panLevel = panLevel;
 		audio.spread = spread;
 		audio.maxDistance = maxDistance;
+		audio.bypassEffects = true;
+		audio.bypassListenerEffects = true;
+		audio.bypassReverbZones = true;
+		audio.dopplerLevel = 0;
 		if(audio.playOnAwake)
 			audio.Play();
 	}

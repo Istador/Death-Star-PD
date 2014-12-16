@@ -12,7 +12,7 @@ public class MGTower : Tower {
 	public readonly static int[] money_table = { 100, 150, 200, 250 };
 	public override int[] MoneyTable { get{ return money_table;} }
 
-	private static int[] damage_table = { 1, 2, 3, 4 }; // Schaden pro Treffer
+	private static int[] damage_table = { 5, 6, 8, 10 }; // Schaden pro Treffer
 	public override int[] DamageTable { get{ return damage_table; } }
 	
 	private static float[] range_table = { 30f, 32.5f, 35f, 37.5f }; // maximale Distanz zum Ziel
@@ -42,7 +42,6 @@ public class MGTower : Tower {
 		seitenwechsel = !seitenwechsel;
 
 		//Erzeugen
-		//TODO Lars: eigener Projektiltyp für den MG-Tower
 		PTurboLaser r = Instantiate("TurboLaser", pos).GetComponent<PTurboLaser>();
 		r.target = target;
 		gameObject.GetComponent<AudioSource>().Play();
