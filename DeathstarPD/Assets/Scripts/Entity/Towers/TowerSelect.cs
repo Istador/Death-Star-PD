@@ -89,7 +89,6 @@ public class TowerSelect : GeneralObject {
 	protected override void Start(){
 		//Vorsicht: Find findet nur aktivierte Objekte
 		panel = GameObject.Find("SelectionPanel").GetComponent<RectTransform>();
-		panel.gameObject.SetActive(false);
 	}
 
 

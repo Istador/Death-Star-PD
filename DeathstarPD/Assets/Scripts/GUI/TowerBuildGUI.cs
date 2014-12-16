@@ -18,7 +18,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 	private Image i4;
 	private Image i5;
 
-	private Text name;
+	private Text nameText;
 	private Text desc;
 
 	private Text money;
@@ -50,7 +50,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 		i4 = t4.GetComponent<Image>();
 		i5 = t5.GetComponent<Image>();
 
-		name = transform.FindChild("TowerDescriptionNameText").GetComponent<Text>();
+		nameText = transform.FindChild("TowerDescriptionNameText").GetComponent<Text>();
 		desc = transform.FindChild("TowerDescriptionText").GetComponent<Text>();
 
 		money = transform.FindChild("moneyText").GetComponent<Text>();
@@ -78,7 +78,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 	
 	private void EnableDesc(bool b){
 		//Ein bzw. ausblenden
-		name.enabled = b;
+		nameText.enabled = b;
 		desc.enabled = b;
 		money.enabled = b;
 		moneyImg.enabled = b;
@@ -145,7 +145,7 @@ public class TowerBuildGUI : MonoBehaviour, MessageReceiver {
 
 
 	private void SetDesc(int index){
-		name.text = getName(index);
+		nameText.text = getName(index);
 		desc.text = getDescription(index);
 		money.text = getMoney(index).ToString();
 		cookies.text = getCookies(index).ToString();

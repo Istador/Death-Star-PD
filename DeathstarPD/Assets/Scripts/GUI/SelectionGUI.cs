@@ -33,6 +33,8 @@ public class SelectionGUI : MonoBehaviour, MessageReceiver {
 		Observer.I.Add("TowerSelectSelected", this);
 		Observer.I.Add("MoneyChange", this);
 		Observer.I.Add("CookieChange", this);
+
+		gameObject.SetActive(false);
 	}
 
 	void OnDestroy(){
