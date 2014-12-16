@@ -31,7 +31,8 @@ public class PLightning : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		if(target){
-			Vector3 newPos = Vector3.Lerp(transform.position, target.transform.position, speed);
+			Debug.Log(Time.deltaTime);
+			Vector3 newPos = Vector3.Lerp(transform.position, target.transform.position, speed * Time.deltaTime * 50f);
 			float r = Random.Range(-wobble, wobble);
 			newPos.x += r;
 			r = Random.Range(-wobble, wobble);
