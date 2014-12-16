@@ -84,7 +84,7 @@ public class Bomber : Ship {
 	private void shoot(Entity target, Vector3 pos){
 		//TODO Lars: Bomben-Effekt statt Laser-Effekt
 		PBomb bomb = Instantiate("Bomb", pos).GetComponent<PBomb>();
-		bomb.target = target;
+		bomb.setTarget(target);
 
 		bomb.transform.parent = ProjectileManager.Container;
 	}
