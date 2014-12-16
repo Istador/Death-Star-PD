@@ -27,6 +27,7 @@ public class AudioTaggedSource : MonoBehaviour {
 	public AudioRolloffMode rolloffMode = AudioRolloffMode.Linear;
 	public float panLevel = 1f;
 	public float spread = 0f;
+	public float maxDistance = 200f;
 
 	public void Start(){
 		Add(this);
@@ -39,6 +40,7 @@ public class AudioTaggedSource : MonoBehaviour {
 		audio.rolloffMode = rolloffMode;
 		audio.panLevel = panLevel;
 		audio.spread = spread;
+		audio.maxDistance = maxDistance;
 		if(audio.playOnAwake)
 			audio.Play();
 	}
