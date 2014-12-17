@@ -8,6 +8,7 @@ public class PBomb : MonoBehaviour {
 	public ParticleSystem ps;
 
 	private float lifetime = 0;
+	private float maxLifetime = 5;
 	private bool count = false;
 
 	// Use this for initialization
@@ -17,10 +18,11 @@ public class PBomb : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		maxLifetime += Time.deltaTime;
 		if(count == true){
 			lifetime += Time.deltaTime;
 		}
-		if(lifetime >= 3f){
+		if(lifetime >= 3f || maxLifetime >= 5){
 			Destroy(gameObject);
 		}
 		if(target && !count){
