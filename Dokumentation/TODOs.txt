@@ -1,0 +1,34 @@
+GUI
+- Win-Screen
+- Zeitmessung (Vorsicht, nicht dass die Pause mitzählt)
+- Pausenmenü und Einstellungen gestalten
+- Credits (Wichtig!)
+- Highscores von Zeit/Geld bis zum Ende (unwichtig)
+- Lebensbalken für Gebäude (optional für Türme)
+- Schriftgrößen im SelectionPanel anpassen
+- SelectionPanel: Werte/Zahlen nur bei mouseOver-Event anzeigen, sowie textl. Beschreibung was die Icons bedeuten
+- Bugfix: Klick auf GUI löst Click im CameraControler aus
+	(Lösung: unsichtbare GUI-Ebene die Klicks für die 3D-Szene auffängt, statt das im CameraController zu machen)
+- Umbenennung von "Energie" in "Kekse", "Kraftwerk" in "Keksfabrik", ändern des Icons in einen Keks. Come to the dark side - we hve cookies
+
+
+Grafik
+- Planet rund (Blender)
+- UVGs der Türme und Gebäude mit größeren Sockeln versehen
+- großer Explosionseffekt vor dem GameOver-Screen
+- Der Schweif von MyLittleDestroyer ist an einer Stelle Schwarz wo er eigtl. dunkel Blau sein sollte.
+- Schattierung (nicht: Schatten) von Türmen, Gebäuden und Raumschiffen
+- "Einfache Modelle": Skript, dass alle UVG-Meshes durch einfache Meshes ersetzt
+- Showroom hübscher: Zoomen, Turmbeschreibung / Turmnamen wie in der GUI, Gebäude
+
+
+Spielablauf
+- Spiel nach letzter Welle beenden (gewinnen)
+- GameOver -> alle gameObjects in der Szene Destroyen
+- Bugfix: Upgrade von Supporttowern verstärkt keine anderen Türme
+- Bugfix: Positionieren der Sub-gameObjects der Türme sofort beim Bauen, und nicht erst nach dem nächsten (Fixed?)Update
+
+
+KI
+- Raumschiffe um Ziel rotieren lassen
+- mehr Raumschiffe (Träger (Carrier aus SC2), Jäger des Trägers und "Bossgegner" mit Schild)
