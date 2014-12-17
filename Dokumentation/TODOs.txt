@@ -20,6 +20,7 @@ Grafik
 - Schattierung (nicht: Schatten) von Türmen, Gebäuden und Raumschiffen
 - "Einfache Modelle": Skript, dass alle UVG-Meshes durch einfache Meshes ersetzt
 - Showroom hübscher: Zoomen, Turmbeschreibung / Turmnamen wie in der GUI, Gebäude
+- Dauer der Partikel-Effekte an die Feuerrate der Türme anpassen
 
 
 Spielablauf
@@ -27,8 +28,10 @@ Spielablauf
 - GameOver -> alle gameObjects in der Szene Destroyen
 - Bugfix: Upgrade von Supporttowern verstärkt keine anderen Türme
 - Bugfix: Positionieren der Sub-gameObjects der Türme sofort beim Bauen, und nicht erst nach dem nächsten (Fixed?)Update
+- Schaden erst dann verursachen, wenn Gegner/Türme von Projektilen getroffen werden (bzw. bei Laserstrahlen sobald der Effekt aufhört)
 
 
 KI
 - Raumschiffe um Ziel rotieren lassen
 - mehr Raumschiffe (Träger (Carrier aus SC2), Jäger des Trägers und "Bossgegner" mit Schild)
+- Geschwindigkeiten der Geschosse an die Feuerrate der Türme anpassen
