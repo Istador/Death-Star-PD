@@ -1,0 +1,32 @@
+
+section {
+    margin: 5vw 5vw 5vw 5vw; padding: 1vw;
+
+    position: relative;
+
+    max-width: 88vw;
+
+    border-radius: 1vw;
+
+    font-size: 2vw;
+    line-height: 2.5vw;
+
+    background: #333;
+    background: -webkit-linear-gradient(315deg, rgba(64, 64, 64, 0.5), rgba(32, 32, 32, 0.7));
+    background:    -moz-linear-gradient(315deg, rgba(64, 64, 64, 0.5), rgba(32, 32, 32, 0.7));
+    background:      -o-linear-gradient(315deg, rgba(64, 64, 64, 0.5), rgba(32, 32, 32, 0.7));
+    background:         linear-gradient(135deg, rgba(64, 64, 64, 0.5), rgba(32, 32, 32, 0.7));
+
+    opacity: 0.9;
+}
+
+section h1, section h2, section h3 { text-align: center; }
+section h1 { margin: 1.05vw 0px 1.05vw 0px; font-size: 1.3em;}
+section h2 { margin: 1.0vw 0px 1.0vw 0px; font-size: 1.2em;}
+section h3 { margin: 0.95vw 0px 0.95vw 0px; font-size: 1.1em;}
+section h4 { margin: 0.9vw 0px 0.9vw 0px; font-size: 1.0em;}
+section p { margin: 0.8vw 0px 0.8vw 0px; }
+section > *:first-child { margin-top: 0px; }
+section > *:last-child { margin-bottom: 0px; }
+
+#team { text-align: center; }
