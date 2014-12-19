@@ -1,0 +1,73 @@
+body {
+	background: black;
+	color: white;
+	font-family: Tahoma, Helvetica, Arial, Verdana;
+	letter-spacing: 0.2vmin;
+}
+
+#background {
+	background: black;
+	background: -webkit-linear-gradient(-45deg, #444, #000);
+	background:    -moz-linear-gradient(-45deg, #444, #000);
+	background:      -o-linear-gradient(-45deg, #444, #000);
+	background:         linear-gradient(135deg, #444, #000);
+	background-size:  100%;
+	position: fixed; display: block;
+	left: 0px; top: 0px;
+	width: 100%; height: 100%;
+	z-index: -1;
+}
+
+.noselect {
+	-webkit-user-select: none;
+	 -khtml-user-select: none;
+	   -moz-user-select: -moz-none;
+	    -ms-user-select: none;
+	     -o-user-select: none;
+	        user-select: none;
+	cursor: default;
+}
+.noselect::selection {
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.noselect input {
+	-webkit-user-select: text;
+	 -khtml-user-select: text;
+	   -moz-user-select: text;
+	    -ms-user-select: text;
+	     -o-user-select: text;
+	        user-select: text;
+}
+
+#logo {
+	width: 84vmin; height: 24vmin;
+	left: 50vw; top: 50vh;
+	margin-left: -42vmin;
+	margin-top: -12vmin;
+	position: fixed;
+	
+	opacity: 0.9;
+	background-image: url(img/logo.white.png);
+	background-size: 100% 100%;
+}
+
+#soon {
+	font-size: 3vmin;
+	left: 50vw; top: 50vh;
+	margin-top: 6vmin;
+	margin-left: -1vmin;
+	position: fixed;
+	color: blackk;
+	opacity: 0.2;
+}
+
+#future {
+	position: fixed;
+	font-size: 3vmin;
+	width: 100%;
+	text-align: center;
+	top: 50vh;
+	margin-top: 13vmin;
+	opacity: 0.75;
+}
