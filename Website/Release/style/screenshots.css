@@ -6,7 +6,7 @@
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
-    background-color: #252525;
+    background-color: #282828;
     height: 31.75vw;
 }
 
@@ -19,10 +19,10 @@
     top: 0px;
     width: 5vw;
     height: 31.75vw;
-    background: -webkit-linear-gradient(0deg,  rgba(37,37,37,1), rgba(37,37,37,1), rgba(37,37,37,0));
-    background:    -moz-linear-gradient(0deg,  rgba(37,37,37,1), rgba(37,37,37,1), rgba(37,37,37,0));
-    background:      -o-linear-gradient(0deg,  rgba(37,37,37,1), rgba(37,37,37,1), rgba(37,37,37,0));
-    background:         linear-gradient(90deg, rgba(37,37,37,1), rgba(37,37,37,1), rgba(37,37,37,0));
+    background: -webkit-linear-gradient(0deg,  rgba(40,40,40,1), rgba(40,40,40,1), rgba(40,40,40,0));
+    background:    -moz-linear-gradient(0deg,  rgba(40,40,40,1), rgba(40,40,40,1), rgba(40,40,40,0));
+    background:      -o-linear-gradient(0deg,  rgba(40,40,40,1), rgba(40,40,40,1), rgba(40,40,40,0));
+    background:         linear-gradient(90deg, rgba(40,40,40,1), rgba(40,40,40,1), rgba(40,40,40,0));
     z-index: 5;
 }
 
@@ -32,10 +32,10 @@
     width: 5vw;
     height: 31.75vw;
     left: 93.5vw;
-    background: -webkit-linear-gradient(0deg,  rgba(37,37,37,0), rgba(37,37,37,1), rgba(37,37,37,1));
-    background:    -moz-linear-gradient(0deg,  rgba(37,37,37,0), rgba(37,37,37,1), rgba(37,37,37,1));
-    background:      -o-linear-gradient(0deg,  rgba(37,37,37,0), rgba(37,37,37,1), rgba(37,37,37,1));
-    background:         linear-gradient(90deg, rgba(37,37,37,0), rgba(37,37,37,1), rgba(37,37,37,1));
+    background: -webkit-linear-gradient(0deg,  rgba(40,40,40,0), rgba(40,40,40,1), rgba(40,40,40,1));
+    background:    -moz-linear-gradient(0deg,  rgba(40,40,40,0), rgba(40,40,40,1), rgba(40,40,40,1));
+    background:      -o-linear-gradient(0deg,  rgba(40,40,40,0), rgba(40,40,40,1), rgba(40,40,40,1));
+    background:         linear-gradient(90deg, rgba(40,40,40,0), rgba(40,40,40,1), rgba(40,40,40,1));
     z-index: 5;
 }
 
@@ -44,7 +44,7 @@
  * ********************************************************************/
 
 #screenshotanimation {
-    margin-left: 10vw;
+    margin-left: 20vw; margin-right: 20vw;
     padding: 3vw 0vw 3vw 0vw;
 
     -webkit-animation: lrani 30s linear 0s infinite alternate none running;
@@ -72,11 +72,11 @@
 }
 
 @-moz-keyframes lrani {
-    from { margin-left: 0vw; }
+    from { margin-left: 20vw; }
     to { margin-left: -143.5vw; }
 }
 @keyframes lrani {
-    from { margin-left: 0vw; }
+    from { margin-left: 20vw; }
     to { margin-left: -143.5vw; } /* 30.5*7 - 90 */
 }
 
@@ -99,7 +99,7 @@
     -webkit-transition: all 0.25s ease;
        -moz-transition: all 0.25s ease;
          -o-transition: all 0.25s ease;
-            transition: all 1s ease;
+            transition: all 0.25s ease;
 }
 
 #screenshots a:hover {
@@ -112,7 +112,7 @@
     -webkit-transition: all 0.25s ease;
        -moz-transition: all 0.25s ease;
          -o-transition: all 0.25s ease;
-            transition: all 1s ease;
+            transition: all 0.25s ease;
 }
 
 #screenshots a > img {
@@ -124,7 +124,7 @@
     -webkit-transition: all 0.25s ease;
        -moz-transition: all 0.25s ease;
          -o-transition: all 0.25s ease;
-            transition: all 1s ease;
+            transition: all 0.25s ease;
 }
 
 #screenshots a:hover > img {
@@ -133,7 +133,7 @@
     -webkit-transition: all 0.25s ease;
        -moz-transition: all 0.25s ease;
          -o-transition: all 0.25s ease;
-            transition: all 1s ease;
+            transition: all 0.25s ease;
 }
 
 

@@ -1,11 +1,9 @@
 
 footer {
     opacity: 0.3;
-    font-size: 1.75vw;
+    font-size: 1.6vw;
     text-align: center;
-    /*display: block;
-    width: 100%;*/
-    margin: 5vw 5vw 5vw 5vw; padding: 0px;
+    margin: 5vw 5vw 5vw 5vw; padding: 0vw;
     line-height: 10.5vw;
 }
 
@@ -15,7 +13,7 @@ footer > * { vertical-align: middle; display: inline-block; }
     padding: 7.5vw 1vw 1vw 1vw;
     vertical-align: top;
     line-height: 2vw;
-    margin: 0px; /* 0px 4vw 0px 0vw; */
+    margin: 0vw; /* 0px 4vw 0px 0vw; */
     text-align: center;
     background-image: url(../img/unity-logo-white.png);
     background-size: auto 5vw;

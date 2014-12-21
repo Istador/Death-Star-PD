@@ -13,7 +13,7 @@
 
     <header>
         <div id="logo" class="noselect"></div>
-        <p id="soon" class="noselect">(coming soonish™ or later)</p>
+        <!--<p id="soon" class="noselect">(coming soonish™ or later)</p>-->
         <p id="future" class="noselect">planetary defense - the future of tower defense</p>
     </header>
 
@@ -45,54 +45,98 @@
         <div></div>
     </div>
 
-    <section class="imgright">
-        <h1>Come to the dark side, we have cookies.</h1>
-        <p>
-        They come in bulk and seek destruction, but they made one mistake: challenging you.
-        The Imperial Military needs you in its campaign against the disreputable rebels that aim to destroy <span class="b">your</span> deathstar.
-        Will you join the fight?
-        </p>
-        <p>
-        Deathstar&nbsp;PD allows you to build and upgrade towers that will attack enemies that come in range.
-        Limited credits and cookies (also known as energy) - the main ressources in the game - forces you to make meaningful decissions and plan ahead where and what to construct.
-        17 waves of enemies, that are constantly getting stronger and more numerous, are awaiting you.
-        </p>
-        <p>todo: image on side</p>
+    <section id="about" class="img right">
+        <h1 title="Game Description">Come to the dark side, we have cookies</h1>
+        <img src="img/cookie.png" alt="Picture of a cookie with the text 'cookie'">
+        <div class="bg">
+            <p>
+            They come in bulk and seek destruction, but they made one mistake: challenging you.
+            The Imperial Military needs you in its campaign against disreputable rebels that aim to destroy <span class="b">your</span> deathstar.
+            Will you join the fight?
+            </p>
+            <p>
+            Deathstar&nbsp;PD allows you to build and upgrade towers that will attack enemies that come in range.
+            Limited credits and cookies (also known as energy) - the main ressources in the game - forces you to make meaningful decissions and plan ahead where and what to construct.
+            17 waves of enemies, that are constantly getting stronger and more numerous, are awaiting you.
+            </p>
+        </div>
+
     </section>
 
     <section id="play" class="twosides">
-        <h1>Play in Browser</h1>
-        <p>requires the Unity® Webplayer</p>
-        <p>todo: subpage with controls, float left</p>
-        <h1>Download</h1>
-        <p>Windows or Linux</p>
-        <p>todo: build, float right</p>
+        <h1 title="Play">Eat</h1>
+        <h1 title="Download">Stockpile</h1>
+        <div class="bg">
+            <img src="img/eat.png" alt="Picture of a bitten cookie with a play symbol" style="width: 10vw; height:10vw; float: left; margin-right: 1vw;">
+            <p>Playing directly in the Browser requires the <a href="https://unity3d.com/webplayer" target="_blank">Unity® Webplayer</a></p>
+            <p>todo: subpage with controls</p>
+        </div>
+        <div class="bg">
+            <img src="img/stockpile.png" alt="Picture of a cookie with a download symbol" style="width: 10vw; height:10vw; float: right; margin-left: 1vw;">
+            <p>Download for Windows or Linux</p>
+            <p>todo: build</p>
+        </div>
     </section>
 
-    <section id="features" class="imgright">
-        <h1>Game Features</h1>
-        <p>todo: subsections with one picture for each feature (three in a row)</p>
+    <section id="features" class="float">
+        <h1 title="Game Features">Ingredients</h1>
+        <div>
+            <div class="bg">
+                <img src="screens/build.small.png" alt="">
+                <h4 class="noselect">3D Sphere</h4>
+                <p>In Deathstar&nbsp;PD you are navigating on a sphere in 3D space. That's why the enemies are not following predefined routes, like in most other tower defense games, but are taking direct routes, depending on their random spawn points.</p>
+            </div>
+            <div class="bg">
+                <img src="screens/fight3.small.png" alt="">
+                <h4 class="noselect">Voxel graphics</h4>
+                <p>You like <a href="https://minecraft.net/" target="_blank">Minecraft</a>? Then you will love Deathstar&nbsp;PD, because most 3D models are constructed out of cubes. Except for the deathstar itself of course.</p>
+            </div>
+            <div class="bg">
+                <img src="screens/fight1.small.png" alt="">
+                <h4 class="noselect">Tower variety</h4>
+                <p>Tower defense games, in which every tower does exactly the same thing, but just in another color, are boring. In Deathstar&nbsp;PD the behavior and use case for each of the five towers is designed differently.</p>
+            </div>
+            <div class="bg">
+                <img src="screens/settings.small.png" alt="">
+                <h4 class="noselect">Auditive</h4>
+                <p>Not only sound effects but also a catchy background music makes Deathstar&nbsp;PD a fun game to play. And for the unlikely case that you might not want to hear it anymore, seperately level it down with the audio settings.</p>
+            </div>
+            <div class="bg">
+                <img src="screens/upgrade.small.png" alt="">
+                <h4 class="noselect">Tower upgrades</h4>
+                <p>By investing Imperial Credits you can upgrade your towers, to make them stronger, faster, robuster and more influential.</p>
+            </div>
+            <!--<div class="bg">
+                <img src="screens/fight2.small.png" alt="">
+                <h4 class="noselect">Squadron Movement</h4>
+                <p>Additional to building towers, which are stationary, you can move your fighter squadrons around for more movability.</p>
+            </div>-->
+            <div></div>
+        </div>
     </section>
 
-    <section id="team" class="imgleft">
-        <h1>The force is strong with these four</h1>
-        <div title="Christopher Giese - GUI, management and literally making cookies.">
-            <h3>Christopher Giese</h3>
-            <p>Eye Candy Manufacturer - Cats Herdsman - Cookie Baker</p>
+    <section id="team" class="img left">
+        <!-- <h1 title="Team members">These are the droids you're looking for</h1> -->
+        <h1 title="Team members">The force is strong with these four</h1>
+        <img src="screens/fight1.small.png" alt="">
+        <div>
+            <div class="bg" title="Christopher Giese - GUI, management and literally making cookies.">
+                <h4>Christopher Giese</h4>
+                <p>Eye Candy Manufacturer - Cats Herdsman - Cookie Baker</p>
+            </div>
+            <div class="bg" title="Laura Gohl - concept arts, icons and 3D models.">
+                <h4>Laura Gohl</h4>
+                <p>Baronness of Art - Discordian Voidwalker - Euclidean Space Traveler</p>
+            </div>
+            <div class="bg" title="Lars Krafft - 3D models, graphics programming, sound effects and music.">
+                <h4>Lars Krafft</h4>
+                <p>Voxel Overlord - Pew Manager - Boom Coordinator - Noise Synthesizer</p>
+            </div>
+            <div class="bg" title="Robin Christopher Ladiges - game idea, artificial intelligence, game mechanics, logo and website.">
+                <h4>Robin Christopher Ladiges</h4>
+                <p>PD Mastermind - Intelligent Designer - Meat-in-the-Middle Mitigator - Pixel Pusher</p>
+            </div>
         </div>
-        <div title="Laura Gohl - concept art, icons and 3D models.">
-            <h3>Laura Gohl</h3>
-            <p>Baronness of Art - Euclidean Space Traveler</p>
-        </div>
-        <div title="Lars Krafft - 3D models, graphics programming, sound effects and music.">
-            <h3>Lars Krafft</h3>
-            <p>Voxel Overlord - Pew Manager - Boom Coordinator - Noise Synthesizer</p>
-        </div>
-        <div title="Robin Christopher Ladiges - game idea, artificial intelligence, game mechanics, logo and website.">
-            <h3>Robin C. Ladiges</h3>
-            <p>PD Mastermind - Intelligent Designer - Man-in-the-Middle Mitigator - Pixel Pusher</p>
-        </div>
-        <p>todo: image on side</p>
     </section>
 
     <footer>
