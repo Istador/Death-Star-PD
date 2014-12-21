@@ -47,10 +47,15 @@
     margin-left: 20vw; margin-right: 20vw;
     padding: 3vw 0vw 3vw 0vw;
 
-    -webkit-animation: lrani 30s linear 0s infinite alternate none running;
-       -moz-animation: lrani 30s linear 0s infinite alternate none running;
-         -o-animation: lrani 30s linear 0s infinite alternate none running;
-            animation: lrani 30s linear 0s infinite alternate none running;
+    -webkit-animation: lrani 30s linear 0s infinite alternate none;
+       -moz-animation: lrani 30s linear 0s infinite alternate none;
+         -o-animation: lrani 30s linear 0s infinite alternate none;
+            animation: lrani 30s linear 0s infinite alternate none;
+	
+	-webkit-animation-play-state: running;
+       -moz-animation-play-state: running;
+         -o-animation-play-state: running;
+            animation-play-state: running;
 }
 
 #screenshotanimation:hover {
@@ -70,8 +75,11 @@
     from { margin-left: 20vw; }
     to { margin-left: -143.5vw; }
 }
-
 @-moz-keyframes lrani {
+    from { margin-left: 20vw; }
+    to { margin-left: -143.5vw; }
+}
+@-o-keyframes lrani {
     from { margin-left: 20vw; }
     to { margin-left: -143.5vw; }
 }
