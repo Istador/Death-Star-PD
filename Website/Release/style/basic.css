@@ -20,6 +20,8 @@ body {
             hyphens: auto;
 }
 
+hr { color: #7f7f7f; opacity: 0.5; }
+
 a { color: #ffffff; text-decoration: none; }
 
 a:hover { text-decoration: underline; }

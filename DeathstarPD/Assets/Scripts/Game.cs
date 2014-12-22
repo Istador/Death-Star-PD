@@ -25,7 +25,7 @@ public static class Game {
 		UnityEditor.EditorApplication.isPlaying = false;
 		#elif UNITY_WEBPLAYER
 		//Webplayer: Seite neu laden
-		Application.OpenURL("https://games.blackpinguin.de/DeathstarPD/play.html");
+		Application.OpenURL("https://games.blackpinguin.de/DeathstarPD/");
 		#else
 		//Standalone Build: Programm beenden
 		Application.Quit();
