@@ -165,7 +165,7 @@ public abstract class Tower : ImmovableEntity {
 	/// <summary>
 	/// erhöht das Level um 1.
 	/// </summary>
-	public void LevelUp(){
+	public virtual void LevelUp(){
 		Level++;
 	}
 

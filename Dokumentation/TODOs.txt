@@ -26,7 +26,6 @@ Grafik
 Spielablauf
 - Spiel nach letzter Welle beenden (gewinnen)
 - GameOver -> alle gameObjects in der Szene Destroyen
-- Bugfix: Upgrade von Supporttowern verstärkt keine anderen Türme
 - Bugfix: Positionieren der Sub-gameObjects der Türme sofort beim Bauen, und nicht erst nach dem nächsten (Fixed?)Update
 - Schaden erst dann verursachen, wenn Gegner/Türme von Projektilen getroffen werden (bzw. bei Laserstrahlen sobald der Effekt aufhört)
 

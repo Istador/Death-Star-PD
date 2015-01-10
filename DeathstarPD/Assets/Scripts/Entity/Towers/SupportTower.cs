@@ -55,7 +55,7 @@ public class SupportTower : Tower {
 	protected void OnDestroy(){
 		//Entferne den Buff von allen Türmen
 		foreach(Tower t in towers) if(t != null && !t.IsDead && t.enabled){
-			t.Buffs--;
+			t.Buffs -= Level;
 		}
 		towers.Clear();
 
@@ -75,7 +75,7 @@ public class SupportTower : Tower {
 			if(t != null && !t.IsDead && t.enabled && !t.Equals(this)){
 				//ist in Reichweite
 				if(DistanceSqTo(t) <= Range * Range){
-					t.Buffs++;
+					t.Buffs += Level;
 					towers.Add(t);
 				}
 			}
@@ -89,6 +89,14 @@ public class SupportTower : Tower {
 		}
 	}
 
+
+	public override void LevelUp(){
+		//Alle Buffs der Türme um 1 erhöhen
+		foreach(Tower t in towers) if(t != null && !t.IsDead && t.enabled){
+			t.Buffs++;
+		}
+		base.LevelUp();
+	}
 
 
 }
