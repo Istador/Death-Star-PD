@@ -17,13 +17,15 @@ div.broken, div.missing {
 	margin: auto;
 	position: relative;
 	top: 50%;
-	width: 193px;
+	width: 735px;
+	text-align: center;
 }
 
 div.broken a, div.missing a {
 	height: 63px;
 	position: relative;
 	top: -31px;
+	display: block;
 }
 
 div.broken img, div.missing img {
@@ -42,4 +44,9 @@ div#unityPlayer {
 
 #unityPlayer > * {
 	outline: 0;
+}
+
+div.content noscript {
+	font-size: 1.75vw;
+    line-height: 2.0vw;
 }
