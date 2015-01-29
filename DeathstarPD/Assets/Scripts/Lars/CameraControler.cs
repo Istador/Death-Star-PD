@@ -1,98 +1,128 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.EventSystems;
 
 public class CameraControler : MonoBehaviour {
 
-	//The GameObject to place on Click
-	public GameObject tower;
+	public static readonly float twopi = Mathf.PI * 2f;
+	public static readonly float pihalf = Mathf.PI / 2f;
+	public static readonly float threepihalf = pihalf * 3f;
+
+	//back Camera
 	public Transform backCamera;
 
-	//Delay till a hold mousebutton is aknowledged
-	public int delay = 10;
-
 	//Zoomborders
-	public float maxRadius = 300f;
-	public float minRadius = 110f;
-	public float zoomSpeedFactor = 2f;
-	private float zoomSpeed;
+	public static readonly float maxRadius = 350f;
+	public static readonly float minRadius = 150f;
+	public static readonly float zoomSpeedFactor = 2f;
+
 
 	//Mouse Controls
-	private bool moving = false;
+	public bool moving { get; private set; }
 	private Vector3 lastPos;
-	private int timer = 0;
+
 
 	//RotationVariables
 	private float rotation = 0;
-	public float radius = 450f;
-	public float topRotation = 0f;
+	public static readonly float startRadius = 250f;
+	private float radius = startRadius;
+	private float topRotation = 0f;
+	private Vector3 up = Vector3.up;
+
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		lastPos = Input.mousePosition;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		//Update kann auch bei pausiertem Spiel aufgerufen werden.
-		// im Pause-Modus soll weder die Kamera bewegt werden können, noch etwas angeklickt werden können.
-		if(Pause.I.Paused || Time.timeScale == 0f) return;
-	
-		//Click to place a building
-		if(Input.GetMouseButtonUp(0) && !moving){
-			TowerSelect.I.Click();
-			TowerBuilding.I.Build();
-		}
-
-		//Click and drag to move Camera
-		if(Input.GetMouseButton(0)){
-			if(!moving){
-				timer += 1;
-			}
-			if(timer >= delay){
-				Screen.showCursor = false;
-				moving = true;
-				float dx = lastPos.x - Input.mousePosition.x;
-				float dy = lastPos.y - Input.mousePosition.y;
-				rotation += dx/100;
-				topRotation += dy/100;
-				if(topRotation < -1.54f){
-					topRotation = -1.54f;
-				}else if(topRotation > 1.54f){
-					topRotation = 1.54f;
-				}
-			}
-		} else {
-			moving = false;
-			timer = 0;
-			Screen.showCursor = true;
-		}
-
-		//Zoom out
-		if(Input.GetAxis("Mouse ScrollWheel") < 0 && radius < maxRadius){
-			radius += zoomSpeed;
-			zoomSpeed = radius/100*zoomSpeedFactor;
-		}
-
-		//Zoom in
-		if(Input.GetAxis("Mouse ScrollWheel") > 0 && radius > minRadius){
-			radius -= zoomSpeed;
-			zoomSpeed = radius/100*zoomSpeedFactor;
-		}
-
-		//Calculate CameraPosition and set Mousposition to determine DeltaX and DeltaY
+		moving = false;
 		calculateRotation();
-		lastPos = Input.mousePosition;
 	}
+
 
 	private void calculateRotation(){
-		float nradius = Mathf.Cos (topRotation) * radius;
-		Vector3 newPos = new Vector3 (Mathf.Cos (rotation) * nradius, Mathf.Sin(topRotation)*radius, Mathf.Sin (rotation) * nradius);
-		transform.position = newPos;
-		transform.LookAt(new Vector3(0,0,0));
+		//Main Camera
+		float nradius = Mathf.Cos(topRotation) * radius;
+		transform.position = new Vector3(
+			Mathf.Cos(rotation) * nradius,
+			Mathf.Sin(topRotation) * radius,
+			Mathf.Sin(rotation) * nradius
+			);
+		transform.LookAt(Vector3.zero, up);
 
-		newPos = new Vector3 (Mathf.Cos (rotation - 3.14f) * nradius, Mathf.Sin(topRotation)*radius, Mathf.Sin (rotation - 3.14f) * nradius);
-		backCamera.position = newPos;
-		backCamera.LookAt(new Vector3(0,0,0));
+		//Back Camera
+		nradius = Mathf.Cos(topRotation) * startRadius;
+		backCamera.position = new Vector3(
+			Mathf.Cos(rotation - Mathf.PI) * nradius,
+			Mathf.Sin(topRotation) * startRadius,
+			Mathf.Sin(rotation - Mathf.PI) * nradius
+			);
+		backCamera.LookAt(Vector3.zero, up);
 	}
+
+
+	public void BeginDrag(){
+		if(Pause.I.Paused || Time.timeScale == 0f) return;
+		//Debug.Log("BeginDrag");
+
+		Screen.showCursor = false;
+		moving = true;
+
+		lastPos = Input.mousePosition;
+	}
+
+
+	public void Drag(){
+		if(Pause.I.Paused || Time.timeScale == 0f) return;
+		//Debug.Log("Drag");
+
+		//top rotation
+		float dy = lastPos.y - Input.mousePosition.y;
+		topRotation += dy / 100f;
+		topRotation %= twopi;
+		if(topRotation < 0f) topRotation += twopi;
+
+		up = topRotation > pihalf && topRotation <= threepihalf ? Vector3.down : Vector3.up;
+
+		//side rotation
+		float dx = lastPos.x - Input.mousePosition.x;
+		rotation += dx * up.y / 100f;
+		rotation %= twopi;
+		if(rotation < 0f) rotation += twopi;
+
+		//Debug.Log(rotation+", "+topRotation);
+
+		//change camera
+		calculateRotation();
+
+		//set Mousposition to determine DeltaX and DeltaY
+		lastPos = Input.mousePosition;
+	}
+
+
+	public void EndDrag(){
+		//Debug.Log("EndDrag");
+		moving = false;
+		Screen.showCursor = true;
+	}
+
+
+	public void Scroll(BaseEventData data){
+		PointerEventData ped = data as PointerEventData;
+		if(ped != null){
+			//how much rows the scroll wheel has changed since the last Scrtoll-Event
+			float scrollSpeed = -ped.scrollDelta.y;
+
+			//calculate speed
+			float zoomSpeed = radius / 100f * zoomSpeedFactor * scrollSpeed;
+
+			//zoom
+			radius += zoomSpeed;
+
+			//satisfy zoom constraints
+			Utility.MinMax(ref radius, minRadius, maxRadius);
+
+			//change camera
+			calculateRotation();
+		}
+	}
+
 	
 }

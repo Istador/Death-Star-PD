@@ -7,8 +7,6 @@ GUI
 - Lebensbalken für Gebäude (optional für Türme)
 - Schriftgrößen im SelectionPanel anpassen
 - SelectionPanel: Werte/Zahlen nur bei mouseOver-Event anzeigen, sowie textl. Beschreibung was die Icons bedeuten
-- Bugfix: Klick auf GUI löst Click im CameraControler aus
-	(Lösung: unsichtbare GUI-Ebene die Klicks für die 3D-Szene auffängt, statt das im CameraController zu machen)
 - Umbenennung von "Energie" in "Kekse", "Kraftwerk" in "Keksfabrik", ändern des Icons in einen Keks. Come to the dark side - we hve cookies
 
 
@@ -21,6 +19,7 @@ Grafik
 - "Einfache Modelle": Skript, dass alle UVG-Meshes durch einfache Meshes ersetzt
 - Showroom hübscher: Zoomen, Turmbeschreibung / Turmnamen wie in der GUI, Gebäude
 - Dauer der Partikel-Effekte an die Feuerrate der Türme anpassen
+- Kamera-Drehung realistisch um alle drei Achsen (statt nur rotation und topRotation)
 
 
 Spielablauf
